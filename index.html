@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>IDAPPSH – Innovation & Development of Hybrid Systems</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ======= SEO BÁSICO ======= -->
+  <meta name="description"
+        content="IDAPPSH ofrece soluciones tecnológicas completas: desarrollo de software a la medida, aplicaciones móviles, desarrollo web, automatización, infraestructura, seguridad informática e integraciones." />
+  <meta name="keywords"
+        content="IDAPPSH, desarrollo de software, desarrollo web, aplicaciones móviles, automatización, bots empresariales, infraestructura, seguridad informática, integraciones API, análisis de datos" />
+  <meta name="author" content="IDAPPSH" />
+
+  <!-- ======= OPEN GRAPH ======= -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="IDAPPSH – Innovation & Development of Hybrid Systems" />
+  <meta property="og:description"
+        content="Soluciones tecnológicas completas: sistemas personalizados, web, apps móviles, automatización, infraestructura y seguridad." />
+  <meta property="og:url" content="https://idappsh.site/" />
+  <!-- CAMBIA ESTA IMAGEN POR TU BANNER REAL -->
+  <meta property="og:image" content="https://idappsh.site/img/banner-idappsh.jpg" />
+
+  <!-- ======= JSON-LD ORGANIZATION ======= -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "IDAPPSH",
+    "url": "https://idappsh.site/",
+    "logo": "https://idappsh.site/img/logo-idappsh.png",
+    "description": "Innovation & Development of Hybrid Systems. Desarrollo de software a la medida, aplicaciones móviles, soluciones web, automatización, infraestructura y seguridad informática.",
+    "sameAs": [
+      "https://www.facebook.com/loquebuscas.idapps",
+      "https://idappsh.github.io/abc/",
+      "https://t.me/r_alameda",
+      "https://wa.me/526633905025"
+    ]
+  }
+  </script>
+
+  <!-- ======= FAVICON ======= -->
+  <!-- Cambia la ruta por tu logo real -->
+  <link rel="icon" type="image/png" href="/img/logo-idappsh.png">
+  <link rel="apple-touch-icon" href="/img/logo-idappsh.png">
+
+  <!-- ================== ESTILOS ================== -->
+  <style>
+    :root {
+      --bg-main: #020617;
+      --bg-card: #020617;
+      --border-soft: #1e293b;
+      --primary: #0ea5e9;
+      --primary-soft: #38bdf8;
+      --accent: #f97316;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --success: #22c55e;
+      --radius-lg: 1rem;
+      --radius-md: 0.75rem;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.75);
+      --max-width: 1150px;
+      --transition-fast: 0.18s ease-out;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; scroll-behavior: smooth; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 0% -20%, #0f172a 0, transparent 45%),
+        radial-gradient(circle at 100% 120%, #0b1120 0, #020617 55%);
+      color: var(--text-main);
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+
+    .wrapper {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* ========== NAVBAR ========== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(2,6,23,0.98), rgba(2,6,23,0.85), transparent);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.25rem;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      gap: 1rem;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .nav-logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 20% 20%, #38bdf8, #0f172a 65%, #020617 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4);
+      font-size: 0.85rem;
+    }
+    .nav-logo-text-main { font-size: 0.95rem; }
+    .nav-logo-text-sub {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+    .nav-link {
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      color: var(--text-muted);
+      position: relative;
+      cursor: pointer;
+      transition: color var(--transition-fast);
+    }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(to right, var(--primary), var(--primary-soft));
+      transform: translateX(-50%);
+      transition: width var(--transition-fast);
+    }
+    .nav-link:hover { color: var(--text-main); }
+    .nav-link.active {
+      color: var(--primary-soft);
+      font-weight: 600;
+    }
+    .nav-link.active::after { width: 60%; }
+
+    .nav-cta { display: flex; gap: 0.5rem; align-items: center; }
+
+    .btn {
+      border-radius: 999px;
+      border: 1px solid transparent;
+      padding: 0.45rem 1.1rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .btn-outline {
+      background: transparent;
+      border-color: rgba(148, 163, 184, 0.7);
+      color: var(--text-main);
+    }
+    .btn-outline:hover {
+      border-color: var(--primary-soft);
+      color: var(--primary-soft);
+      background: rgba(15, 23, 42, 0.7);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-soft));
+      color: #0b1120;
+      border-color: transparent;
+      box-shadow: 0 10px 25px rgba(56, 189, 248, 0.5);
+    }
+    .btn-primary:hover {
+      filter: brightness(1.07);
+      transform: translateY(-0.5px);
+      box-shadow: 0 16px 40px rgba(56, 189, 248, 0.55);
+    }
+
+    .mobile-toggle {
+      display: none;
+      border: none;
+      background: none;
+      color: var(--text-main);
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 880px) {
+      .nav-menu, .nav-cta { display: none; }
+      .mobile-toggle { display: block; }
+
+      .nav-menu.mobile-open {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        background: #020617;
+        border-bottom: 1px solid rgba(30, 64, 175, 0.5);
+        padding: 0.75rem 1.25rem 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+        box-shadow: 0 20px 35px rgba(15, 23, 42, 0.95);
+      }
+      .nav-cta.mobile-open {
+        display: flex;
+        justify-content: flex-start;
+        padding: 0 1.25rem 0.75rem;
+      }
+    }
+
+    /* ========== SECCIONES BASE ========== */
+    main { padding-bottom: 4rem; }
+    section {
+      padding: 4rem 0;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.9);
+    }
+    section:last-of-type { border-bottom: none; }
+
+    .section-header { margin-bottom: 2rem; }
+    .section-kicker {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--primary-soft);
+      margin-bottom: 0.3rem;
+    }
+    .section-title {
+      font-size: clamp(1.4rem, 2vw, 1.8rem);
+      margin-bottom: 0.3rem;
+    }
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 620px;
+    }
+
+    /* ========== HERO ========== */
+    #inicio { padding-top: 4rem; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--primary-soft);
+      margin-bottom: 0.5rem;
+    }
+    .hero-title {
+      font-size: clamp(2rem, 3.1vw, 2.7rem);
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+    .hero-highlight {
+      background: linear-gradient(to right, var(--primary-soft), #facc15);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .hero-text {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 540px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem; }
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+      font-size: 0.78rem; color: var(--text-muted);
+      align-items: center;
+    }
+    .hero-meta-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 8px rgba(34,197,94,0.9);
+      display: inline-block;
+    }
+    .hero-card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.08), transparent 50%),
+                  radial-gradient(circle at bottom right, rgba(248,113,113,0.1), transparent 55%),
+                  #020617;
+      border: 1px solid rgba(30,64,175,0.4);
+      padding: 1.4rem 1.25rem;
+      box-shadow: var(--shadow-soft);
+    }
+    .hero-card-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 0.9rem;
+    }
+    .hero-card-title { font-size: 0.9rem; font-weight: 600; }
+    .hero-chip {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      color: var(--text-muted);
+    }
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 0.65rem;
+      font-size: 0.75rem;
+    }
+    .hero-metric {
+      padding: 0.55rem 0.65rem;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(30,64,175,0.65);
+      background: radial-gradient(circle at top, rgba(15,118,110,0.3), transparent 70%);
+    }
+    .hero-metric-label { color: var(--text-muted); margin-bottom: 0.15rem; }
+    .hero-metric-value { font-size: 0.86rem; font-weight: 600; color: var(--primary-soft); }
+    .hero-note { margin-top: 0.75rem; font-size: 0.75rem; color: var(--text-muted); }
+
+    .hero-banner-strip {
+      margin-top: 2.2rem;
+      border-radius: 999px;
+      border: 1px solid rgba(56,189,248,0.25);
+      background: radial-gradient(circle at left, rgba(56,189,248,0.12), transparent 55%);
+      padding: 0.7rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .hero-banner-pill {
+      border-radius: 999px;
+      padding: 0.25rem 0.7rem;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(56,189,248,0.6);
+      color: var(--primary-soft);
+      font-size: 0.75rem;
+    }
+
+    @media (max-width: 880px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      #inicio { padding-top: 3rem; }
+    }
+
+    /* ========== CARDS / GRIDS GENERALES ========== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1.25rem;
+    }
+    @media (max-width: 960px) {
+      .cards-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width: 660px) {
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      border-radius: var(--radius-md);
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 1rem;
+      box-shadow: 0 8px 30px rgba(15,23,42,0.85);
+      position: relative;
+      overflow: hidden;
+      transition: border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at 0 0, rgba(56,189,248,0.1), transparent 55%);
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+      pointer-events: none;
+    }
+    .card:hover {
+      border-color: rgba(56,189,248,0.7);
+      transform: translateY(-2px);
+      box-shadow: 0 15px 45px rgba(15,23,42,0.95);
+    }
+    .card:hover::before { opacity: 1; }
+    .card-icon {
+      width: 32px; height: 32px; border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, var(--primary-soft), #0f172a 65%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; margin-bottom: 0.6rem;
+    }
+    .card-title { font-size: 0.98rem; margin-bottom: 0.35rem; }
+    .card-text { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.6rem; }
+    .card-list {
+      list-style: none;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+    .card-list li {
+      position: relative;
+      padding-left: 1rem;
+      margin-bottom: 0.25rem;
+    }
+    .card-list li::before {
+      content: "●";
+      position: absolute; left: 0; top: 0;
+      font-size: 0.55rem; color: var(--primary-soft);
+      transform: translateY(0.21rem);
+    }
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .card-link {
+      font-size: 0.78rem;
+      color: var(--primary-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    /* ========== PROYECTOS ========== */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 1.2rem;
+    }
+    @media (max-width: 880px) {
+      .products-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ========== PLANES ========== */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 1.25rem;
+    }
+    @media (max-width: 960px) {
+      .plans-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width: 660px) {
+      .plans-grid { grid-template-columns: 1fr; }
+    }
+
+    .plan-card {
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      box-shadow: 0 12px 35px rgba(15,23,42,0.9);
+      position: relative;
+      overflow: hidden;
+    }
+    .plan-card.highlight {
+      border-color: rgba(56,189,248,0.9);
+      box-shadow: 0 18px 50px rgba(56,189,248,0.45);
+    }
+    .plan-card.highlight::before {
+      content: "Recomendado";
+      position: absolute;
+      top: 0.75rem;
+      right: -2.6rem;
+      transform: rotate(35deg);
+      background: linear-gradient(135deg, var(--primary), #22c55e);
+      color: #020617;
+      font-size: 0.65rem;
+      padding: 0.2rem 2.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+    }
+    .plan-name { font-size: 0.95rem; margin-bottom: 0.25rem; }
+    .plan-price { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.15rem; }
+    .plan-price span { font-size: 0.8rem; color: var(--text-muted); font-weight: 400; }
+    .plan-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.7rem; }
+    .plan-features {
+      list-style: none;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.8rem;
+    }
+    .plan-features li {
+      position: relative;
+      padding-left: 1.1rem;
+      margin-bottom: 0.3rem;
+    }
+    .plan-features li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-size: 0.75rem;
+      transform: translateY(-1px);
+    }
+
+    /* ========== CLIENTES ========== */
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 1rem;
+    }
+    @media (max-width: 960px) {
+      .clients-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width: 660px) {
+      .clients-grid { grid-template-columns: 1fr; }
+    }
+    .client-card {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      padding: 0.9rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .client-name { font-weight: 600; color: var(--text-main); margin-bottom: 0.15rem; }
+    .client-tag { font-size: 0.7rem; color: var(--primary-soft); margin-bottom: 0.4rem; }
+
+    /* ========== NOSOTROS / TIMELINE ========== */
+    .about-layout {
+      display: grid;
+      grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 880px) {
+      .about-layout { grid-template-columns: 1fr; }
+    }
+    .timeline {
+      border-left: 1px solid var(--border-soft);
+      padding-left: 1.3rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .timeline-item { margin-bottom: 1.1rem; position: relative; }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -1.32rem;
+      top: 0.1rem;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--primary-soft);
+      box-shadow: 0 0 8px rgba(56,189,248,0.9);
+    }
+    .timeline-year {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--primary-soft);
+      letter-spacing: 0.15em;
+      margin-bottom: 0.15rem;
+    }
+    .timeline-title { color: var(--text-main); margin-bottom: 0.1rem; }
+
+    /* ========== SOPORTE / FAQ ========== */
+    .faq-list { display: flex; flex-direction: column; gap: 0.7rem; }
+    .faq-item {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      overflow: hidden;
+    }
+    .faq-question {
+      padding: 0.75rem 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 0.82rem;
+    }
+    .faq-question span { flex: 1; padding-right: 0.85rem; }
+    .faq-toggle { font-size: 1.1rem; color: var(--primary-soft); }
+    .faq-answer {
+      padding: 0 0.85rem 0.75rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: none;
+    }
+    .faq-item.open .faq-answer { display: block; }
+
+    /* ========== CONTACTO + MAPA ========== */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: minmax(0,1.2fr) minmax(0,1fr);
+      gap: 2rem;
+    }
+    @media (max-width: 880px) {
+      .contact-layout { grid-template-columns: 1fr; }
+    }
+    .contact-form {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      padding: 1.1rem;
+      box-shadow: 0 14px 40px rgba(15,23,42,0.95);
+      font-size: 0.85rem;
+    }
+    .field-group { margin-bottom: 0.75rem; }
+    .field-label {
+      display: block;
+      margin-bottom: 0.2rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .field-input,
+    .field-textarea,
+    .field-select {
+      width: 100%;
+      padding: 0.6rem 0.65rem;
+      border-radius: 0.6rem;
+      border: 1px solid #1f2937;
+      background: #020617;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+    .field-input:focus,
+    .field-textarea:focus,
+    .field-select:focus {
+      border-color: var(--primary-soft);
+      box-shadow: 0 0 0 1px rgba(56,189,248,0.5);
+    }
+    .field-textarea { min-height: 120px; resize: vertical; }
+
+    .contact-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .contact-meta-item {
+      padding: 0.7rem 0.8rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+    }
+    .contact-meta-item strong {
+      display: block;
+      margin-bottom: 0.15rem;
+      color: var(--text-main);
+      font-size: 0.82rem;
+    }
+    .map-shell {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      margin-top: 0.6rem;
+      box-shadow: 0 12px 30px rgba(15,23,42,0.9);
+    }
+    .map-shell iframe {
+      display: block;
+      width: 100%;
+      height: 200px;
+      border: 0;
+    }
+    .small-note { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem; }
+    .status-msg { font-size: 0.8rem; margin-top: 0.4rem; display: none; }
+    .status-msg.show { display: block; }
+    .status-success { color: var(--success); }
+
+    /* ========== NOVEDADES: CARRUSEL + FACEBOOK ========== */
+    #novedades {
+      background: radial-gradient(circle at top, rgba(56,189,248,0.08), transparent 60%);
+    }
+    .novedades-layout {
+      display: grid;
+      grid-template-columns: minmax(0,1.3fr) minmax(0,1fr);
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+    @media (max-width: 980px) {
+      .novedades-layout { grid-template-columns: 1fr; }
+    }
+
+    .img-carousel-shell {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      background: #020617;
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      position: relative;
+    }
+    .img-carousel-header {
+      padding: 0.65rem 0.9rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .img-carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: 100%;
+    }
+    .img-carousel-item {
+      min-width: 100%;
+      max-height: 260px;
+      object-fit: cover;
+    }
+    .img-carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(15,23,42,0.7);
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      color: #e5e7eb;
+      padding: 0.15rem 0.55rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      z-index: 5;
+    }
+    .img-carousel-btn.left { left: 8px; }
+    .img-carousel-btn.right { right: 8px; }
+
+    .fb-shell {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      background: #020617;
+      box-shadow: var(--shadow-soft);
+      padding: 0.65rem 0.9rem 0.9rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .fb-shell-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.4rem;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      border-top: 1px solid rgba(15,23,42,0.95);
+      background: #020617;
+      padding: 1.5rem 0 2rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .footer-layout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .footer-brand { max-width: 280px; }
+    .footer-brand-title { font-size: 0.9rem; margin-bottom: 0.2rem; color: var(--text-main); }
+    .footer-brand-sub { font-size: 0.75rem; }
+
+    .footer-column-title {
+      font-size: 0.8rem;
+      color: var(--text-main);
+      margin-bottom: 0.35rem;
+    }
+    .footer-links,
+    .footer-legal,
+    .footer-social { display: flex; flex-direction: column; gap: 0.3rem; }
+
+    .footer-link { cursor: pointer; }
+    .footer-link:hover { color: var(--primary-soft); }
+
+    .footer-social-row {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: 0.3rem;
+    }
+    .social-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      font-size: 0.95rem;
+    }
+    .social-btn:hover {
+      border-color: var(--primary-soft);
+      color: var(--primary-soft);
+    }
+    @media (max-width: 700px) {
+      .footer-layout { flex-direction: column; }
+    }
+
+    /* ========== BOTÓN WHATSAPP ========== */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      width: 60px;
+      height: 60px;
+      z-index: 9999;
+    }
+    .whatsapp-float img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(0,0,0,0.6);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- SDK Facebook root -->
+  <div id="fb-root"></div>
+
+  <!-- ========== HEADER / NAV ========== -->
+  <header>
+    <div class="nav">
+      <a href="#inicio" class="nav-brand">
+        <div class="nav-logo-mark">H</div>
+        <div>
+          <div class="nav-logo-text-main">IDAPPSH</div>
+          <div class="nav-logo-text-sub">Hybrid Systems Lab</div>
+        </div>
+      </a>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú">☰</button>
+
+      <nav class="nav-menu" id="navMenu">
+        <a class="nav-link active" data-target="inicio">Inicio</a>
+        <a class="nav-link" data-target="soluciones">Soluciones</a>
+        <a class="nav-link" data-target="productos">Proyectos</a>
+        <a class="nav-link" data-target="novedades">Novedades</a>
+        <a class="nav-link" data-target="planes">Planes</a>
+        <a class="nav-link" data-target="clientes">Clientes</a>
+        <a class="nav-link" data-target="nosotros">Nosotros</a>
+        <a class="nav-link" data-target="soporte">Soporte</a>
+        <a class="nav-link" data-target="contacto">Contacto</a>
+      </nav>
+
+      <div class="nav-cta" id="navCta">
+        <button class="btn btn-outline" data-target="soluciones">Ver servicios</button>
+        <button class="btn btn-primary" data-target="contacto">Agenda una llamada</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== CONTENIDO PRINCIPAL ========== -->
+  <main>
+    <!-- HERO -->
+    <section id="inicio">
+      <div class="wrapper">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-eyebrow">Innovation & Development of Hybrid Systems</div>
+            <h1 class="hero-title">
+              <span class="hero-highlight">Soluciones tecnológicas completas</span> para tu negocio.
+            </h1>
+            <p class="hero-text">
+              IDAPPSH desarrolla software a la medida, aplicaciones móviles, sitios web profesionales,
+              automatización de procesos, integraciones, infraestructura y seguridad informática.
+            </p>
+
+            <div class="hero-actions">
+              <button class="btn btn-primary" data-target="soluciones">Ver soluciones</button>
+              <button class="btn btn-outline" data-target="contacto">Hablar sobre un proyecto</button>
+            </div>
+
+            <div class="hero-meta">
+              <span><span class="hero-meta-dot"></span> Desarrollo, infraestructura y soporte en una sola línea.</span>
+              <span>Trabajo por proyecto o colaboración continua.</span>
+            </div>
+
+            <div class="hero-banner-strip">
+              <span class="hero-banner-pill">Software a la medida · Web · Apps móviles · Automatización · Integraciones · Seguridad</span>
+              <span>Soluciones que se integran a la forma en que ya trabajas.</span>
+            </div>
+          </div>
+
+          <aside class="hero-card" aria-label="Resumen de capacidades IDAPPSH">
+            <div class="hero-card-header">
+              <div>
+                <div class="hero-card-title">Panel de operaciones IDAPPSH</div>
+                <div style="font-size:0.75rem;color:var(--text-muted);">Estado general · Sistemas · Integraciones</div>
+              </div>
+              <span class="hero-chip">Visión global</span>
+            </div>
+
+            <div class="hero-metrics">
+              <div class="hero-metric">
+                <div class="hero-metric-label">Soluciones desarrolladas</div>
+                <div class="hero-metric-value">+X sistemas</div>
+                <div style="font-size:0.72rem;color:var(--text-muted);">Sistemas y herramientas hechos a la medida.</div>
+              </div>
+              <div class="hero-metric">
+                <div class="hero-metric-label">Horas ahorradas</div>
+                <div class="hero-metric-value">+180 h/mes</div>
+                <div style="font-size:0.72rem;color:var(--text-muted);">Procesos que ahora son automáticos o más simples.</div>
+              </div>
+              <div class="hero-metric">
+                <div class="hero-metric-label">Áreas de trabajo</div>
+                <div class="hero-metric-value">Web, apps, sistemas</div>
+                <div style="font-size:0.72rem;color:var(--text-muted);">Desarrollo, infraestructura y automatización.</div>
+              </div>
+              <div class="hero-metric">
+                <div class="hero-metric-label">Modelo</div>
+                <div class="hero-metric-value">Proyecto o servicio</div>
+                <div style="font-size:0.72rem;color:var(--text-muted);">Nos adaptamos a tu operación.</div>
+              </div>
+            </div>
+
+            <div class="hero-note">
+              El enfoque es simple: soluciones útiles, mantenibles y listas para crecer cuando tu negocio lo necesite.
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLUCIONES -->
+    <section id="soluciones">
+      <div class="wrapper">
+        <header class="section-header">
+          <div class="section-kicker">Soluciones</div>
+          <h2 class="section-title">Desarrollo de software, web, apps, infraestructura y automatización.</h2>
+          <p class="section-subtitle">
+            Servicios diseñados para adaptarse a tu forma de trabajo: sistemas personalizados, plataformas web,
+            aplicaciones móviles, automatización, integraciones, análisis de datos, seguridad y soporte continuo.
+          </p>
+        </header>
+
+        <div class="cards-grid">
+          <!-- 1 -->
+          <article class="card">
+            <div class="card-icon">🧩</div>
+            <h3 class="card-title">Desarrollo de software a la medida</h3>
+            <p class="card-text">
+              Sistemas creados específicamente para tus procesos, sin plantillas genéricas ni limitaciones innecesarias.
+            </p>
+            <ul class="card-list">
+              <li>Sistemas de control de clientes, citas e inventarios</li>
+              <li>Sistemas administrativos y paneles internos</li>
+              <li>Herramientas híbridas (web + escritorio)</li>
+            </ul>
+            <div class="card-footer">
+              <span>Software alineado a tu flujo real</span>
+              <a href="#contacto" class="card-link">Analizar tu caso →</a>
+            </div>
+          </article>
+
+          <!-- 2 -->
+          <article class="card">
+            <div class="card-icon">🌐</div>
+            <h3 class="card-title">Desarrollo web profesional</h3>
+            <p class="card-text">
+              Sitios y plataformas web modernas, rápidas y optimizadas para mostrar, vender y administrar servicios.
+            </p>
+            <ul class="card-list">
+              <li>Sitios corporativos y landing pages</li>
+              <li>Formularios avanzados y paneles administrativos</li>
+              <li>Integración con bases de datos y APIs</li>
+            </ul>
+            <div class="card-footer">
+              <span>Web lista para producción</span>
+              <a href="#productos" class="card-link">Ver ejemplos →</a>
+            </div>
+          </article>
+
+          <!-- 3 -->
+          <article class="card">
+            <div class="card-icon">📱</div>
+            <h3 class="card-title">Aplicaciones móviles</h3>
+            <p class="card-text">
+              Apps profesionales para Android y iOS, conectadas con sistemas web, bases de datos y servicios externos.
+            </p>
+            <ul class="card-list">
+              <li>Apps empresariales internas y comerciales</li>
+              <li>Integración con GPS, notificaciones, QR, APIs</li>
+              <li>Publicación en Play Store y App Store</li>
+            </ul>
+            <div class="card-footer">
+              <span>Apps diseñadas para crecer</span>
+              <a href="#contacto" class="card-link">Quiero una app →</a>
+            </div>
+          </article>
+
+          <!-- 4 -->
+          <article class="card">
+            <div class="card-icon">🖥️</div>
+            <h3 class="card-title">Ingeniería de sistemas / informática</h3>
+            <p class="card-text">
+              Diseño, optimización y mantenimiento de la infraestructura que soporta tus sistemas.
+            </p>
+            <ul class="card-list">
+              <li>Servidores dedicados, VPS y entornos híbridos</li>
+              <li>Redes, VPN y seguridad básica</li>
+              <li>Optimización de equipos y servicios</li>
+            </ul>
+            <div class="card-footer">
+              <span>Infraestructura estable</span>
+              <a href="#contacto" class="card-link">Revisar tu entorno →</a>
+            </div>
+          </article>
+
+          <!-- 5 -->
+          <article class="card">
+            <div class="card-icon">🤖</div>
+            <h3 class="card-title">Automatización y bots empresariales</h3>
+            <p class="card-text">
+              Automatización de tareas repetitivas y procesos internos mediante herramientas y bots inteligentes.
+            </p>
+            <ul class="card-list">
+              <li>Automatización en web y sistemas internos</li>
+              <li>Bots para gestión de datos y reportes</li>
+              <li>Alertas por Telegram, correo o panel</li>
+            </ul>
+            <div class="card-footer">
+              <span>Menos tareas manuales</span>
+              <a href="#productos" class="card-link">Ejemplos prácticos →</a>
+            </div>
+          </article>
+
+          <!-- 6 -->
+          <article class="card">
+            <div class="card-icon">📊</div>
+            <h3 class="card-title">Análisis de datos y reportes</h3>
+            <p class="card-text">
+              Reportes automatizados, dashboards interactivos y soluciones basadas en Excel y otras fuentes.
+            </p>
+            <ul class="card-list">
+              <li>Reportes automáticos y dashboards dinámicos</li>
+              <li>Optimización de procesos basados en hojas de cálculo</li>
+              <li>Integración de datos desde Excel, CSV y APIs</li>
+            </ul>
+            <div class="card-footer">
+              <span>Datos que se convierten en decisiones</span>
+              <a href="#contacto" class="card-link">Optimizar tus reportes →</a>
+            </div>
+          </article>
+
+          <!-- 7 -->
+          <article class="card">
+            <div class="card-icon">🔌</div>
+            <h3 class="card-title">Integración de sistemas y APIs</h3>
+            <p class="card-text">
+              Conectamos sistemas entre sí para que la información fluya sin reprocesos ni duplicados.
+            </p>
+            <ul class="card-list">
+              <li>Integración con pasarelas de pago y servicios externos</li>
+              <li>Notificaciones automáticas y webhooks</li>
+              <li>Puentes entre sistemas internos y plataformas externas</li>
+            </ul>
+            <div class="card-footer">
+              <span>Todo trabajando en conjunto</span>
+              <a href="#contacto" class="card-link">Revisar integraciones →</a>
+            </div>
+          </article>
+
+          <!-- 8 -->
+          <article class="card">
+            <div class="card-icon">🔒</div>
+            <h3 class="card-title">Seguridad, mantenimiento y soporte</h3>
+            <p class="card-text">
+              Protección de datos, mantenimiento preventivo y soporte técnico continuo para tus sistemas.
+            </p>
+            <ul class="card-list">
+              <li>Respaldo, control de acceso y buenas prácticas</li>
+              <li>Mantenimiento preventivo y correctivo</li>
+              <li>Actualización de sistemas y sitios web</li>
+            </ul>
+            <div class="card-footer">
+              <span>Sistemas cuidados a largo plazo</span>
+              <a href="#contacto" class="card-link">Pedir soporte →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROYECTOS / EJEMPLOS -->
+    <section id="productos">
+      <div class="wrapper">
+        <header class="section-header">
+          <div class="section-kicker">Servicios & Proyectos</div>
+          <h2 class="section-title">Ejemplos de soluciones que se pueden construir e integrar.</h2>
+          <p class="section-subtitle">
+            Desde sistemas internos y paneles para operación hasta automatización, integraciones y apps móviles
+            conectadas a tu infraestructura actual.
+          </p>
+        </header>
+
+        <div class="products-grid">
+          <article class="card">
+            <h3 class="card-title">Sistema de monitoreo y alertas personalizadas</h3>
+            <p class="card-text">
+              Sistema que vigila información específica y envía alertas por Telegram, correo o panel cuando se detectan
+              cambios importantes o ventanas de oportunidad.
+            </p>
+            <ul class="card-list">
+              <li>Monitoreo 24/7 de fuentes clave</li>
+              <li>Historial de eventos y registros</li>
+              <li>Configuración flexible por cliente o servicio</li>
+            </ul>
+            <div class="card-footer">
+              <span>Especial para operaciones sensibles al tiempo</span>
+              <a href="#contacto" class="card-link">Quiero algo similar →</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Dashboard de operación y métricas</h3>
+            <p class="card-text">
+              Panel centralizado para visualizar estados de sistemas, tareas, colas, alertas y resultados en tiempo real.
+            </p>
+            <ul class="card-list">
+              <li>Vista unificada de procesos y estados</li>
+              <li>Filtros por cliente, servicio o fecha</li>
+              <li>Base para reportes y toma de decisiones</li>
+            </ul>
+            <div class="card-footer">
+              <span>Control operativo en una sola pantalla</span>
+              <a href="#contacto" class="card-link">Explorar opciones →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOVEDADES: CARRUSEL IMÁGENES + FACEBOOK -->
+    <section id="novedades">
+      <div class="wrapper">
+        <header class="section-header">
+          <div class="section-kicker">Novedades & redes</div>
+          <h2 class="section-title">Automatización, seguridad, web, apps y más en acción.</h2>
+          <p class="section-subtitle">
+            Muestras visuales de las áreas que trabajamos y conexión directa con la actividad en Facebook.
+            Puedes reemplazar las imágenes por tus propios diseños y capturas.
+          </p>
+        </header>
+
+        <div class="novedades-layout">
+          <!-- CARRUSEL DE IMÁGENES -->
+          <div class="img-carousel-shell">
+            <div class="img-carousel-header">
+              <span>Servicios en imágenes</span>
+              <span style="font-size:0.75rem;color:var(--text-muted);">Desliza o espera el cambio automático</span>
+            </div>
+            <button class="img-carousel-btn left" type="button" onclick="moveImgCarousel(-1)">‹</button>
+            <button class="img-carousel-btn right" type="button" onclick="moveImgCarousel(1)">›</button>
+
+            <div class="img-carousel-track" id="imgCarouselTrack">
+              <!-- Cambia las rutas por tus propias imágenes -->
+              <img src="/img/diseño-web.jpg"        alt="Diseño y desarrollo web"        class="img-carousel-item">
+              <img src="/img/automatizacion.png"    alt="Automatización de procesos"    class="img-carousel-item">
+              <img src="/img/soporte-it.jpg"        alt="Soporte técnico e infraestructura" class="img-carousel-item">
+              <img src="/img/soporte-it1.jpg"        alt="Soporte técnico e infraestructura" class="img-carousel-item">
+              <img src="/img/soporte-it2.jpg"        alt="Soporte técnico e infraestructura" class="img-carousel-item">
+              <img src="/img/chatbots-rpa.jpg"      alt="Chatbots y RPA"                class="img-carousel-item">
+              <img src="/img/excel-vba.png"         alt="Reportes y Excel / VBA"        class="img-carousel-item">
+              <img src="/img/excel-vba1.jpg"         alt="Reportes y Excel / VBA"        class="img-carousel-item">
+              <img src="/img/api-integration.jpg"   alt="Integración de APIs"           class="img-carousel-item">
+              <img src="/img/ciberseguridad.jpg"    alt="Soluciones de ciberseguridad"  class="img-carousel-item">
+              <img src="/img/ciberseguridad1.jpg"    alt="Soluciones de ciberseguridad"  class="img-carousel-item">
+              <img src="/img/hardware-systems.jpeg"  alt="Sistemas híbridos hardware + software" class="img-carousel-item">
+              <img src="/img/desarrollo-apps-moviles.jpg" alt="Desarrollo de aplicaciones móviles" class="img-carousel-item">
+              <img src="/img/que-es-cmd.jpg" alt="Desarrollo de aplicaciones móviles" class="img-carousel-item">
+              <img src="/img/dominio-web.png" alt="Desarrollo de aplicaciones móviles" class="img-carousel-item">
+              <img src="/img/dominio-web1.png" alt="Desarrollo de aplicaciones móviles" class="img-carousel-item">
+            </div>
+          </div>
+
+          <!-- WIDGET FACEBOOK -->
+          <div class="fb-shell">
+            <div class="fb-shell-header">
+              <span>Actividad en Facebook</span>
+              <a href="https://www.facebook.com/loquebuscas.idapps"
+                 target="_blank" rel="noopener noreferrer"
+                 style="font-size:0.78rem;color:var(--primary-soft);">Ver página completa →</a>
+            </div>
+            <div class="fb-page"
+                 data-href="https://www.facebook.com/loquebuscas.idapps"
+                 data-tabs="timeline"
+                 data-width="420"
+                 data-height="420"
+                 data-small-header="false"
+                 data-adapt-container-width="true"
+                 data-hide-cover="false"
+                 data-show-facepile="true">
+            </div>
+          </div>
+        </div>
+
+        <p class="small-note">
+          Nota: el carrusel usa imágenes locales; sólo sustituye los archivos por tus diseños.
+          El widget de Facebook muestra la actividad en tiempo real de tu página.
+        </p>
+      </div>
+    </section>
+
+    <!-- PLANES -->
+    <section id="planes">
+      <div class="wrapper">
+        <header class="section-header">
+          <div class="section-kicker">Planes</div>
+          <h2 class="section-title">Modelos de colaboración claros y escalables.</h2>
+          <p class="section-subtitle">
+            Podemos trabajar por proyecto específico o bajo esquemas continuos con mantenimiento, mejoras y soporte.
+          </p>
+        </header>
+
+        <div class="plans-grid">
+          <article class="plan-card">
+            <h3 class="plan-name">Proyecto puntual</h3>
+            <p class="plan-price">A definir <span>/ por alcance</span></p>
+            <p class="plan-desc">
+              Ideal para construir un sistema, sitio o app específica con inicio y fin definidos.
+            </p>
+            <ul class="plan-features">
+              <li>Relevamiento de requerimientos</li>
+              <li>Desarrollo, pruebas y entrega</li>
+              <li>Capacitación básica</li>
+            </ul>
+            <button class="btn btn-outline" data-target="contacto">Cotizar proyecto</button>
+          </article>
+
+          <article class="plan-card highlight">
+            <h3 class="plan-name">Sistemas + Automatización</h3>
+            <p class="plan-price">Mensual <span>/ según módulos</span></p>
+            <p class="plan-desc">
+              Para combinar sistemas personalizados, automatización de procesos y mantenimiento continuo.
+            </p>
+            <ul class="plan-features">
+              <li>Desarrollo de módulos a la medida</li>
+              <li>Mejoras y actualizaciones constantes</li>
+              <li>Monitoreo básico de infraestructura</li>
+              <li>Atención prioritaria</li>
+            </ul>
+            <button class="btn btn-primary" data-target="contacto">Hablar sobre este plan</button>
+          </article>
+
+          <article class="plan-card">
+            <h3 class="plan-name">Acompañamiento tecnológico</h3>
+            <p class="plan-price">Mensual <span>/ consultoría</span></p>
+            <p class="plan-desc">
+              Acompañamiento para decidir qué construir, cuándo y cómo integrarlo con tu operación actual.
+            </p>
+            <ul class="plan-features">
+              <li>Sesiones de revisión periódicas</li>
+              <li>Recomendaciones técnicas aplicadas</li>
+              <li>Roadmap de sistemas, automatización y apps</li>
+            </ul>
+            <button class="btn btn-outline" data-target="contacto">Agendar llamada</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLIENTES -->
+    <section id="clientes">
+      <div class="wrapper">
+        <header class="section-header">
+          <div class="section-kicker">Casos de uso</div>
+          <h2 class="section-title">Sistemas que ya están trabajando para otros.</h2>
+          <p class="section-subtitle">
+            El objetivo es el mismo en todos los casos: reducir carga manual, minimizar errores
+            y dar más control sobre la información clave.
+          </p>
+        </header>
+
+        <div class="clients-grid">
+          <article class="client-card">
+            <div class="client-name">Agencia de servicios</div>
+            <div class="client-tag">Monitoreo y panel web</div>
+            <p>
+              Implementación de sistemas de monitoreo y panel web con alertas y estados centralizados,
+              reduciendo revisiones manuales constantes.
+            </p>
+          </article>
+
+          <article class="client-card">
+            <div class="client-name">Profesionales independientes</div>
+            <div class="client-tag">Automatización y reportes</div>
+            <p>
+              Automatización de procesos repetitivos, generación de reportes y avisos que permiten enfocarse en tareas de mayor valor.
+            </p>
+          </article>
+
+          <article class="client-card">
+            <div class="client-name">PyMEs</div>
+            <div class="client-tag">Sistemas y apps a medida</div>
+            <p>
+              Sistemas internos, paneles web y aplicaciones móviles conectadas a su flujo de trabajo y herramientas ya existentes.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOSOTROS -->
+    <section id="nosotros">
+      <div class="wrapper">
+        <header class="section-header">
+          <div class="section-kicker">Nosotros</div>
+          <h2 class="section-title">IDAPPSH: enfoque técnico, soluciones reales.</h2>
+          <p class="section-subtitle">
+            Más que “herramientas sueltas”, la idea es construir sistemas que realmente se usen y se integren con el día a día de tu operación.
+          </p>
+        </header>
+
+        <div class="about-layout">
+          <div>
+            <p style="font-size:0.86rem;color:var(--text-muted);margin-bottom:0.8rem;">
+              IDAPPSH nace de la necesidad de automatizar procesos que normalmente se gestionan a mano:
+              monitoreo continuo, tareas repetitivas, consolidación de información y conexión entre sistemas
+              que antes trabajaban aislados.
+            </p>
+            <p style="font-size:0.86rem;color:var(--text-muted);margin-bottom:0.8rem;">
+              Trabajamos con un enfoque práctico: soluciones útiles, mantenibles y con espacio para crecer.
+              Desde un sistema pequeño hasta una infraestructura híbrida, la idea es que cada pieza tenga sentido.
+            </p>
+            <p style="font-size:0.86rem;color:var(--text-muted);">
+              Cada proyecto pasa por tres filtros: ¿es útil hoy?, ¿es mantenible sin volverse un problema?,
+              ¿puede crecer con tu operación? Si la respuesta es sí a los tres, se construye.
+            </p>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-year">Inicio</div>
+              <div class="timeline-title">Automatización para uso propio</div>
+              <div>
+                Primeros sistemas y scripts enfocados en resolver problemas internos concretos y procesos manuales.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-year">Etapa siguiente</div>
+              <div class="timeline-title">Soluciones para terceros</div>
+              <div>
+                Adaptación de herramientas para que funcionen de forma estable para clientes,
+                con soporte, documentación y ajustes continuos.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-year">Actualidad</div>
+              <div class="timeline-title">Laboratorio de sistemas híbridos</div>
+              <div>
+                IDAPPSH combina desarrollo de software, web, apps móviles, automatización, infraestructura
+                y seguridad para ofrecer soluciones completas a medida.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOPORTE -->
+    <section id="soporte">
+      <div class="wrapper">
+        <header class="section-header">
+          <div class="section-kicker">Soporte & ayuda</div>
+          <h2 class="section-title">Acompañamiento técnico antes, durante y después del desarrollo.</h2>
+          <p class="section-subtitle">
+            No se trata de entregar un sistema y desaparecer. La idea es acompañar el uso, los ajustes y la evolución del proyecto.
+          </p>
+        </header>
+
+        <div class="faq-list">
+          <article class="faq-item">
+            <div class="faq-question">
+              <span>¿Qué necesito para empezar un proyecto con IDAPPSH?</span>
+              <div class="faq-toggle">+</div>
+            </div>
+            <div class="faq-answer">
+              Un resumen sencillo de tu proceso actual, qué te duele y qué te gustaría mejorar.
+              Con eso se puede agendar una llamada corta y aterrizar requerimientos y prioridades.
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <div class="faq-question">
+              <span>¿Dan soporte remoto y actualizaciones?</span>
+              <div class="faq-toggle">+</div>
+            </div>
+            <div class="faq-answer">
+              Sí. Dependiendo del tipo de solución, se incluye soporte remoto, ajustes y actualizaciones.
+              En esquemas continuos se programan revisiones periódicas.
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <div class="faq-question">
+              <span>¿Pueden trabajar sobre sistemas que ya tengo?</span>
+              <div class="faq-toggle">+</div>
+            </div>
+            <div class="faq-answer">
+              En muchos casos sí. Se revisa el sistema actual, se identifican puntos de integración
+              y se decide si conviene mejorar, conectar o reemplazar partes específicas.
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <div class="wrapper">
+        <header class="section-header">
+          <div class="section-kicker">Contacto</div>
+          <h2 class="section-title">Cuéntanos qué proceso quieres mejorar o automatizar.</h2>
+          <p class="section-subtitle">
+            Deja tus datos y un resumen de lo que necesitas. A partir de eso se arma una propuesta inicial
+            y se define el mejor camino para avanzar.
+          </p>
+        </header>
+
+        <div class="contact-layout">
+          <form class="contact-form" id="contactForm">
+            <div class="field-group">
+              <label class="field-label" for="nombre">Nombre</label>
+              <input class="field-input" id="nombre" name="nombre" placeholder="Nombre o nombre de tu negocio" required />
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="email">Correo electrónico</label>
+              <input class="field-input" id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com" required />
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="whatsapp">WhatsApp (opcional)</label>
+              <input class="field-input" id="whatsapp" name="whatsapp" placeholder="+52 ..." />
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="tipo">Tipo de proyecto</label>
+              <select class="field-select" id="tipo" name="tipo">
+                <option value="">Selecciona una opción</option>
+                <option value="sistema">Sistema a medida</option>
+                <option value="web">Desarrollo web</option>
+                <option value="apps">Aplicaciones móviles</option>
+                <option value="automatizacion">Automatización</option>
+                <option value="infraestructura">Servidores / Infraestructura</option>
+                <option value="consultoria">Consultoría</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="mensaje">Describe brevemente lo que necesitas</label>
+              <textarea class="field-textarea" id="mensaje" name="mensaje"
+                placeholder="Ejemplo: sistema para X, panel para Y, automatizar Z..." required></textarea>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Enviar mensaje</button>
+            <div class="small-note">
+              Este formulario es una demostración en frontend. Cuando tengas tu backend listo se puede conectar
+              a correo, API propia o notificación por Telegram/WhatsApp.
+            </div>
+
+            <div id="statusMessage" class="status-msg"></div>
+          </form>
+
+          <div class="contact-meta">
+            <div class="contact-meta-item">
+              <strong>Correo directo</strong>
+              <div>idappsh@gmail.com</div>
+              <div>systems.idappsh@gmail.com</div>
+            </div>
+
+            <div class="contact-meta-item">
+              <strong>Canales de contacto</strong>
+              <div>WhatsApp: 663 390 5025</div>
+              <div>Telegram: @r_alameda</div>
+              <div>Correo electrónico y llamadas programadas.</div>
+            </div>
+
+            <div class="contact-meta-item">
+              <strong>Ubicación de referencia</strong>
+              <div>Cuernavaca, Morelos, México. Atención remota a cualquier parte.</div>
+              <div>Horario flexible según proyecto.</div>
+            </div>
+
+            <div class="map-shell">
+              <iframe
+                src="https://www.google.com/maps?q=Cuernavaca,+Morelos,+Mexico&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrapper">
+      <div class="footer-layout">
+        <!-- Marca -->
+        <div class="footer-brand">
+          <div class="footer-brand-title">IDAPPSH – Innovation & Development of Hybrid Systems</div>
+          <div class="footer-brand-sub">
+            Ofrecemos soluciones tecnológicas completas: desarrollo de software a la medida, aplicaciones móviles,
+            sitios web profesionales, automatización, integraciones, infraestructura y seguridad informática.
+          </div>
+        </div>
+
+        <!-- Navegación -->
+        <div>
+          <div class="footer-column-title">Navegación</div>
+          <div class="footer-links">
+            <span class="footer-link" data-target="inicio">Inicio</span>
+            <span class="footer-link" data-target="soluciones">Soluciones</span>
+            <span class="footer-link" data-target="productos">Proyectos</span>
+            <span class="footer-link" data-target="novedades">Novedades</span>
+            <span class="footer-link" data-target="planes">Planes</span>
+            <span class="footer-link" data-target="contacto">Contacto</span>
+          </div>
+        </div>
+
+        <!-- Servicios -->
+        <div>
+          <div class="footer-column-title">Servicios</div>
+          <div class="footer-links">
+            <span>Desarrollo de software a la medida</span>
+            <span>Desarrollo web profesional</span>
+            <span>Aplicaciones móviles</span>
+            <span>Automatización y bots empresariales</span>
+            <span>Análisis de datos y reportes</span>
+            <span>Integración de sistemas y APIs</span>
+            <span>Seguridad, mantenimiento y soporte</span>
+          </div>
+        </div>
+
+        <!-- Redes -->
+        <div>
+          <div class="footer-column-title">Conecta</div>
+          <div class="footer-social">
+            <span>Redes y contacto</span>
+            <div class="footer-social-row">
+              <a href="https://www.facebook.com/loquebuscas.idapps"
+                 target="_blank" rel="noopener noreferrer"
+                 class="social-btn" aria-label="Facebook">f</a>
+              <a href="https://www.instagram.com/IDAPPSH"
+                 target="_blank" rel="noopener noreferrer"
+                 class="social-btn" aria-label="Instagram">▢</a>
+              <a href="https://mx.linkedin.com/"
+                 target="_blank" rel="noopener noreferrer"
+                 class="social-btn" aria-label="LinkedIn">in</a>
+              <a href="https://idappsh.github.io/abc/"
+                 target="_blank" rel="noopener noreferrer"
+                 class="social-btn" aria-label="GitHub">{}</a>
+              <a href="https://t.me/r_alameda"
+                 target="_blank" rel="noopener noreferrer"
+                 class="social-btn" aria-label="Telegram">TG</a>
+              <a href="https://wa.me/526633905025"
+                 target="_blank" rel="noopener noreferrer"
+                 class="social-btn" aria-label="WhatsApp">WA</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Legal -->
+        <div>
+          <div class="footer-column-title">Legal</div>
+          <div class="footer-legal">
+            <span class="footer-link">Aviso de privacidad</span>
+            <span class="footer-link">Términos y condiciones</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:1rem;font-size:0.7rem;color:var(--text-muted);">
+        © <span id="year"></span> IDAPPSH. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOTÓN WHATSAPP FLOTANTE -->
+  <a href="https://wa.me/526633905025" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+    <!-- Puedes sustituir esta URL por un ícono local -->
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+  </a>
+
+  <!-- SDK FACEBOOK -->
+  <script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v16.0"></script>
+
+  <!-- ========== JAVASCRIPT ========== -->
+  <script>
+    // Año footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Scroll suave
+    function scrollToSection(id) {
+      const section = document.getElementById(id);
+      if (!section) return;
+      const y = section.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+
+    document.addEventListener("click", function (e) {
+      const target = e.target.closest("[data-target]");
+      if (!target) return;
+      const sectionId = target.getAttribute("data-target");
+      scrollToSection(sectionId);
+    });
+
+    // Menú móvil
+    const mobileToggle = document.getElementById("mobileToggle");
+    const navMenu = document.getElementById("navMenu");
+    const navCta = document.getElementById("navCta");
+
+    mobileToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("mobile-open");
+      navCta.classList.toggle("mobile-open");
+    });
+
+    navMenu.addEventListener("click", (e) => {
+      if (e.target.classList.contains("nav-link")) {
+        navMenu.classList.remove("mobile-open");
+        navCta.classList.remove("mobile-open");
+      }
+    });
+
+    // Resaltar sección activa
+    const sections = document.querySelectorAll("main section");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    function updateActiveNav() {
+      let current = "inicio";
+      const offset = 120;
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top - offset <= 0) current = section.id;
+      });
+      navLinks.forEach((link) => {
+        const sec = link.getAttribute("data-target");
+        link.classList.toggle("active", sec === current);
+      });
+    }
+    window.addEventListener("scroll", updateActiveNav);
+    window.addEventListener("load", updateActiveNav);
+
+    // FAQ
+    document.querySelectorAll(".faq-item").forEach((item) => {
+      item.querySelector(".faq-question").addEventListener("click", () => {
+        item.classList.toggle("open");
+      });
+    });
+
+    // Formulario contacto (demo)
+    const contactForm = document.getElementById("contactForm");
+    const statusMessage = document.getElementById("statusMessage");
+
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      statusMessage.textContent =
+        "Tu mensaje se ha registrado localmente. Cuando conectes el backend se enviará de forma real.";
+      statusMessage.classList.add("show", "status-success");
+      setTimeout(() => statusMessage.classList.remove("show"), 5000);
+      contactForm.reset();
+    });
+
+    // Carrusel de imágenes
+    let imgPosition = 0;
+    function moveImgCarousel(direction) {
+      const track = document.getElementById("imgCarouselTrack");
+      const items = document.querySelectorAll(".img-carousel-item");
+      const total = items.length;
+      imgPosition += direction;
+      if (imgPosition < 0) imgPosition = total - 1;
+      if (imgPosition >= total) imgPosition = 0;
+      track.style.transform = `translateX(-${imgPosition * 100}%)`;
+    }
+    // Auto slide
+    setInterval(() => moveImgCarousel(1), 6000);
+  </script>
+</body>
+</html>
