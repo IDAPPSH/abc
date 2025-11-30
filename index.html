@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <title>IDAPPSH – Innovation & Development of Hybrid Systems</title>
@@ -7,16 +8,16 @@
 
   <!-- ======= SEO BÁSICO ======= -->
   <meta name="description"
-        content="IDAPPSH ofrece soluciones tecnológicas completas: desarrollo de software a la medida, aplicaciones móviles, desarrollo web, automatización, infraestructura, seguridad informática e integraciones." />
+    content="IDAPPSH ofrece soluciones tecnológicas completas: desarrollo de software a la medida, aplicaciones móviles, desarrollo web, automatización, infraestructura, seguridad informática e integraciones." />
   <meta name="keywords"
-        content="IDAPPSH, desarrollo de software, desarrollo web, aplicaciones móviles, automatización, bots empresariales, infraestructura, seguridad informática, integraciones API, análisis de datos" />
+    content="IDAPPSH, desarrollo de software, desarrollo web, aplicaciones móviles, automatización, bots empresariales, infraestructura, seguridad informática, integraciones API, análisis de datos" />
   <meta name="author" content="IDAPPSH" />
 
   <!-- ======= OPEN GRAPH ======= -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="IDAPPSH – Innovation & Development of Hybrid Systems" />
   <meta property="og:description"
-        content="Soluciones tecnológicas completas: sistemas personalizados, web, apps móviles, automatización, infraestructura y seguridad." />
+    content="Soluciones tecnológicas completas: sistemas personalizados, web, apps móviles, automatización, infraestructura y seguridad." />
   <meta property="og:url" content="https://idappsh.site/" />
   <!-- CAMBIA ESTA IMAGEN POR TU BANNER REAL -->
   <meta property="og:image" content="https://idappsh.site/img/banner-idappsh.jpg" />
@@ -63,8 +64,18 @@
       --transition-fast: 0.18s ease-out;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
@@ -72,9 +83,20 @@
         radial-gradient(circle at 100% 120%, #0b1120 0, #020617 55%);
       color: var(--text-main);
     }
-    img { max-width: 100%; display: block; }
-    a { color: inherit; text-decoration: none; }
-    button { font-family: inherit; }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
 
     .wrapper {
       max-width: var(--max-width);
@@ -88,9 +110,10 @@
       top: 0;
       z-index: 20;
       backdrop-filter: blur(14px);
-      background: linear-gradient(to bottom, rgba(2,6,23,0.98), rgba(2,6,23,0.85), transparent);
+      background: linear-gradient(to bottom, rgba(2, 6, 23, 0.98), rgba(2, 6, 23, 0.85), transparent);
       border-bottom: 1px solid rgba(148, 163, 184, 0.08);
     }
+
     .nav {
       display: flex;
       align-items: center;
@@ -100,6 +123,7 @@
       margin: 0 auto;
       gap: 1rem;
     }
+
     .nav-brand {
       display: flex;
       align-items: center;
@@ -107,6 +131,7 @@
       font-weight: 700;
       letter-spacing: 0.04em;
     }
+
     .nav-logo-mark {
       width: 34px;
       height: 34px;
@@ -118,7 +143,11 @@
       box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4);
       font-size: 0.85rem;
     }
-    .nav-logo-text-main { font-size: 0.95rem; }
+
+    .nav-logo-text-main {
+      font-size: 0.95rem;
+    }
+
     .nav-logo-text-sub {
       font-size: 0.65rem;
       color: var(--text-muted);
@@ -131,6 +160,7 @@
       gap: 1rem;
       font-size: 0.9rem;
     }
+
     .nav-link {
       padding: 0.35rem 0.6rem;
       border-radius: 999px;
@@ -139,6 +169,7 @@
       cursor: pointer;
       transition: color var(--transition-fast);
     }
+
     .nav-link::after {
       content: "";
       position: absolute;
@@ -151,14 +182,25 @@
       transform: translateX(-50%);
       transition: width var(--transition-fast);
     }
-    .nav-link:hover { color: var(--text-main); }
+
+    .nav-link:hover {
+      color: var(--text-main);
+    }
+
     .nav-link.active {
       color: var(--primary-soft);
       font-weight: 600;
     }
-    .nav-link.active::after { width: 60%; }
 
-    .nav-cta { display: flex; gap: 0.5rem; align-items: center; }
+    .nav-link.active::after {
+      width: 60%;
+    }
+
+    .nav-cta {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
 
     .btn {
       border-radius: 999px;
@@ -173,22 +215,26 @@
       font-weight: 500;
       white-space: nowrap;
     }
+
     .btn-outline {
       background: transparent;
       border-color: rgba(148, 163, 184, 0.7);
       color: var(--text-main);
     }
+
     .btn-outline:hover {
       border-color: var(--primary-soft);
       color: var(--primary-soft);
       background: rgba(15, 23, 42, 0.7);
     }
+
     .btn-primary {
       background: linear-gradient(135deg, var(--primary), var(--primary-soft));
       color: #0b1120;
       border-color: transparent;
       box-shadow: 0 10px 25px rgba(56, 189, 248, 0.5);
     }
+
     .btn-primary:hover {
       filter: brightness(1.07);
       transform: translateY(-0.5px);
@@ -205,8 +251,15 @@
     }
 
     @media (max-width: 880px) {
-      .nav-menu, .nav-cta { display: none; }
-      .mobile-toggle { display: block; }
+
+      .nav-menu,
+      .nav-cta {
+        display: none;
+      }
+
+      .mobile-toggle {
+        display: block;
+      }
 
       .nav-menu.mobile-open {
         position: absolute;
@@ -221,6 +274,7 @@
         gap: 0.3rem;
         box-shadow: 0 20px 35px rgba(15, 23, 42, 0.95);
       }
+
       .nav-cta.mobile-open {
         display: flex;
         justify-content: flex-start;
@@ -229,14 +283,23 @@
     }
 
     /* ========== SECCIONES BASE ========== */
-    main { padding-bottom: 4rem; }
+    main {
+      padding-bottom: 4rem;
+    }
+
     section {
       padding: 4rem 0;
       border-bottom: 1px solid rgba(15, 23, 42, 0.9);
     }
-    section:last-of-type { border-bottom: none; }
 
-    .section-header { margin-bottom: 2rem; }
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-header {
+      margin-bottom: 2rem;
+    }
+
     .section-kicker {
       font-size: 0.75rem;
       letter-spacing: 0.15em;
@@ -244,10 +307,12 @@
       color: var(--primary-soft);
       margin-bottom: 0.3rem;
     }
+
     .section-title {
       font-size: clamp(1.4rem, 2vw, 1.8rem);
       margin-bottom: 0.3rem;
     }
+
     .section-subtitle {
       font-size: 0.9rem;
       color: var(--text-muted);
@@ -255,13 +320,17 @@
     }
 
     /* ========== HERO ========== */
-    #inicio { padding-top: 4rem; }
+    #inicio {
+      padding-top: 4rem;
+    }
+
     .hero-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
       gap: 2.5rem;
       align-items: center;
     }
+
     .hero-eyebrow {
       font-size: 0.75rem;
       letter-spacing: 0.18em;
@@ -269,76 +338,117 @@
       color: var(--primary-soft);
       margin-bottom: 0.5rem;
     }
+
     .hero-title {
       font-size: clamp(2rem, 3.1vw, 2.7rem);
       line-height: 1.1;
       margin-bottom: 0.75rem;
     }
+
     .hero-highlight {
       background: linear-gradient(to right, var(--primary-soft), #facc15);
       -webkit-background-clip: text;
       color: transparent;
     }
+
     .hero-text {
       color: var(--text-muted);
       font-size: 0.95rem;
       max-width: 540px;
       margin-bottom: 1.5rem;
     }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem; }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
     .hero-meta {
-      display: flex; flex-wrap: wrap; gap: 0.75rem;
-      font-size: 0.78rem; color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
       align-items: center;
     }
+
     .hero-meta-dot {
-      width: 6px; height: 6px; border-radius: 50%;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
       background: var(--success);
-      box-shadow: 0 0 8px rgba(34,197,94,0.9);
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.9);
       display: inline-block;
     }
+
     .hero-card {
       border-radius: var(--radius-lg);
-      background: radial-gradient(circle at top left, rgba(56,189,248,0.08), transparent 50%),
-                  radial-gradient(circle at bottom right, rgba(248,113,113,0.1), transparent 55%),
-                  #020617;
-      border: 1px solid rgba(30,64,175,0.4);
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.08), transparent 50%),
+        radial-gradient(circle at bottom right, rgba(248, 113, 113, 0.1), transparent 55%),
+        #020617;
+      border: 1px solid rgba(30, 64, 175, 0.4);
       padding: 1.4rem 1.25rem;
       box-shadow: var(--shadow-soft);
     }
+
     .hero-card-header {
-      display: flex; justify-content: space-between; align-items: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 0.9rem;
     }
-    .hero-card-title { font-size: 0.9rem; font-weight: 600; }
+
+    .hero-card-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
     .hero-chip {
       font-size: 0.7rem;
       padding: 0.25rem 0.6rem;
       border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.7);
+      border: 1px solid rgba(148, 163, 184, 0.7);
       color: var(--text-muted);
     }
+
     .hero-metrics {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 0.65rem;
       font-size: 0.75rem;
     }
+
     .hero-metric {
       padding: 0.55rem 0.65rem;
       border-radius: var(--radius-md);
-      border: 1px solid rgba(30,64,175,0.65);
-      background: radial-gradient(circle at top, rgba(15,118,110,0.3), transparent 70%);
+      border: 1px solid rgba(30, 64, 175, 0.65);
+      background: radial-gradient(circle at top, rgba(15, 118, 110, 0.3), transparent 70%);
     }
-    .hero-metric-label { color: var(--text-muted); margin-bottom: 0.15rem; }
-    .hero-metric-value { font-size: 0.86rem; font-weight: 600; color: var(--primary-soft); }
-    .hero-note { margin-top: 0.75rem; font-size: 0.75rem; color: var(--text-muted); }
+
+    .hero-metric-label {
+      color: var(--text-muted);
+      margin-bottom: 0.15rem;
+    }
+
+    .hero-metric-value {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--primary-soft);
+    }
+
+    .hero-note {
+      margin-top: 0.75rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
 
     .hero-banner-strip {
       margin-top: 2.2rem;
       border-radius: 999px;
-      border: 1px solid rgba(56,189,248,0.25);
-      background: radial-gradient(circle at left, rgba(56,189,248,0.12), transparent 55%);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      background: radial-gradient(circle at left, rgba(56, 189, 248, 0.12), transparent 55%);
       padding: 0.7rem 1rem;
       display: flex;
       flex-wrap: wrap;
@@ -347,31 +457,43 @@
       font-size: 0.78rem;
       color: var(--text-muted);
     }
+
     .hero-banner-pill {
       border-radius: 999px;
       padding: 0.25rem 0.7rem;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(56,189,248,0.6);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.6);
       color: var(--primary-soft);
       font-size: 0.75rem;
     }
 
     @media (max-width: 880px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      #inicio { padding-top: 3rem; }
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #inicio {
+        padding-top: 3rem;
+      }
     }
 
     /* ========== CARDS / GRIDS GENERALES ========== */
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1.25rem;
     }
+
     @media (max-width: 960px) {
-      .cards-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
+
     @media (max-width: 660px) {
-      .cards-grid { grid-template-columns: 1fr; }
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .card {
@@ -379,51 +501,78 @@
       background: var(--bg-card);
       border: 1px solid var(--border-soft);
       padding: 1rem;
-      box-shadow: 0 8px 30px rgba(15,23,42,0.85);
+      box-shadow: 0 8px 30px rgba(15, 23, 42, 0.85);
       position: relative;
       overflow: hidden;
       transition: border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
     }
+
     .card::before {
       content: "";
       position: absolute;
       inset: -40%;
-      background: radial-gradient(circle at 0 0, rgba(56,189,248,0.1), transparent 55%);
+      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.1), transparent 55%);
       opacity: 0;
       transition: opacity var(--transition-fast);
       pointer-events: none;
     }
+
     .card:hover {
-      border-color: rgba(56,189,248,0.7);
+      border-color: rgba(56, 189, 248, 0.7);
       transform: translateY(-2px);
-      box-shadow: 0 15px 45px rgba(15,23,42,0.95);
+      box-shadow: 0 15px 45px rgba(15, 23, 42, 0.95);
     }
-    .card:hover::before { opacity: 1; }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
     .card-icon {
-      width: 32px; height: 32px; border-radius: 999px;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
       background: radial-gradient(circle at 30% 20%, var(--primary-soft), #0f172a 65%);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
     }
-    .card-title { font-size: 0.98rem; margin-bottom: 0.35rem; }
-    .card-text { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.6rem; }
+
+    .card-title {
+      font-size: 0.98rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .card-text {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+
     .card-list {
       list-style: none;
       font-size: 0.8rem;
       color: var(--text-muted);
       margin-bottom: 0.75rem;
     }
+
     .card-list li {
       position: relative;
       padding-left: 1rem;
       margin-bottom: 0.25rem;
     }
+
     .card-list li::before {
       content: "●";
-      position: absolute; left: 0; top: 0;
-      font-size: 0.55rem; color: var(--primary-soft);
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 0.55rem;
+      color: var(--primary-soft);
       transform: translateY(0.21rem);
     }
+
     .card-footer {
       display: flex;
       justify-content: space-between;
@@ -431,6 +580,7 @@
       font-size: 0.78rem;
       color: var(--text-muted);
     }
+
     .card-link {
       font-size: 0.78rem;
       color: var(--primary-soft);
@@ -442,24 +592,33 @@
     /* ========== PROYECTOS ========== */
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(2,minmax(0,1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1.2rem;
     }
+
     @media (max-width: 880px) {
-      .products-grid { grid-template-columns: 1fr; }
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ========== PLANES ========== */
     .plans-grid {
       display: grid;
-      grid-template-columns: repeat(3,minmax(0,1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1.25rem;
     }
+
     @media (max-width: 960px) {
-      .plans-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .plans-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
+
     @media (max-width: 660px) {
-      .plans-grid { grid-template-columns: 1fr; }
+      .plans-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .plan-card {
@@ -467,14 +626,16 @@
       padding: 1rem;
       border: 1px solid var(--border-soft);
       background: var(--bg-card);
-      box-shadow: 0 12px 35px rgba(15,23,42,0.9);
+      box-shadow: 0 12px 35px rgba(15, 23, 42, 0.9);
       position: relative;
       overflow: hidden;
     }
+
     .plan-card.highlight {
-      border-color: rgba(56,189,248,0.9);
-      box-shadow: 0 18px 50px rgba(56,189,248,0.45);
+      border-color: rgba(56, 189, 248, 0.9);
+      box-shadow: 0 18px 50px rgba(56, 189, 248, 0.45);
     }
+
     .plan-card.highlight::before {
       content: "Recomendado";
       position: absolute;
@@ -488,21 +649,43 @@
       text-transform: uppercase;
       letter-spacing: 0.13em;
     }
-    .plan-name { font-size: 0.95rem; margin-bottom: 0.25rem; }
-    .plan-price { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.15rem; }
-    .plan-price span { font-size: 0.8rem; color: var(--text-muted); font-weight: 400; }
-    .plan-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.7rem; }
+
+    .plan-name {
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .plan-price {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+
+    .plan-price span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .plan-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.7rem;
+    }
+
     .plan-features {
       list-style: none;
       font-size: 0.78rem;
       color: var(--text-muted);
       margin-bottom: 0.8rem;
     }
+
     .plan-features li {
       position: relative;
       padding-left: 1.1rem;
       margin-bottom: 0.3rem;
     }
+
     .plan-features li::before {
       content: "✓";
       position: absolute;
@@ -515,15 +698,22 @@
     /* ========== CLIENTES ========== */
     .clients-grid {
       display: grid;
-      grid-template-columns: repeat(3,minmax(0,1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1rem;
     }
+
     @media (max-width: 960px) {
-      .clients-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .clients-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
+
     @media (max-width: 660px) {
-      .clients-grid { grid-template-columns: 1fr; }
+      .clients-grid {
+        grid-template-columns: 1fr;
+      }
     }
+
     .client-card {
       border-radius: var(--radius-md);
       border: 1px solid var(--border-soft);
@@ -532,36 +722,57 @@
       font-size: 0.8rem;
       color: var(--text-muted);
     }
-    .client-name { font-weight: 600; color: var(--text-main); margin-bottom: 0.15rem; }
-    .client-tag { font-size: 0.7rem; color: var(--primary-soft); margin-bottom: 0.4rem; }
+
+    .client-name {
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.15rem;
+    }
+
+    .client-tag {
+      font-size: 0.7rem;
+      color: var(--primary-soft);
+      margin-bottom: 0.4rem;
+    }
 
     /* ========== NOSOTROS / TIMELINE ========== */
     .about-layout {
       display: grid;
-      grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
       gap: 2rem;
       align-items: start;
     }
+
     @media (max-width: 880px) {
-      .about-layout { grid-template-columns: 1fr; }
+      .about-layout {
+        grid-template-columns: 1fr;
+      }
     }
+
     .timeline {
       border-left: 1px solid var(--border-soft);
       padding-left: 1.3rem;
       font-size: 0.8rem;
       color: var(--text-muted);
     }
-    .timeline-item { margin-bottom: 1.1rem; position: relative; }
+
+    .timeline-item {
+      margin-bottom: 1.1rem;
+      position: relative;
+    }
+
     .timeline-item::before {
       content: "";
       position: absolute;
       left: -1.32rem;
       top: 0.1rem;
-      width: 8px; height: 8px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: var(--primary-soft);
-      box-shadow: 0 0 8px rgba(56,189,248,0.9);
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.9);
     }
+
     .timeline-year {
       font-size: 0.75rem;
       text-transform: uppercase;
@@ -569,16 +780,26 @@
       letter-spacing: 0.15em;
       margin-bottom: 0.15rem;
     }
-    .timeline-title { color: var(--text-main); margin-bottom: 0.1rem; }
+
+    .timeline-title {
+      color: var(--text-main);
+      margin-bottom: 0.1rem;
+    }
 
     /* ========== SOPORTE / FAQ ========== */
-    .faq-list { display: flex; flex-direction: column; gap: 0.7rem; }
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
     .faq-item {
       border-radius: var(--radius-md);
       border: 1px solid var(--border-soft);
       background: var(--bg-card);
       overflow: hidden;
     }
+
     .faq-question {
       padding: 0.75rem 0.85rem;
       display: flex;
@@ -587,40 +808,61 @@
       cursor: pointer;
       font-size: 0.82rem;
     }
-    .faq-question span { flex: 1; padding-right: 0.85rem; }
-    .faq-toggle { font-size: 1.1rem; color: var(--primary-soft); }
+
+    .faq-question span {
+      flex: 1;
+      padding-right: 0.85rem;
+    }
+
+    .faq-toggle {
+      font-size: 1.1rem;
+      color: var(--primary-soft);
+    }
+
     .faq-answer {
       padding: 0 0.85rem 0.75rem;
       font-size: 0.78rem;
       color: var(--text-muted);
       display: none;
     }
-    .faq-item.open .faq-answer { display: block; }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
 
     /* ========== CONTACTO + MAPA ========== */
     .contact-layout {
       display: grid;
-      grid-template-columns: minmax(0,1.2fr) minmax(0,1fr);
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
       gap: 2rem;
     }
+
     @media (max-width: 880px) {
-      .contact-layout { grid-template-columns: 1fr; }
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
     }
+
     .contact-form {
       border-radius: var(--radius-md);
       border: 1px solid var(--border-soft);
       background: var(--bg-card);
       padding: 1.1rem;
-      box-shadow: 0 14px 40px rgba(15,23,42,0.95);
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.95);
       font-size: 0.85rem;
     }
-    .field-group { margin-bottom: 0.75rem; }
+
+    .field-group {
+      margin-bottom: 0.75rem;
+    }
+
     .field-label {
       display: block;
       margin-bottom: 0.2rem;
       font-size: 0.78rem;
       color: var(--text-muted);
     }
+
     .field-input,
     .field-textarea,
     .field-select {
@@ -634,13 +876,18 @@
       outline: none;
       transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
     }
+
     .field-input:focus,
     .field-textarea:focus,
     .field-select:focus {
       border-color: var(--primary-soft);
-      box-shadow: 0 0 0 1px rgba(56,189,248,0.5);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.5);
     }
-    .field-textarea { min-height: 120px; resize: vertical; }
+
+    .field-textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
 
     .contact-meta {
       font-size: 0.8rem;
@@ -649,49 +896,76 @@
       flex-direction: column;
       gap: 0.6rem;
     }
+
     .contact-meta-item {
       padding: 0.7rem 0.8rem;
       border-radius: var(--radius-md);
       border: 1px solid var(--border-soft);
       background: var(--bg-card);
     }
+
     .contact-meta-item strong {
       display: block;
       margin-bottom: 0.15rem;
       color: var(--text-main);
       font-size: 0.82rem;
     }
+
     .map-shell {
       border-radius: var(--radius-md);
       overflow: hidden;
       border: 1px solid var(--border-soft);
       margin-top: 0.6rem;
-      box-shadow: 0 12px 30px rgba(15,23,42,0.9);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
     }
+
     .map-shell iframe {
       display: block;
       width: 100%;
       height: 200px;
       border: 0;
     }
-    .small-note { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem; }
-    .status-msg { font-size: 0.8rem; margin-top: 0.4rem; display: none; }
-    .status-msg.show { display: block; }
-    .status-success { color: var(--success); }
+
+    .small-note {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+    }
+
+    .status-msg {
+      font-size: 0.8rem;
+      margin-top: 0.4rem;
+      display: none;
+    }
+
+    .status-msg.show {
+      display: block;
+    }
+
+    .status-success {
+      color: var(--success);
+    }
 
     /* ========== NOVEDADES: CARRUSEL + FACEBOOK ========== */
+    /* ========== NOVEDADES: CARRUSEL + FACEBOOK ========== */
     #novedades {
-      background: radial-gradient(circle at top, rgba(56,189,248,0.08), transparent 60%);
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.08), transparent 60%);
     }
+
     .novedades-layout {
       display: grid;
-      grid-template-columns: minmax(0,1.3fr) minmax(0,1fr);
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
       gap: 1.5rem;
       align-items: stretch;
     }
+
     @media (max-width: 980px) {
-      .novedades-layout { grid-template-columns: 1fr; }
+      .novedades-layout {
+        grid-template-columns: 1fr;
+      }
     }
+
+    /* ---- CARRUSEL ---- */
 
     .img-carousel-shell {
       border-radius: var(--radius-lg);
@@ -701,6 +975,7 @@
       overflow: hidden;
       position: relative;
     }
+
     .img-carousel-header {
       padding: 0.65rem 0.9rem;
       font-size: 0.8rem;
@@ -710,32 +985,138 @@
       justify-content: space-between;
       align-items: center;
     }
+
     .img-carousel-track {
       display: flex;
       transition: transform 0.5s ease-in-out;
       width: 100%;
     }
-    .img-carousel-item {
+
+    /* Cada slide es un banner completo */
+    .img-carousel-slide {
+      position: relative;
       min-width: 100%;
-      max-height: 260px;
-      object-fit: cover;
+      height: 260px;
+      /* alto uniforme */
+      overflow: hidden;
     }
+
+    /* Imagen de fondo */
+    .img-carousel-media {
+      position: absolute;
+      inset: 0;
+    }
+
+    .img-carousel-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.05);
+    }
+
+    /* Degradado oscuro para que el texto se lea */
+    .img-carousel-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right,
+          rgba(2, 6, 23, 0.95) 0%,
+          rgba(2, 6, 23, 0.8) 30%,
+          rgba(2, 6, 23, 0.4) 55%,
+          transparent 85%);
+    }
+
+    /* Caja de texto sobrepuesta */
+    .img-carousel-info {
+      position: relative;
+      z-index: 1;
+      max-width: 46%;
+      margin-left: auto;
+      margin-right: 1.4rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1rem 0;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .img-carousel-info h3 {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      margin-bottom: 0.4rem;
+    }
+
+    .img-carousel-info p {
+      margin-bottom: 0.45rem;
+    }
+
+    .img-carousel-info ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0.4rem 0 0;
+    }
+
+    .img-carousel-info li {
+      padding-left: 0.9rem;
+      position: relative;
+      margin-bottom: 0.2rem;
+    }
+
+    .img-carousel-info li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--primary-soft);
+    }
+
+    /* Móvil: texto en una tarjeta sobre la imagen */
+    @media (max-width: 900px) {
+      .img-carousel-slide {
+        height: 260px;
+      }
+
+      .img-carousel-media::after {
+        background: linear-gradient(to top,
+            rgba(2, 6, 23, 0.95) 0%,
+            rgba(2, 6, 23, 0.75) 35%,
+            transparent 80%);
+      }
+
+      .img-carousel-info {
+        max-width: 100%;
+        margin: 0 0.9rem 0.9rem;
+        padding: 0.8rem 0.75rem;
+        border-radius: 0.75rem;
+        background: rgba(2, 6, 23, 0.95);
+      }
+    }
+
+    /* Botones de navegación */
     .img-carousel-btn {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(15,23,42,0.7);
+      background: rgba(15, 23, 42, 0.7);
       border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.6);
+      border: 1px solid rgba(148, 163, 184, 0.6);
       color: #e5e7eb;
-      padding: 0.15rem 0.55rem;
+      padding: 0.18rem 0.6rem;
       font-size: 1.2rem;
       cursor: pointer;
       z-index: 5;
     }
-    .img-carousel-btn.left { left: 8px; }
-    .img-carousel-btn.right { right: 8px; }
 
+    .img-carousel-btn.left {
+      left: 8px;
+    }
+
+    .img-carousel-btn.right {
+      right: 8px;
+    }
+
+    /* ---- FACEBOOK (igual que ya tenías) ---- */
     .fb-shell {
       border-radius: var(--radius-lg);
       border: 1px solid var(--border-soft);
@@ -745,6 +1126,7 @@
       font-size: 0.8rem;
       color: var(--text-muted);
     }
+
     .fb-shell-header {
       display: flex;
       justify-content: space-between;
@@ -752,14 +1134,16 @@
       margin-bottom: 0.4rem;
     }
 
+
     /* ========== FOOTER ========== */
     footer {
-      border-top: 1px solid rgba(15,23,42,0.95);
+      border-top: 1px solid rgba(15, 23, 42, 0.95);
       background: #020617;
       padding: 1.5rem 0 2rem;
       font-size: 0.78rem;
       color: var(--text-muted);
     }
+
     .footer-layout {
       display: flex;
       flex-wrap: wrap;
@@ -767,27 +1151,49 @@
       justify-content: space-between;
       align-items: flex-start;
     }
-    .footer-brand { max-width: 280px; }
-    .footer-brand-title { font-size: 0.9rem; margin-bottom: 0.2rem; color: var(--text-main); }
-    .footer-brand-sub { font-size: 0.75rem; }
+
+    .footer-brand {
+      max-width: 280px;
+    }
+
+    .footer-brand-title {
+      font-size: 0.9rem;
+      margin-bottom: 0.2rem;
+      color: var(--text-main);
+    }
+
+    .footer-brand-sub {
+      font-size: 0.75rem;
+    }
 
     .footer-column-title {
       font-size: 0.8rem;
       color: var(--text-main);
       margin-bottom: 0.35rem;
     }
+
     .footer-links,
     .footer-legal,
-    .footer-social { display: flex; flex-direction: column; gap: 0.3rem; }
+    .footer-social {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
 
-    .footer-link { cursor: pointer; }
-    .footer-link:hover { color: var(--primary-soft); }
+    .footer-link {
+      cursor: pointer;
+    }
+
+    .footer-link:hover {
+      color: var(--primary-soft);
+    }
 
     .footer-social-row {
       display: flex;
       gap: 0.4rem;
       margin-top: 0.3rem;
     }
+
     .social-btn {
       width: 28px;
       height: 28px;
@@ -801,12 +1207,16 @@
       transition: all var(--transition-fast);
       font-size: 0.95rem;
     }
+
     .social-btn:hover {
       border-color: var(--primary-soft);
       color: var(--primary-soft);
     }
+
     @media (max-width: 700px) {
-      .footer-layout { flex-direction: column; }
+      .footer-layout {
+        flex-direction: column;
+      }
     }
 
     /* ========== BOTÓN WHATSAPP ========== */
@@ -818,11 +1228,12 @@
       height: 60px;
       z-index: 9999;
     }
+
     .whatsapp-float img {
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      box-shadow: 0 0 12px rgba(0,0,0,0.6);
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
     }
   </style>
 </head>
@@ -890,7 +1301,8 @@
             </div>
 
             <div class="hero-banner-strip">
-              <span class="hero-banner-pill">Software a la medida · Web · Apps móviles · Automatización · Integraciones · Seguridad</span>
+              <span class="hero-banner-pill">Software a la medida · Web · Apps móviles · Automatización · Integraciones
+                · Seguridad</span>
               <span>Soluciones que se integran a la forma en que ya trabajas.</span>
             </div>
           </div>
@@ -908,17 +1320,20 @@
               <div class="hero-metric">
                 <div class="hero-metric-label">Soluciones desarrolladas</div>
                 <div class="hero-metric-value">+X sistemas</div>
-                <div style="font-size:0.72rem;color:var(--text-muted);">Sistemas y herramientas hechos a la medida.</div>
+                <div style="font-size:0.72rem;color:var(--text-muted);">Sistemas y herramientas hechos a la medida.
+                </div>
               </div>
               <div class="hero-metric">
                 <div class="hero-metric-label">Horas ahorradas</div>
                 <div class="hero-metric-value">+180 h/mes</div>
-                <div style="font-size:0.72rem;color:var(--text-muted);">Procesos que ahora son automáticos o más simples.</div>
+                <div style="font-size:0.72rem;color:var(--text-muted);">Procesos que ahora son automáticos o más
+                  simples.</div>
               </div>
               <div class="hero-metric">
                 <div class="hero-metric-label">Áreas de trabajo</div>
                 <div class="hero-metric-value">Web, apps, sistemas</div>
-                <div style="font-size:0.72rem;color:var(--text-muted);">Desarrollo, infraestructura y automatización.</div>
+                <div style="font-size:0.72rem;color:var(--text-muted);">Desarrollo, infraestructura y automatización.
+                </div>
               </div>
               <div class="hero-metric">
                 <div class="hero-metric-label">Modelo</div>
@@ -932,6 +1347,176 @@
             </div>
           </aside>
         </div>
+      </div>
+    </section>
+
+        <!-- NOVEDADES: CARRUSEL IMÁGENES + FACEBOOK -->
+    <section id="novedades">
+      <div class="wrapper">
+        <header class="section-header">
+          <div class="section-kicker">Novedades & redes</div>
+          <h2 class="section-title">Automatización, seguridad, web, apps y más en acción.</h2>
+          <p class="section-subtitle">
+            Muestras visuales de las áreas que trabajamos y conexión directa con la actividad en Facebook.
+            Puedes reemplazar las imágenes por tus propios diseños y capturas.
+          </p>
+        </header>
+
+        <div class="novedades-layout">
+          <!-- CARRUSEL DE IMÁGENES -->
+          <div class="img-carousel-shell">
+            <div class="img-carousel-header">
+              <span>Servicios en imágenes</span>
+              <span style="font-size:0.75rem;color:var(--text-muted);">
+                Desliza o espera el cambio automático
+              </span>
+            </div>
+
+            <!-- Botones -->
+            <button class="img-carousel-btn left" type="button" onclick="moveImgCarousel(-1)">‹</button>
+            <button class="img-carousel-btn right" type="button" onclick="moveImgCarousel(1)">›</button>
+
+            <!-- TRACK COMPLETO -->
+            <div class="img-carousel-track" id="imgCarouselTrack">
+
+              <!-- 1. Desarrollo Web -->
+              <div class="img-carousel-slide">
+                <div class="img-carousel-media">
+                  <img src="img/diseño-web.jpg" alt="Diseño y desarrollo web">
+                </div>
+                <div class="img-carousel-info">
+                  <h3>Desarrollo web profesional</h3>
+                  <p>Sitios y plataformas modernas para mostrar, vender o administrar tu negocio.</p>
+                  <ul>
+                    <li>Sitios corporativos</li>
+                    <li>Landing pages</li>
+                    <li>Paneles administrativos</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- 2. Automatización -->
+              <div class="img-carousel-slide">
+                <div class="img-carousel-media">
+                  <img src="img/automatizacion.png" alt="Automatización de procesos">
+                </div>
+                <div class="img-carousel-info">
+                  <h3>Automatización de procesos</h3>
+                  <p>Bots y herramientas que eliminan tareas repetitivas.</p>
+                  <ul>
+                    <li>Procesos automáticos</li>
+                    <li>Captura y envío de datos</li>
+                    <li>Alertas y reportes</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- 3. Soporte e Infraestructura -->
+              <div class="img-carousel-slide">
+                <div class="img-carousel-media">
+                  <img src="img/soporte-it.jpg" alt="Soporte técnico e infraestructura">
+                </div>
+                <div class="img-carousel-info">
+                  <h3>Soporte técnico e infraestructura</h3>
+                  <p>Equipos, servidores y redes listos para trabajar.</p>
+                  <ul>
+                    <li>Redes y VPN</li>
+                    <li>Servidores</li>
+                    <li>Mantenimiento preventivo</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- 4. Chatbots y RPA -->
+              <div class="img-carousel-slide">
+                <div class="img-carousel-media">
+                  <img src="img/chatbots-rpa.jpg" alt="Chatbots y RPA">
+                </div>
+                <div class="img-carousel-info">
+                  <h3>Chatbots y RPA</h3>
+                  <p>Automatización inteligente para procesos internos.</p>
+                  <ul>
+                    <li>Bots empresariales</li>
+                    <li>Integración con Telegram</li>
+                    <li>RPA para tareas complejas</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- 5. Excel / Datos -->
+              <div class="img-carousel-slide">
+                <div class="img-carousel-media">
+                  <img src="/mg/excel-vba.png" alt="Reportes y Excel / VBA">
+                </div>
+                <div class="img-carousel-info">
+                  <h3>Reportes y análisis de datos</h3>
+                  <p>Dashboards y reportes automatizados profesionales.</p>
+                  <ul>
+                    <li>Excel avanzado</li>
+                    <li>VBA automatizado</li>
+                    <li>Dashboards dinámicos</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- 6. Integración de APIs -->
+              <div class="img-carousel-slide">
+                <div class="img-carousel-media">
+                  <img src="img/api-integration.jpg" alt="Integración de APIs">
+                </div>
+                <div class="img-carousel-info">
+                  <h3>Integración de APIs</h3>
+                  <p>Conexión entre sistemas internos y servicios externos.</p>
+                  <ul>
+                    <li>Pasarelas de pago</li>
+                    <li>Webhooks</li>
+                    <li>Servicios externos</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- 7. Ciberseguridad -->
+              <div class="img-carousel-slide">
+                <div class="img-carousel-media">
+                  <img src="img/ciberseguridad.jpg" alt="Soluciones de ciberseguridad">
+                </div>
+                <div class="img-carousel-info">
+                  <h3>Ciberseguridad</h3>
+                  <p>Protección de datos y seguridad empresarial.</p>
+                  <ul>
+                    <li>Control de acceso</li>
+                    <li>Respaldos</li>
+                    <li>Buenas prácticas</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- 8. Apps móviles -->
+              <div class="img-carousel-slide">
+                <div class="img-carousel-media">
+                  <img src="img/desarrollo-apps-moviles.jpg" alt="Desarrollo de aplicaciones móviles">
+                </div>
+                <div class="img-carousel-info">
+                  <h3>Aplicaciones móviles</h3>
+                  <p>Apps conectadas a sistemas web y APIs.</p>
+                  <ul>
+                    <li>Android y iOS</li>
+                    <li>GPS, QR, notificaciones</li>
+                    <li>Apps internas y comerciales</li>
+                  </ul>
+                </div>
+              </div>
+            </div><!-- END TRACK -->
+          </div>
+
+
+          
+        </div>
+
+        <p class="small-note">
+          Nota: el carrusel usa imágenes locales; sólo sustituye los archivos por tus diseños.
+          El widget de Facebook muestra la actividad en tiempo real de tu página.
+        </p>
       </div>
     </section>
 
@@ -1093,6 +1678,7 @@
           </article>
         </div>
       </div>
+      
     </section>
 
     <!-- PROYECTOS / EJEMPLOS -->
@@ -1128,7 +1714,8 @@
           <article class="card">
             <h3 class="card-title">Dashboard de operación y métricas</h3>
             <p class="card-text">
-              Panel centralizado para visualizar estados de sistemas, tareas, colas, alertas y resultados en tiempo real.
+              Panel centralizado para visualizar estados de sistemas, tareas, colas, alertas y resultados en tiempo
+              real.
             </p>
             <ul class="card-list">
               <li>Vista unificada de procesos y estados</li>
@@ -1144,76 +1731,7 @@
       </div>
     </section>
 
-    <!-- NOVEDADES: CARRUSEL IMÁGENES + FACEBOOK -->
-    <section id="novedades">
-      <div class="wrapper">
-        <header class="section-header">
-          <div class="section-kicker">Novedades & redes</div>
-          <h2 class="section-title">Automatización, seguridad, web, apps y más en acción.</h2>
-          <p class="section-subtitle">
-            Muestras visuales de las áreas que trabajamos y conexión directa con la actividad en Facebook.
-            Puedes reemplazar las imágenes por tus propios diseños y capturas.
-          </p>
-        </header>
 
-        <div class="novedades-layout">
-          <!-- CARRUSEL DE IMÁGENES -->
-          <div class="img-carousel-shell">
-            <div class="img-carousel-header">
-              <span>Servicios en imágenes</span>
-              <span style="font-size:0.75rem;color:var(--text-muted);">Desliza o espera el cambio automático</span>
-            </div>
-            <button class="img-carousel-btn left" type="button" onclick="moveImgCarousel(-1)">‹</button>
-            <button class="img-carousel-btn right" type="button" onclick="moveImgCarousel(1)">›</button>
-
-            <div class="img-carousel-track" id="imgCarouselTrack">
-              <!-- Cambia las rutas por tus propias imágenes -->
-              <img src="img/diseño-web.jpg"        alt="Diseño y desarrollo web"        class="img-carousel-item">
-              <img src="img/automatizacion.png"    alt="Automatización de procesos"    class="img-carousel-item">
-              <img src="img/soporte-it.jpg"        alt="Soporte técnico e infraestructura" class="img-carousel-item">
-              <img src="img/soporte-it1.jpg"        alt="Soporte técnico e infraestructura" class="img-carousel-item">
-              <img src="img/soporte-it2.jpg"        alt="Soporte técnico e infraestructura" class="img-carousel-item">
-              <img src="img/chatbots-rpa.jpg"      alt="Chatbots y RPA"                class="img-carousel-item">
-              <img src="img/excel-vba.png"         alt="Reportes y Excel / VBA"        class="img-carousel-item">
-              <img src="img/excel-vba1.jpg"         alt="Reportes y Excel / VBA"        class="img-carousel-item">
-              <img src="img/api-integration.jpg"   alt="Integración de APIs"           class="img-carousel-item">
-              <img src="img/ciberseguridad.jpg"    alt="Soluciones de ciberseguridad"  class="img-carousel-item">
-              <img src="img/ciberseguridad1.jpg"    alt="Soluciones de ciberseguridad"  class="img-carousel-item">
-              <img src="img/hardware-systems.jpeg"  alt="Sistemas híbridos hardware + software" class="img-carousel-item">
-              <img src="img/desarrollo-apps-moviles.jpg" alt="Desarrollo de aplicaciones móviles" class="img-carousel-item">
-              <img src="img/que-es-cmd.jpg" alt="Desarrollo de aplicaciones móviles" class="img-carousel-item">
-              <img src="img/dominio-web.png" alt="Desarrollo de aplicaciones móviles" class="img-carousel-item">
-              <img src="img/dominio-web1.png" alt="Desarrollo de aplicaciones móviles" class="img-carousel-item">
-            </div>
-          </div>
-
-          <!-- WIDGET FACEBOOK -->
-          <div class="fb-shell">
-            <div class="fb-shell-header">
-              <span>Actividad en Facebook</span>
-              <a href="https://www.facebook.com/loquebuscas.idapps"
-                 target="_blank" rel="noopener noreferrer"
-                 style="font-size:0.78rem;color:var(--primary-soft);">Ver página completa →</a>
-            </div>
-            <div class="fb-page"
-                 data-href="https://www.facebook.com/loquebuscas.idapps"
-                 data-tabs="timeline"
-                 data-width="420"
-                 data-height="420"
-                 data-small-header="false"
-                 data-adapt-container-width="true"
-                 data-hide-cover="false"
-                 data-show-facepile="true">
-            </div>
-          </div>
-        </div>
-
-        <p class="small-note">
-          Nota: el carrusel usa imágenes locales; sólo sustituye los archivos por tus diseños.
-          El widget de Facebook muestra la actividad en tiempo real de tu página.
-        </p>
-      </div>
-    </section>
 
     <!-- PLANES -->
     <section id="planes">
@@ -1299,7 +1817,8 @@
             <div class="client-name">Profesionales independientes</div>
             <div class="client-tag">Automatización y reportes</div>
             <p>
-              Automatización de procesos repetitivos, generación de reportes y avisos que permiten enfocarse en tareas de mayor valor.
+              Automatización de procesos repetitivos, generación de reportes y avisos que permiten enfocarse en tareas
+              de mayor valor.
             </p>
           </article>
 
@@ -1307,7 +1826,8 @@
             <div class="client-name">PyMEs</div>
             <div class="client-tag">Sistemas y apps a medida</div>
             <p>
-              Sistemas internos, paneles web y aplicaciones móviles conectadas a su flujo de trabajo y herramientas ya existentes.
+              Sistemas internos, paneles web y aplicaciones móviles conectadas a su flujo de trabajo y herramientas ya
+              existentes.
             </p>
           </article>
         </div>
@@ -1321,7 +1841,8 @@
           <div class="section-kicker">Nosotros</div>
           <h2 class="section-title">IDAPPSH: enfoque técnico, soluciones reales.</h2>
           <p class="section-subtitle">
-            Más que “herramientas sueltas”, la idea es construir sistemas que realmente se usen y se integren con el día a día de tu operación.
+            Más que “herramientas sueltas”, la idea es construir sistemas que realmente se usen y se integren con el día
+            a día de tu operación.
           </p>
         </header>
 
@@ -1380,7 +1901,8 @@
           <div class="section-kicker">Soporte & ayuda</div>
           <h2 class="section-title">Acompañamiento técnico antes, durante y después del desarrollo.</h2>
           <p class="section-subtitle">
-            No se trata de entregar un sistema y desaparecer. La idea es acompañar el uso, los ajustes y la evolución del proyecto.
+            No se trata de entregar un sistema y desaparecer. La idea es acompañar el uso, los ajustes y la evolución
+            del proyecto.
           </p>
         </header>
 
@@ -1437,12 +1959,14 @@
           <form class="contact-form" id="contactForm">
             <div class="field-group">
               <label class="field-label" for="nombre">Nombre</label>
-              <input class="field-input" id="nombre" name="nombre" placeholder="Nombre o nombre de tu negocio" required />
+              <input class="field-input" id="nombre" name="nombre" placeholder="Nombre o nombre de tu negocio"
+                required />
             </div>
 
             <div class="field-group">
               <label class="field-label" for="email">Correo electrónico</label>
-              <input class="field-input" id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com" required />
+              <input class="field-input" id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com"
+                required />
             </div>
 
             <div class="field-group">
@@ -1500,9 +2024,7 @@
             </div>
 
             <div class="map-shell">
-              <iframe
-                src="https://www.google.com/maps?q=Cuernavaca,+Morelos,+Mexico&output=embed"
-                loading="lazy"
+              <iframe src="https://www.google.com/maps?q=Cuernavaca,+Morelos,+Mexico&output=embed" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade">
               </iframe>
             </div>
@@ -1558,25 +2080,31 @@
           <div class="footer-social">
             <span>Redes y contacto</span>
             <div class="footer-social-row">
-              <a href="https://www.facebook.com/loquebuscas.idapps"
-                 target="_blank" rel="noopener noreferrer"
-                 class="social-btn" aria-label="Facebook">f</a>
-              <a href="https://www.instagram.com/IDAPPSH"
-                 target="_blank" rel="noopener noreferrer"
-                 class="social-btn" aria-label="Instagram">▢</a>
-              <a href="https://mx.linkedin.com/"
-                 target="_blank" rel="noopener noreferrer"
-                 class="social-btn" aria-label="LinkedIn">in</a>
-              <a href="https://idappsh.github.io/abc/"
-                 target="_blank" rel="noopener noreferrer"
-                 class="social-btn" aria-label="GitHub">{}</a>
-              <a href="https://t.me/r_alameda"
-                 target="_blank" rel="noopener noreferrer"
-                 class="social-btn" aria-label="Telegram">TG</a>
-              <a href="https://wa.me/526633905025"
-                 target="_blank" rel="noopener noreferrer"
-                 class="social-btn" aria-label="WhatsApp">WA</a>
+              <a href="https://www.facebook.com/loquebuscas.idapps" target="_blank" rel="noopener noreferrer"
+                class="social-btn" aria-label="Facebook">f</a>
+              <a href="https://www.instagram.com/IDAPPSH" target="_blank" rel="noopener noreferrer" class="social-btn"
+                aria-label="Instagram">▢</a>
+              <a href="https://mx.linkedin.com/" target="_blank" rel="noopener noreferrer" class="social-btn"
+                aria-label="LinkedIn">in</a>
+              <a href="https://idappsh.github.io/abc/" target="_blank" rel="noopener noreferrer" class="social-btn"
+                aria-label="GitHub">{}</a>
+              <a href="https://t.me/r_alameda" target="_blank" rel="noopener noreferrer" class="social-btn"
+                aria-label="Telegram">TG</a>
+              <a href="https://wa.me/526633905025" target="_blank" rel="noopener noreferrer" class="social-btn"
+                aria-label="WhatsApp">WA</a>
             </div>
+            <!-- WIDGET FACEBOOK -->
+          <div class="fb-shell">
+            <div class="fb-shell-header">
+              <span>Actividad en Facebook</span>
+              <a href="https://www.facebook.com/loquebuscas.idapps" target="_blank" rel="noopener noreferrer"
+                style="font-size:0.78rem;color:var(--primary-soft);">Ver página completa →</a>
+            </div>
+            <div class="fb-page" data-href="https://www.facebook.com/loquebuscas.idapps" data-tabs="timeline"
+              data-width="420" data-height="420" data-small-header="false" data-adapt-container-width="true"
+              data-hide-cover="false" data-show-facepile="true">
+            </div>
+          </div>
           </div>
         </div>
 
@@ -1587,6 +2115,7 @@
             <span class="footer-link">Aviso de privacidad</span>
             <span class="footer-link">Términos y condiciones</span>
           </div>
+          
         </div>
       </div>
 
@@ -1594,6 +2123,7 @@
         © <span id="year"></span> IDAPPSH. Todos los derechos reservados.
       </div>
     </div>
+
   </footer>
 
   <!-- BOTÓN WHATSAPP FLOTANTE -->
@@ -1682,20 +2212,24 @@
       contactForm.reset();
     });
 
-    // Carrusel de imágenes
+    // Carrusel de imágenes (slides con imagen + texto)
     let imgPosition = 0;
     function moveImgCarousel(direction) {
       const track = document.getElementById("imgCarouselTrack");
-      const items = document.querySelectorAll(".img-carousel-item");
+      const items = document.querySelectorAll(".img-carousel-slide"); // <-- AQUÍ EL CAMBIO
       const total = items.length;
+
       imgPosition += direction;
       if (imgPosition < 0) imgPosition = total - 1;
       if (imgPosition >= total) imgPosition = 0;
+
       track.style.transform = `translateX(-${imgPosition * 100}%)`;
     }
+
     // Auto slide
     setInterval(() => moveImgCarousel(1), 6000);
   </script>
-</body>
-</html>
 
+</body>
+
+</html>
