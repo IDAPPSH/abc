@@ -2,25 +2,28 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>IDAPPSH – Innovation & Development of Hybrid Systems</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- ======= SEO BÁSICO ======= -->
   <meta name="description"
-    content="IDAPPSH ofrece soluciones tecnológicas completas: desarrollo de software a la medida, aplicaciones móviles, desarrollo web, automatización, infraestructura, seguridad informática e integraciones." />
+    content="IDAPPSH ofrece soluciones tecnológicas completas: desarrollo de software a la medida, aplicaciones móviles, desarrollo web, automatización, infraestructura, seguridad informática e integraciones.">
   <meta name="keywords"
-    content="IDAPPSH, desarrollo de software, desarrollo web, aplicaciones móviles, automatización, bots empresariales, infraestructura, seguridad informática, integraciones API, análisis de datos" />
-  <meta name="author" content="IDAPPSH" />
+    content="IDAPPSH, desarrollo de software, desarrollo web, aplicaciones móviles, automatización, bots empresariales, infraestructura, seguridad informática, integraciones API, análisis de datos">
+  <meta name="author" content="IDAPPSH">
+  <link rel="canonical" href="https://idappsh.site/">
+
+  <!-- ICONOS DE REDES (FONT AWESOME) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <!-- ======= OPEN GRAPH ======= -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="IDAPPSH – Innovation & Development of Hybrid Systems" />
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="IDAPPSH – Innovation & Development of Hybrid Systems">
   <meta property="og:description"
-    content="Soluciones tecnológicas completas: sistemas personalizados, web, apps móviles, automatización, infraestructura y seguridad." />
-  <meta property="og:url" content="https://idappsh.site/" />
-  <!-- CAMBIA ESTA IMAGEN POR TU BANNER REAL -->
-  <meta property="og:image" content="https://idappsh.site/img/banner-idappsh.jpg" />
+    content="Soluciones tecnológicas completas: sistemas personalizados, web, apps móviles, automatización, infraestructura y seguridad.">
+  <meta property="og:url" content="https://idappsh.site/">
+  <meta property="og:image" content="https://idappsh.site/img/banner-idappsh.png">
 
   <!-- ======= JSON-LD ORGANIZATION ======= -->
   <script type="application/ld+json">
@@ -33,7 +36,7 @@
     "description": "Innovation & Development of Hybrid Systems. Desarrollo de software a la medida, aplicaciones móviles, soluciones web, automatización, infraestructura y seguridad informática.",
     "sameAs": [
       "https://www.facebook.com/loquebuscas.idapps",
-      "https://idappsh.github.io/abc/",
+      "https://github.com/IDAPPSH",
       "https://t.me/r_alameda",
       "https://wa.me/526633905025"
     ]
@@ -41,16 +44,16 @@
   </script>
 
   <!-- ======= FAVICON ======= -->
-  <!-- Cambia la ruta por tu logo real -->
-  <link rel="icon" type="image/png" href="/img/logo-idappsh.png">
-  <link rel="apple-touch-icon" href="/img/logo-idappsh.png">
+  <link rel="icon" type="image/x-icon" href="img/icobot.ico">
+  <link rel="apple-touch-icon" href="img/icobot.ico">
+
 
   <!-- ================== ESTILOS ================== -->
   <style>
     :root {
       --bg-main: #020617;
       --bg-card: #020617;
-      --border-soft: #1e293b;
+      --border-soft: #6d6f74;
       --primary: #0ea5e9;
       --primary-soft: #38bdf8;
       --accent: #f97316;
@@ -348,8 +351,14 @@
     .hero-highlight {
       background: linear-gradient(to right, var(--primary-soft), #facc15);
       -webkit-background-clip: text;
+      /* Chrome, Safari, Edge */
+      background-clip: text;
+      /* Soporte estándar */
+      -webkit-text-fill-color: transparent;
+      /* Evita errores y hace visible el efecto */
       color: transparent;
     }
+
 
     .hero-text {
       color: var(--text-muted);
@@ -869,9 +878,10 @@
       width: 100%;
       padding: 0.6rem 0.65rem;
       border-radius: 0.6rem;
-      border: 1px solid #1f2937;
-      background: #020617;
-      color: var(--text-main);
+      border: 1px solid #040111da;
+      background: #ffffff;
+      color: #0f172a;
+      /* ← ESTA ES LA LÍNEA QUE TE FALTABA */
       font-size: 0.85rem;
       outline: none;
       transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
@@ -953,20 +963,20 @@
     }
 
     .novedades-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-      gap: 1.5rem;
-      align-items: stretch;
+      display: block;
+      /* un solo bloque */
     }
 
     @media (max-width: 980px) {
       .novedades-layout {
-        grid-template-columns: 1fr;
+        display: block;
       }
     }
 
+
     /* ---- CARRUSEL ---- */
 
+    /* ---- CARRUSEL ---- */
     .img-carousel-shell {
       border-radius: var(--radius-lg);
       border: 1px solid var(--border-soft);
@@ -992,54 +1002,37 @@
       width: 100%;
     }
 
-    /* Cada slide es un banner completo */
+    /* Cada slide ocupa todo el ancho y tiene altura fija */
     .img-carousel-slide {
-      position: relative;
       min-width: 100%;
       height: 260px;
-      /* alto uniforme */
-      overflow: hidden;
+      display: flex;
+      align-items: stretch;
+      background: #020617;
     }
 
-    /* Imagen de fondo */
+    /* Imagen a la izquierda */
     .img-carousel-media {
-      position: absolute;
-      inset: 0;
+      flex: 1.4;
+      overflow: hidden;
     }
 
     .img-carousel-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: saturate(1.05);
     }
 
-    /* Degradado oscuro para que el texto se lea */
-    .img-carousel-media::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right,
-          rgba(2, 6, 23, 0.95) 0%,
-          rgba(2, 6, 23, 0.8) 30%,
-          rgba(2, 6, 23, 0.4) 55%,
-          transparent 85%);
-    }
-
-    /* Caja de texto sobrepuesta */
+    /* Panel de texto a la derecha */
     .img-carousel-info {
-      position: relative;
-      z-index: 1;
-      max-width: 46%;
-      margin-left: auto;
-      margin-right: 1.4rem;
-      height: 100%;
+      flex: 1;
+      padding: 1rem 1.1rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 1rem 0;
-      font-size: 0.82rem;
-      color: var(--text-muted);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.95), #020617);
     }
 
     .img-carousel-info h3 {
@@ -1071,25 +1064,20 @@
       color: var(--primary-soft);
     }
 
-    /* Móvil: texto en una tarjeta sobre la imagen */
+    /* Responsive: en móvil imagen arriba, texto abajo */
     @media (max-width: 900px) {
       .img-carousel-slide {
-        height: 260px;
+        flex-direction: column;
+        height: auto;
       }
 
-      .img-carousel-media::after {
-        background: linear-gradient(to top,
-            rgba(2, 6, 23, 0.95) 0%,
-            rgba(2, 6, 23, 0.75) 35%,
-            transparent 80%);
+      .img-carousel-media {
+        flex: none;
+        height: 190px;
       }
 
       .img-carousel-info {
-        max-width: 100%;
-        margin: 0 0.9rem 0.9rem;
-        padding: 0.8rem 0.75rem;
-        border-radius: 0.75rem;
-        background: rgba(2, 6, 23, 0.95);
+        flex: none;
       }
     }
 
@@ -1098,7 +1086,7 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(15, 23, 42, 0.7);
+      background: rgba(15, 23, 42, 0.85);
       border-radius: 999px;
       border: 1px solid rgba(148, 163, 184, 0.6);
       color: #e5e7eb;
@@ -1115,6 +1103,7 @@
     .img-carousel-btn.right {
       right: 8px;
     }
+
 
     /* ---- FACEBOOK (igual que ya tenías) ---- */
     .fb-shell {
@@ -1137,8 +1126,8 @@
 
     /* ========== FOOTER ========== */
     footer {
-      border-top: 1px solid rgba(15, 23, 42, 0.95);
-      background: #020617;
+      border-top: 1px solid rgba(16, 245, 16, 0.95);
+      background: #050404;
       padding: 1.5rem 0 2rem;
       font-size: 0.78rem;
       color: var(--text-muted);
@@ -1195,8 +1184,8 @@
     }
 
     .social-btn {
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
       border-radius: 999px;
       border: 1px solid var(--border-soft);
       background: #020617;
@@ -1234,6 +1223,17 @@
       height: 100%;
       border-radius: 50%;
       box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+    }
+
+    /* En pantallas chicas, subimos el botón para que no tape el footer */
+    @media (max-width: 700px) {
+      .whatsapp-float {
+        bottom: 90px;
+        /* lo subes por encima del footer */
+        right: 16px;
+        width: 52px;
+        height: 52px;
+      }
     }
   </style>
 </head>
@@ -1350,7 +1350,7 @@
       </div>
     </section>
 
-        <!-- NOVEDADES: CARRUSEL IMÁGENES + FACEBOOK -->
+    <!-- NOVEDADES: CARRUSEL IMÁGENES + FACEBOOK -->
     <section id="novedades">
       <div class="wrapper">
         <header class="section-header">
@@ -1365,12 +1365,14 @@
         <div class="novedades-layout">
           <!-- CARRUSEL DE IMÁGENES -->
           <div class="img-carousel-shell">
+
             <div class="img-carousel-header">
               <span>Servicios en imágenes</span>
               <span style="font-size:0.75rem;color:var(--text-muted);">
                 Desliza o espera el cambio automático
               </span>
             </div>
+
 
             <!-- Botones -->
             <button class="img-carousel-btn left" type="button" onclick="moveImgCarousel(-1)">‹</button>
@@ -1446,7 +1448,7 @@
               <!-- 5. Excel / Datos -->
               <div class="img-carousel-slide">
                 <div class="img-carousel-media">
-                  <img src="/mg/excel-vba.png" alt="Reportes y Excel / VBA">
+                  <img src="img/excel-vba.png" alt="Reportes y Excel / VBA">
                 </div>
                 <div class="img-carousel-info">
                   <h3>Reportes y análisis de datos</h3>
@@ -1458,6 +1460,7 @@
                   </ul>
                 </div>
               </div>
+
 
               <!-- 6. Integración de APIs -->
               <div class="img-carousel-slide">
@@ -1510,7 +1513,7 @@
           </div>
 
 
-          
+
         </div>
 
         <p class="small-note">
@@ -1678,7 +1681,7 @@
           </article>
         </div>
       </div>
-      
+
     </section>
 
     <!-- PROYECTOS / EJEMPLOS -->
@@ -2080,31 +2083,56 @@
           <div class="footer-social">
             <span>Redes y contacto</span>
             <div class="footer-social-row">
+              <!-- Facebook -->
               <a href="https://www.facebook.com/loquebuscas.idapps" target="_blank" rel="noopener noreferrer"
-                class="social-btn" aria-label="Facebook">f</a>
+                class="social-btn" aria-label="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+
+              <!-- Instagram -->
               <a href="https://www.instagram.com/IDAPPSH" target="_blank" rel="noopener noreferrer" class="social-btn"
-                aria-label="Instagram">▢</a>
+                aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+
+              <!-- LinkedIn -->
               <a href="https://mx.linkedin.com/" target="_blank" rel="noopener noreferrer" class="social-btn"
-                aria-label="LinkedIn">in</a>
-              <a href="https://idappsh.github.io/abc/" target="_blank" rel="noopener noreferrer" class="social-btn"
-                aria-label="GitHub">{}</a>
+                aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </a>
+
+              <!-- GitHub -->
+              <a href="https://github.com/IDAPPSH" target="_blank" rel="noopener noreferrer" class="social-btn"
+                aria-label="GitHub">
+                <i class="fa-brands fa-github"></i>
+              </a>
+
+              <!-- Telegram -->
               <a href="https://t.me/r_alameda" target="_blank" rel="noopener noreferrer" class="social-btn"
-                aria-label="Telegram">TG</a>
+                aria-label="Telegram">
+                <i class="fa-brands fa-telegram"></i>
+              </a>
+
+              <!-- WhatsApp -->
               <a href="https://wa.me/526633905025" target="_blank" rel="noopener noreferrer" class="social-btn"
-                aria-label="WhatsApp">WA</a>
+                aria-label="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+              </a>
             </div>
+
+
             <!-- WIDGET FACEBOOK -->
-          <div class="fb-shell">
-            <div class="fb-shell-header">
-              <span>Actividad en Facebook</span>
-              <a href="https://www.facebook.com/loquebuscas.idapps" target="_blank" rel="noopener noreferrer"
-                style="font-size:0.78rem;color:var(--primary-soft);">Ver página completa →</a>
+            <div class="fb-shell">
+              <div class="fb-shell-header">
+                <span>Actividad en Facebook</span>
+                <a href="https://www.facebook.com/loquebuscas.idapps" target="_blank" rel="noopener noreferrer"
+                  style="font-size:0.78rem;color:var(--primary-soft);">Ver página completa →</a>
+              </div>
+              <div class="fb-page" data-href="https://www.facebook.com/loquebuscas.idapps" data-tabs="timeline"
+                data-width="420" data-height="420" data-small-header="false" data-adapt-container-width="true"
+                data-hide-cover="false" data-show-facepile="true">
+              </div>
             </div>
-            <div class="fb-page" data-href="https://www.facebook.com/loquebuscas.idapps" data-tabs="timeline"
-              data-width="420" data-height="420" data-small-header="false" data-adapt-container-width="true"
-              data-hide-cover="false" data-show-facepile="true">
-            </div>
-          </div>
           </div>
         </div>
 
@@ -2115,7 +2143,7 @@
             <span class="footer-link">Aviso de privacidad</span>
             <span class="footer-link">Términos y condiciones</span>
           </div>
-          
+
         </div>
       </div>
 
