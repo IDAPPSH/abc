@@ -1257,192 +1257,355 @@
 
         /********************** -->
 
-        /* ==========IA -  CHATBOT FLOTANTE ========== */
+        /********************** */
+        /* ========= CHATBOT (CLARO / MINIMAL / BORDE HUNDIDO) ========= */
+        :root {
+            --cb-bg: #f6f8fb;
+            --cb-surface: #ffffff;
+            --cb-text: #0f172a;
+            --cb-muted: #64748b;
+
+            --cb-border: rgba(15, 23, 42, .18);
+            --cb-border-strong: rgba(15, 23, 42, .28);
+
+            --cb-shadow-out: 0 18px 40px rgba(15, 23, 42, .12);
+            --cb-shadow-in: inset 0 1px 0 rgba(255, 255, 255, .85), inset 0 -1px 0 rgba(15, 23, 42, .06);
+
+            --cb-accent: #0ea5e9;
+            --cb-accent-2: #22c55e;
+
+            --cb-radius: 18px;
+        }
+
+        /* ====== Botón flotante ====== */
         #idappsh-chat-launcher {
             position: fixed;
-            right: 22px;
-            bottom: 92px;
-            /* arriba del WhatsApp flotante */
+            right: 18px;
+
+            /* IMPORTANTE: se mueve por scroll con TOP (JS actualiza --cb-launcher-top) */
+            bottom: auto !important;
+            top: var(--cb-launcher-top, 55vh);
+
             width: 56px;
             height: 56px;
             border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.6);
-            background: rgba(2, 6, 23, 0.92);
-            color: var(--primary-soft);
+
+            background: linear-gradient(180deg, #ffffff, #eef2f7);
+            border: 1px solid var(--cb-border-strong);
+            box-shadow: var(--cb-shadow-out), var(--cb-shadow-in);
+
+            color: var(--cb-text);
             cursor: pointer;
             z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+
+            display: grid;
+            place-items: center;
+
+            transform: translateY(0);
+            transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, top .18s ease;
         }
 
+        /* “Hey aquí estoy” (pulso suave) */
+        #idappsh-chat-launcher.is-nudging {
+            animation: cbNudge .55s ease;
+            transform: translateY(-1px);
+            background: linear-gradient(180deg, #62ff6aec, #f1c70cde, #31fff5);
+            border-color: rgb(136, 211, 255);
+            transform: translateY(-1px);
+            color: var(--cb-text);
+            border-color: rgb(255, 2, 2);
+
+        }
+
+        @keyframes cbNudge {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+
+            35% {
+                transform: translateY(-2px) scale(1.03);
+            }
+
+            70% {
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                transform: translateY(0) scale(1);
+            }
+        }
+
+
+
+
+        /* Puntito estado */
+        #idappsh-chat-launcher::after {
+            content: "";
+            position: absolute;
+            right: 9px;
+            top: 9px;
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: var(--cb-accent);
+            box-shadow: 0 0 0 3px rgba(12, 210, 236, 0.384);
+            opacity: .95;
+        }
+
+        /* Hover */
         #idappsh-chat-launcher:hover {
-            border-color: var(--primary-soft);
-            filter: brightness(1.08);
+            border-color: rgba(14, 233, 124, 0.45);
+            transform: translateY(-2px);
         }
 
+        /* ====== Panel ====== */
         #idappsh-chat-panel {
             position: fixed;
             right: 22px;
-            bottom: 145px;
-            /* queda arriba de ambos botones */
-            width: 240px;
+            bottom: 155px;
+
+            width: 380px;
             max-width: calc(100vw - 44px);
-            height: 420px;
-            max-height: calc(100vh - 200px);
-            border-radius: 16px;
-            border: 1px solid rgba(148, 163, 184, 0.678);
-            background: rgba(29, 107, 143, 0.781);
-            box-shadow: 0 22px 60px rgba(0, 0, 0, 0.65);
+            height: 540px;
+            max-height: calc(100vh - 220px);
+
+            border-radius: var(--cb-radius);
+            border: 1px solid var(--cb-border-strong);
+
+            background: var(--cb-bg);
+            box-shadow: var(--cb-shadow-out);
+
             overflow: hidden;
             z-index: 9999;
+
             display: none;
+            flex-direction: column;
         }
 
         #idappsh-chat-panel.open {
-            display: block;
+            display: flex;
         }
 
+        /* ====== Header ====== */
         .chat-head {
+            padding: 12px 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 12px;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+
+            background: linear-gradient(180deg, #ffffff, #f3f6fb);
+            border-bottom: 1px solid var(--cb-border);
+        }
+
+        .chat-title {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
 
         .chat-name {
-            font-weight: 700;
-            color: var(--text-main);
-            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--cb-text);
+            font-size: .95rem;
         }
 
         .chat-sub {
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            margin-top: 2px;
+            color: var(--cb-muted);
+            font-size: .76rem;
         }
 
         .chat-close {
-            width: 34px;
-            height: 34px;
-            border-radius: 10px;
-            border: 1px solid rgba(148, 163, 184, 0.25);
-            background: transparent;
-            color: var(--text-muted);
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            border: 1px solid var(--cb-border);
+            background: #fff;
+            color: var(--cb-muted);
             cursor: pointer;
-            font-size: 1.25rem;
-            line-height: 1;
+            box-shadow: var(--cb-shadow-in);
+            display: grid;
+            place-items: center;
+            transition: transform .12s ease, border-color .12s ease, color .12s ease;
         }
 
         .chat-close:hover {
-            color: var(--text-main);
-            border-color: rgba(56, 189, 248, 0.5);
+            transform: translateY(-1px);
+            border-color: rgba(14, 165, 233, .40);
+            color: var(--cb-text);
         }
 
+        /* ====== Body ====== */
         .chat-body {
-            padding: 12px;
             flex: 1;
-            /* ✅ ocupa lo que reste */
+            padding: 14px;
             overflow: auto;
         }
 
-
+        /* ====== Mensajes ====== */
         .msg {
-            font-size: 0.82rem;
+            font-size: .90rem;
             line-height: 1.35;
-            padding: 10px 10px;
-            border-radius: 12px;
+            padding: 10px 12px;
+            border-radius: 16px;
             margin-bottom: 10px;
-            max-width: 90%;
-            border: 1px solid rgba(148, 163, 184, 0.15);
+            max-width: 88%;
+            border: 1px solid var(--cb-border);
+            background: #fff;
+            color: var(--cb-text);
+            box-shadow: var(--cb-shadow-in);
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
 
+        /* soporta: .msg.assistant / .msg.user */
+        .msg.assistant,
         .msg.bot {
-            background: rgba(15, 23, 42, 0.85);
-            color: var(--text-main);
+            background: #ffffff;
         }
 
+        .msg.user,
         .msg.me {
             margin-left: auto;
-            background: rgba(232, 235, 236, 0.15);
-            color: var(--text-main);
-            border-color: rgba(56, 189, 248, 0.25);
+            background: linear-gradient(180deg, rgba(14, 165, 233, .12), rgba(14, 165, 233, .05));
+            border-color: rgba(14, 165, 233, .28);
         }
 
-        .chat-actions {
+        /* ====== Botones “¿Te ayudó?” ====== */
+        .help-row {
+            margin: 6px 0 12px;
+            padding: 10px 12px;
+            border: 1px dashed rgba(15, 23, 42, .18);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, .75);
+            box-shadow: var(--cb-shadow-in);
+        }
+
+        .help-q {
+            font-size: .82rem;
+            color: var(--cb-muted);
+            margin-bottom: 8px;
+        }
+
+        .help-btn {
+            border: 1px solid var(--cb-border);
+            background: #fff;
+            color: var(--cb-text);
+            border-radius: 12px;
+            padding: 8px 10px;
+            cursor: pointer;
+            margin-right: 8px;
+            transition: transform .12s ease, border-color .12s ease, filter .12s ease;
+        }
+
+        .help-btn:hover {
+            transform: translateY(-1px);
+            border-color: rgba(14, 165, 233, .35);
+        }
+
+        .help-btn.yes {
+            border-color: rgba(34, 197, 94, .28);
+        }
+
+        .help-btn.no {
+            border-color: rgba(14, 165, 233, .28);
+        }
+
+        /* ====== Acciones a humano (Whats/Telegram) ====== */
+        .action-row {
             display: flex;
+            gap: 8px;
             flex-wrap: wrap;
+            margin: 6px 0 12px;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             gap: 8px;
-            padding: 10px 12px;
-            border-top: 1px solid rgba(148, 163, 184, 0.12);
-            border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+
+            padding: 8px 10px;
+            border-radius: 12px;
+
+            border: 1px solid rgba(15, 23, 42, .18);
+            background: #fff;
+            color: var(--cb-text);
+            text-decoration: none;
+
+            box-shadow: var(--cb-shadow-in);
+            transition: transform .12s ease, border-color .12s ease, filter .12s ease;
         }
 
-        .chat-action {
-            font-size: 0.75rem;
-            padding: 6px 10px;
-            border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.35);
-            color: var(--primary-soft);
-            background: rgba(2, 6, 23, 0.4);
+        .action-btn:hover {
+            transform: translateY(-1px);
+            border-color: rgba(14, 165, 233, .38);
         }
 
-        .chat-action:hover {
-            border-color: rgba(56, 189, 248, 0.7);
-            filter: brightness(1.06);
-        }
-
+        /* ====== Footer ====== */
         .chat-foot {
+            padding: 12px;
             display: flex;
-            gap: 8px;
-            padding: 10px 12px;
+            gap: 10px;
+            background: linear-gradient(180deg, #f3f6fb, #ffffff);
+            border-top: 1px solid var(--cb-border);
         }
 
         #idappsh-chat-input {
             flex: 1;
-            border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.25);
-            background: rgba(15, 23, 42, 0.85);
-            color: var(--text-main);
-            padding: 10px 12px;
+            border-radius: 14px;
+            border: 1px solid var(--cb-border);
+            background: #ffffff;
+            padding: 11px 12px;
+            color: var(--cb-text);
             outline: none;
+            box-shadow: var(--cb-shadow-in);
         }
+
+        #idappsh-chat-input:focus {
+            border-color: rgba(14, 165, 233, .55);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .85), 0 0 0 3px rgba(14, 165, 233, .15);
+        }
+
+
 
         .chat-send {
-            width: 44px;
-            border-radius: 999px;
-            border: 1px solid rgba(36, 231, 10, 0.63);
-            background: rgb(229, 229, 230);
-            color: rgb(43, 212, 241);
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            border: 1px solid rgba(14, 165, 233, .28);
+            background: linear-gradient(180deg, #0ea5e9, #0284c7);
+            color: #fff;
             cursor: pointer;
+            display: grid;
+            place-items: center;
+            transition: transform .12s ease, filter .12s ease;
         }
 
-        #idappsh-chat-panel {
-            /* ... lo que ya tienes ... */
-            display: none;
-            flex-direction: column;
-            /* ✅ */
+        .chat-send:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.03);
         }
 
-        #idappsh-chat-panel.open {
-            display: flex;
-            /* ✅ */
+        .chat-send:active {
+            transform: translateY(0) scale(.98);
         }
 
-
-        @media (max-width: 700px) {
+        /* ====== Responsive ====== */
+        @media (max-width:700px) {
             #idappsh-chat-launcher {
                 right: 16px;
-                bottom: 150px;
+                bottom: auto !important;
             }
 
             #idappsh-chat-panel {
                 right: 16px;
-                bottom: 220px;
+                width: 92vw;
+                height: 60vh;
             }
         }
+
+        /******************************/
+
 
         /******************************
 
@@ -1476,7 +1639,7 @@
     </style>
 </head>
 
-<script src="/assets/js/chatbot.js"></script>
+
 
 <body>
     <!-- SDK Facebook root -->
@@ -2435,23 +2598,22 @@
             </div>
             <button id="idappsh-chat-close" class="chat-close" aria-label="Cerrar">×</button>
         </div>
-
-        <div id="idappsh-chat-msgs" class="chat-body">
+        <div id="idappsh-chat-messages" class="chat-body">
             <div class="msg bot">Hola 👋 ¿en qué te puedo ayudar sobre IDAPPSH/GEKOS?</div>
         </div>
 
-        <div id="idappsh-chat-actions" class="chat-actions"></div>
+
+
 
         <form id="idappsh-chat-form" class="chat-foot">
             <input id="idappsh-chat-input" type="text" placeholder="Escribe tu pregunta…" autocomplete="off" />
-            <button type="submit" class="chat-send" aria-label="Enviar">
+            <<button id="idappsh-chat-send" type="submit" class="chat-send" aria-label="Enviar">
                 <i class="fa-solid fa-paper-plane"></i>
-            </button>
+                </button>
         </form>
     </div>
 
-    <!-- JS del chatbot (frontend) -->
-    <script src="/assets/js/chatbot.js" defer></script>
+
 
 
 
@@ -2563,80 +2725,88 @@
 
         setInterval(() => moveImgCarousel(1), 6000);
 
-        // ================= CHAT UI (abrir/cerrar) =================
-        const chatLauncher = document.getElementById("idappsh-chat-launcher");
-        const chatPanel = document.getElementById("idappsh-chat-panel");
-        const chatClose = document.getElementById("idappsh-chat-close");
-
-        if (chatLauncher && chatPanel) {
-            chatLauncher.addEventListener("click", (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                chatPanel.classList.toggle("open");
-            });
-        }
-
-        if (chatClose && chatPanel) {
-            chatClose.addEventListener("click", (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                chatPanel.classList.remove("open");
-            });
-        }
-
-        // ✅ IMPORTANTE: clicks dentro del panel NO deben burbujear
-        if (chatPanel) {
-            chatPanel.addEventListener("click", (e) => e.stopPropagation());
-        }
-
-        // ✅ Click afuera cierra (pero NO se dispara al enviar porque ya stopPropagation)
-        document.addEventListener("click", (e) => {
-            if (!chatPanel || !chatLauncher) return;
-            if (!chatPanel.classList.contains("open")) return;
-
-            const clickedInside = chatPanel.contains(e.target) || chatLauncher.contains(e.target);
-            if (!clickedInside) chatPanel.classList.remove("open");
-        });
-
-        // ================= CHAT INPUT / SUBMIT (DEMO) =================
-        const chatForm = document.getElementById("idappsh-chat-form");
-        const chatInput = document.getElementById("idappsh-chat-input");
-        const chatMsgs = document.getElementById("idappsh-chat-msgs");
-
-        function addChatMsg(text, who = "bot") {
-            if (!chatMsgs) return;
-            const d = document.createElement("div");
-            d.className = "msg " + who;
-            d.textContent = text;
-            chatMsgs.appendChild(d);
-            chatMsgs.scrollTop = chatMsgs.scrollHeight;
-        }
-
-        if (chatForm && chatInput) {
-            chatForm.addEventListener("submit", (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-
-                const q = chatInput.value.trim();
-                if (!q) return;
-
-                addChatMsg(q, "me");
-                chatInput.value = "";
-
-                // DEMO: aquí luego conectas el Worker/API
-                addChatMsg("Recibido ✅ (falta conectar IA).", "bot");
-            });
-
-            // Enter envía (sin cerrar chat)
-            chatInput.addEventListener("keydown", (e) => {
-                if (e.key === "Enter") {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    chatForm.requestSubmit();
-                }
-            });
-        }
+        //        <!-- // ================= CHAT UI (abrir/cerrar) =================
+        //        const chatLauncher = document.getElementById("idappsh-chat-launcher");
+        //        const chatPanel = document.getElementById("idappsh-chat-panel");
+        //        const chatClose = document.getElementById("idappsh-chat-close");
+        //
+        //        if (chatLauncher && chatPanel) {
+        //            chatLauncher.addEventListener("click", (e) => {
+        //                e.preventDefault();
+        //                e.stopPropagation();
+        //                chatPanel.classList.toggle("open");
+        //            });
+        //        }
+        //
+        //        if (chatClose && chatPanel) {
+        //            chatClose.addEventListener("click", (e) => {
+        //                e.preventDefault();
+        //                e.stopPropagation();
+        //                chatPanel.classList.remove("open");
+        //            });
+        //        }
+        //
+        //        // ✅ IMPORTANTE: clicks dentro del panel NO deben burbujear
+        //        if (chatPanel) {
+        //            chatPanel.addEventListener("click", (e) => e.stopPropagation());
+        //        }
+        //
+        //        // ✅ Click afuera cierra (pero NO se dispara al enviar porque ya stopPropagation)
+        //        document.addEventListener("click", (e) => {
+        //            if (!chatPanel || !chatLauncher) return;
+        //            if (!chatPanel.classList.contains("open")) return;
+        //
+        //            const clickedInside = chatPanel.contains(e.target) || chatLauncher.contains(e.target);
+        //            if (!clickedInside) chatPanel.classList.remove("open");
+        //        });
+        //
+        //        // ================= CHAT INPUT / SUBMIT (DEMO) =================
+        //        const chatForm = document.getElementById("idappsh-chat-form");
+        //        const chatInput = document.getElementById("idappsh-chat-input");
+        //        const chatMsgs = document.getElementById("idappsh-chat-msgs");
+        //
+        //        function addChatMsg(text, who = "bot") {
+        //            if (!chatMsgs) return;
+        //            const d = document.createElement("div");
+        //            d.className = "msg " + who;
+        //            d.textContent = text;
+        //            chatMsgs.appendChild(d);
+        //            chatMsgs.scrollTop = chatMsgs.scrollHeight;
+        //        }
+        //
+        //        if (chatForm && chatInput) {
+        //            chatForm.addEventListener("submit", (e) => {
+        //                e.preventDefault();
+        //                e.stopPropagation();
+        //
+        //                const q = chatInput.value.trim();
+        //                if (!q) return;
+        //
+        //                addChatMsg(q, "me");
+        //                chatInput.value = "";
+        //
+        //                // DEMO: aquí luego conectas el Worker/API
+        //                addChatMsg("Recibido ✅ (falta conectar IA).", "bot");
+        //            });
+        //
+        //            // Enter envía (sin cerrar chat)
+        //            chatInput.addEventListener("keydown", (e) => {
+        //                if (e.key === "Enter") {
+        //                    e.preventDefault();
+        //                    e.stopPropagation();
+        //                    chatForm.requestSubmit();
+        //                }
+        //            });
+        //        } -->
     </script>
+
+    <!-- JS del chatbot (frontend) -->
+
+    <script src="/assets/js/chatbot.js"></script>
+
+
+
+
 </body>
 
 </html>
