@@ -3,6 +3,7 @@
   window.__IDAPPSH_CHATBOT_INIT__ = true;
 
   const WORKER_URL = "https://idappsh-ia.idappsh.workers.dev/";
+  const WORKER_URL = "https://idappsh-ia.idappsh.workers.dev/chat";
 
   document.addEventListener("DOMContentLoaded", () => {
     const launcher = document.getElementById("idappsh-chat-launcher");
@@ -239,4 +240,5 @@
     }
   });
 })();
+
 
