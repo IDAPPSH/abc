@@ -2,7 +2,7 @@
   if (window.__IDAPPSH_CHATBOT_INIT__) return;
   window.__IDAPPSH_CHATBOT_INIT__ = true;
 
-  const WORKER_URL = "https://idappsh-ia.idappsh.workers.dev/chat";
+  const WORKER_URL = "https://idappsh-ia.idappsh.workers.dev/";
 
   document.addEventListener("DOMContentLoaded", () => {
     const launcher = document.getElementById("idappsh-chat-launcher");
@@ -239,3 +239,4 @@
     }
   });
 })();
+
