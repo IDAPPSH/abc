@@ -2,8 +2,123 @@
   if (window.__IDAPPSH_CHATBOT_INIT__) return;
   window.__IDAPPSH_CHATBOT_INIT__ = true;
 
-  const WORKER_URL = "https://idappsh-ia.idappsh.workers.dev/";
   const WORKER_URL = "https://idappsh-ia.idappsh.workers.dev/chat";
+  const ENDPOINT = "https://idappsh-ia.idappsh.workers.dev/chat";
+
+  const elMsgs = document.getElementById("chatMsgs");
+  const elInput = document.getElementById("chatInput");
+  const elSend = document.getElementById("chatSend");
+  const elHint = document.getElementById("chatHint");
+  const elQuick = document.getElementById("quickActions");
+
+  const elToggle = document.getElementById("chatToggle");
+  const elBody = document.getElementById("chatBody");
+
+  let history = []; // [{role, content}]
+
+  function addMsg(who, text) {
+    const div = document.createElement("div");
+    div.className = who === "user" ? "msg msg-user" : "msg msg-bot";
+    div.innerHTML = `<div class="who">${who === "user" ? "Tú" : "IDAPPSH IA"}</div>
+                   <div class="text">${escapeHtml(text)}</div>`;
+    elMsgs.appendChild(div);
+    elMsgs.scrollTop = elMsgs.scrollHeight;
+  }
+
+  function setHint(text) {
+    elHint.textContent = text || "";
+  }
+
+  function setQuickActions(actions) {
+    elQuick.innerHTML = "";
+    (actions || []).forEach(a => {
+      const btn = document.createElement("a");
+      btn.className = "qa-btn";
+      btn.href = a.url;
+      btn.target = "_blank";
+      btn.rel = "noopener";
+      btn.textContent = a.label;
+      elQuick.appendChild(btn);
+    });
+  }
+
+  async function sendMessage() {
+    const text = (elInput.value || "").trim();
+    if (!text) return;
+
+    addMsg("user", text);
+    elInput.value = "";
+    setHint("Escribiendo...");
+
+    history.push({ role: "user", content: text });
+
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text, history }),
+      });
+
+      const data = await res.json();
+
+      const botText =
+        data.reply ??      // ✅ tu backend real
+        data.message ??    // compat
+        data.text ??       // compat
+        data.answer ??     // compat
+        "";
+
+      if (!botText.trim()) {
+        throw new Error("Respuesta vacía del backend");
+      }
+
+      addMsg("bot", botText);
+
+      // quick actions
+      if (Array.isArray(data.quick_actions)) {
+        setQuickActions(data.quick_actions);
+      }
+
+      // needs_human
+      if (data.needs_human === true) {
+        setHint("¿Quieres asistencia humana? Elige un canal:");
+      } else {
+        setHint("");
+      }
+
+    } catch (e) {
+      console.error(e);
+      setHint("Error de conexión. Intenta de nuevo.");
+    }
+  }
+
+  elSend.addEventListener("click", sendMessage);
+  elInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") sendMessage();
+  });
+
+  elToggle.addEventListener("click", () => {
+    const hidden = elBody.style.display === "none";
+    elBody.style.display = hidden ? "block" : "none";
+    elToggle.textContent = hidden ? "—" : "+";
+  });
+
+  // Mensaje inicial
+  addMsg("bot", "Qué onda 👋 Soy IDAPPSH IA. ¿Qué quieres hacer hoy?");
+  setQuickActions([
+    { label: "WhatsApp", url: "https://wa.me/" },
+    { label: "Telegram", url: "https://t.me/" },
+  ]);
+
+  function escapeHtml(s) {
+    return String(s)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
 
   document.addEventListener("DOMContentLoaded", () => {
     const launcher = document.getElementById("idappsh-chat-launcher");
@@ -240,5 +355,3 @@
     }
   });
 })();
-
-
