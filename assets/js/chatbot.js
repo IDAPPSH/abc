@@ -1,9 +1,7 @@
 (() => {
-  // Evita doble carga
   if (window.__IDAPPSH_CHATBOT_INIT__) return;
   window.__IDAPPSH_CHATBOT_INIT__ = true;
 
-  // ✅ Pon tu URL real del Worker (la tuya)
   const WORKER_URL = "https://idappsh-ia.idappsh.workers.dev/chat";
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -15,37 +13,52 @@
     const input = document.getElementById("idappsh-chat-input");
     const sendBtn = document.getElementById("idappsh-chat-send");
 
-    // Si falta HTML del chat, no truena
-    if (!launcher || !panel || !closeBtn || !msgList || !input || !sendBtn) {
-      console.warn("Faltan elementos del chatbot en el HTML. Revisa IDs idappsh-chat-*");
+    // Si falta algo: imprime EXACTAMENTE qué falta
+    const missing = [];
+    if (!launcher) missing.push("idappsh-chat-launcher");
+    if (!panel) missing.push("idappsh-chat-panel");
+    if (!closeBtn) missing.push("idappsh-chat-close");
+    if (!msgList) missing.push("idappsh-chat-messages");
+    if (!input) missing.push("idappsh-chat-input");
+    if (!sendBtn) missing.push("idappsh-chat-send");
+
+    if (missing.length) {
+      console.warn("Faltan elementos del chatbot:", missing.join(", "));
       return;
     }
 
-    let history = []; // [{role, content}...]
+    let history = [];
 
-    // Abrir/cerrar
+    // ======= OPEN/CLOSE (con aria-hidden bien) =======
+    function openPanel() {
+      panel.classList.add("open");
+      panel.setAttribute("aria-hidden", "false");
+      setTimeout(() => input.focus(), 50);
+    }
+    function closePanel() {
+      panel.classList.remove("open");
+      panel.setAttribute("aria-hidden", "true");
+    }
+
     launcher.addEventListener("click", (e) => {
       e.stopPropagation();
-      panel.classList.toggle("open");
-      setTimeout(() => input.focus(), 50);
+      if (panel.classList.contains("open")) closePanel();
+      else openPanel();
     });
 
     closeBtn.addEventListener("click", (e) => {
       e.stopPropagation();
-      panel.classList.remove("open");
+      closePanel();
     });
 
-    // Click dentro NO cierra
     panel.addEventListener("click", (e) => e.stopPropagation());
 
-    // ✅ Click fuera SÍ cierra (pero solo si realmente fue fuera)
     document.addEventListener("click", (e) => {
       if (!panel.classList.contains("open")) return;
       const clickedInside = panel.contains(e.target) || launcher.contains(e.target);
-      if (!clickedInside) panel.classList.remove("open");
+      if (!clickedInside) closePanel();
     });
 
-    // Enviar con Enter
     input.addEventListener("keydown", (e) => {
       if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
@@ -53,13 +66,70 @@
       }
     });
 
-    // ✅ IMPORTANTÍSIMO: stopPropagation para que NO cierre el panel al hacer click en Enviar
     sendBtn.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
       sendMessage();
     });
 
+    // ======= “PRESENCIA” (follow scroll + hey hey cada 3s) =======
+    (function setupPresence() {
+      let raf = null;
+
+      const minTop = 140;
+      const maxTop = () => Math.max(180, window.innerHeight - 170);
+
+      function setTop(px) {
+        document.documentElement.style.setProperty("--cb-launcher-top", px + "px");
+      }
+
+      function syncTop() {
+        const doc = document.documentElement;
+        const maxScroll = Math.max(1, doc.scrollHeight - window.innerHeight);
+        const p = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+        const top = minTop + (maxTop() - minTop) * p;
+        setTop(top);
+      }
+
+      function onScroll() {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          raf = null;
+          syncTop();
+        });
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll, { passive: true });
+      syncTop();
+
+      // NUDGE
+      let lock = false;
+      function nudge() {
+        if (lock) return;
+        if (panel.classList.contains("open")) return;
+
+        lock = true;
+        launcher.classList.remove("is-nudging"); // por si se quedó pegada
+        launcher.offsetHeight; // fuerza reflow para reiniciar animación
+        launcher.classList.add("is-nudging");
+
+        setTimeout(() => launcher.classList.remove("is-nudging"), 560);
+        setTimeout(() => (lock = false), 900);
+      }
+
+      // Interacciones
+      document.addEventListener("click", nudge, true);
+      document.addEventListener("keydown", nudge, true);
+
+      // ✅ CADA 3 SEGUNDOS (tu pedido)
+      setInterval(() => {
+        if (document.visibilityState !== "visible") return;
+        nudge();
+      }, 3000);
+    })();
+
+    // ======= UI helpers =======
     function appendBubble(role, text) {
       const div = document.createElement("div");
       div.className = "msg " + role;
@@ -67,6 +137,26 @@
       msgList.appendChild(div);
       msgList.scrollTop = msgList.scrollHeight;
       return div;
+    }
+
+    function appendHumanEscalation(actions = []) {
+      appendBubble("assistant", "Va. ¿Quieres asistencia humana? Elige un canal:");
+
+      const wrap = document.createElement("div");
+      wrap.className = "action-row";
+
+      (actions || []).forEach(a => {
+        const btn = document.createElement("a");
+        btn.className = "action-btn";
+        btn.href = a.url;
+        btn.target = "_blank";
+        btn.rel = "noopener noreferrer";
+        btn.textContent = a.label || a.type;
+        wrap.appendChild(btn);
+      });
+
+      msgList.appendChild(wrap);
+      msgList.scrollTop = msgList.scrollHeight;
     }
 
     function appendHelpfulButtons(actions) {
@@ -102,26 +192,7 @@
       msgList.scrollTop = msgList.scrollHeight;
     }
 
-    function appendHumanEscalation(actions = []) {
-      appendBubble("assistant", "Va. ¿Quieres asistencia humana? Elige un canal:");
-
-      const wrap = document.createElement("div");
-      wrap.className = "action-row";
-
-      (actions || []).forEach(a => {
-        const btn = document.createElement("a");
-        btn.className = "action-btn";
-        btn.href = a.url;
-        btn.target = "_blank";
-        btn.rel = "noopener noreferrer";
-        btn.textContent = a.label || a.type;
-        wrap.appendChild(btn);
-      });
-
-      msgList.appendChild(wrap);
-      msgList.scrollTop = msgList.scrollHeight;
-    }
-
+    // ======= Worker call =======
     async function sendMessage() {
       const text = (input.value || "").trim();
       if (!text) return;
@@ -154,11 +225,8 @@
         appendBubble("assistant", data.reply || "Listo.");
         history.push({ role: "assistant", content: data.reply || "" });
 
-        if (data.needs_human) {
-          appendHumanEscalation(data.quick_actions);
-        } else {
-          appendHelpfulButtons(data.quick_actions);
-        }
+        if (data.needs_human) appendHumanEscalation(data.quick_actions);
+        else appendHelpfulButtons(data.quick_actions);
 
       } catch (e) {
         typing.remove();
