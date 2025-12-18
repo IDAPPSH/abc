@@ -1,131 +1,73 @@
 {
-  "version": 1,
-  "defaults": {
-    "max_buttons": 6,
-    "fallback_context": "inicio"
-  },
-
   "contexts": {
     "inicio": {
-      "title": "Elige una opción o pregunta directo:",
       "chips": [
-        { "label": "Pregunta directa", "send": "__direct__" },
-        { "label": "Ver temas", "send": "__topics__" }
-      ],
-      "topics": [
-        { "label": "Servicios", "send": "__ctx__:servicios" },
-        { "label": "GEKOS", "send": "__ctx__:gekos" },
-        { "label": "Soporte", "send": "__ctx__:soporte" },
-        { "label": "Cotización", "send": "__ctx__:cotizacion" },
-        { "label": "Links / contacto", "send": "__ctx__:links_utiles" }
-      ],
-      "suggested_questions": [
-        { "label": "¿Qué servicios ofrecen?", "send": "¿Qué servicios ofrecen?" },
-        { "label": "¿Cómo los contacto?", "send": "¿Cómo los contacto?" },
-        { "label": "¿Puedo hablar con una persona?", "send": "¿Puedo hablar con una persona?" }
+        { "label": "Ver temas", "send": "__topics__" },
+        { "label": "Pregunta directa", "send": "__direct__" }
+      ]
+    },
+
+    "topics": {
+      "chips": [
+        { "label": "Servicios", "set_context": "servicios", "send": "__show_ctx_menu__" },
+        { "label": "GEKOS", "set_context": "gekos", "send": "__show_ctx_menu__" },
+        { "label": "Soporte", "set_context": "soporte", "send": "__show_ctx_menu__" },
+        { "label": "Cotización", "set_context": "cotizacion", "send": "__show_ctx_menu__" },
+        { "label": "Links / Contacto", "set_context": "links_utiles", "send": "__show_ctx_menu__" }
       ]
     },
 
     "servicios": {
-      "title": "Servicios IDAPPSH",
       "chips": [
-        { "label": "Software a la medida", "send": "¿Hacen software a la medida?" },
-        { "label": "Web / landing", "send": "¿Desarrollan páginas web o landing pages?" },
-        { "label": "Apps móviles", "send": "¿Desarrollan apps Android y iOS?" },
-        { "label": "Automatización", "send": "¿Automatizan procesos repetitivos?" },
-        { "label": "Integración APIs", "send": "¿Integran sistemas y APIs?" },
-        { "label": "Soporte", "send": "¿Dan soporte técnico y mantenimiento?" }
-      ],
-      "suggested_questions": [
-        { "label": "¿Qué incluye un proyecto web?", "send": "¿Qué incluye un proyecto web?" },
-        { "label": "¿Cómo trabajan mensual?", "send": "¿Cómo manejan la modalidad mensual?" },
-        { "label": "Quiero cotizar", "send": "Quiero una cotización" }
+        { "label": "Sitio web", "set_context": "servicios", "send": "Quiero un sitio web" },
+        { "label": "App móvil", "set_context": "servicios", "send": "Quiero una app móvil" },
+        { "label": "Automatización", "set_context": "servicios", "send": "Quiero automatizar procesos" },
+        { "label": "Integraciones / APIs", "set_context": "servicios", "send": "Quiero integrar APIs o sistemas" },
+        { "label": "Dashboards / Reportes", "set_context": "servicios", "send": "Quiero dashboards o reportes" },
+        { "label": "Soporte y mantenimiento", "set_context": "soporte", "send": "Necesito soporte" },
+        { "label": "Cotizar", "set_context": "cotizacion", "send": "Quiero una cotización" },
+        { "label": "Volver a temas", "send": "__topics__" }
       ]
     },
 
     "gekos": {
-      "title": "GEKOS",
       "chips": [
-        { "label": "¿Qué es GEKOS?", "send": "¿Qué es GEKOS?" },
-        { "label": "¿Cómo funciona?", "send": "¿Cómo funciona GEKOS?" },
-        { "label": "Garantía de cita", "send": "¿Qué pasa si no se obtiene ninguna cita?" },
-        { "label": "Precios", "send": "¿Cuánto cuesta GEKOS?" },
-        { "label": "Costo 2026", "send": "¿Cuánto cuesta GEKOS en 2026?" },
-        { "label": "Términos", "send": "Muéstrame los términos y condiciones de GEKOS" }
-      ],
-      "suggested_questions": [
-        { "label": "¿Depende del consulado?", "send": "¿De qué depende que haya citas disponibles?" },
-        { "label": "¿Costos extra?", "send": "¿Hay costos adicionales?" },
-        { "label": "Soporte humano", "send": "Quiero hablar con soporte humano de GEKOS" }
+        { "label": "¿Qué es GEKOS?", "set_context": "gekos", "send": "¿Qué es GEKOS?" },
+        { "label": "¿Cómo funciona?", "set_context": "gekos", "send": "¿Cómo funciona GEKOS?" },
+        { "label": "Precios", "set_context": "gekos", "send": "¿Cuánto cuesta GEKOS?" },
+        { "label": "Costos 2026", "set_context": "gekos", "send": "¿Cuánto costará GEKOS en 2026?" },
+        { "label": "Garantía de cita", "set_context": "gekos", "send": "Explícame la garantía de cita" },
+        { "label": "Términos", "set_context": "gekos", "send": "Muéstrame términos y condiciones de GEKOS" },
+        { "label": "Hablar con humano", "set_context": "soporte", "send": "Quiero hablar con una persona" },
+        { "label": "Volver a temas", "send": "__topics__" }
       ]
     },
 
     "soporte": {
-      "title": "Soporte",
       "chips": [
-        { "label": "Hablar con alguien", "send": "Quiero hablar con una persona" },
-        { "label": "WhatsApp", "send": "Pásame el WhatsApp" },
-        { "label": "Telegram", "send": "Pásame el Telegram" },
-        { "label": "Tengo un error", "send": "Tengo un error y necesito ayuda" },
-        { "label": "Cuenta / acceso", "send": "Tengo problema con mi cuenta o acceso" },
-        { "label": "Pago / factura", "send": "Tengo tema de pago o factura" }
+        { "label": "Tengo un error", "set_context": "soporte", "send": "Tengo un error, necesito ayuda" },
+        { "label": "No funciona", "set_context": "soporte", "send": "No me funciona, ¿me apoyas?" },
+        { "label": "Hablar con humano", "set_context": "soporte", "send": "__human__" },
+        { "label": "Volver a temas", "send": "__topics__" }
       ]
     },
 
     "cotizacion": {
-      "title": "Cotización",
       "chips": [
-        { "label": "¿Cómo cotizar?", "send": "¿Cómo puedo cotizar un proyecto?" },
-        { "label": "¿Qué necesitan?", "send": "¿Qué información necesitan para cotizar?" },
-        { "label": "Agendar llamada", "send": "Quiero agendar una llamada" },
-        { "label": "Web", "send": "Quiero cotizar un sitio web" },
-        { "label": "App", "send": "Quiero cotizar una app móvil" },
-        { "label": "Sistema", "send": "Quiero cotizar un sistema a la medida" }
+        { "label": "Qué necesitan para cotizar", "set_context": "cotizacion", "send": "¿Qué información necesitan para cotizar?" },
+        { "label": "Agendar llamada", "set_context": "cotizacion", "send": "Quiero agendar una llamada" },
+        { "label": "Cotizar ahora", "set_context": "cotizacion", "send": "__human__" },
+        { "label": "Volver a temas", "send": "__topics__" }
       ]
     },
 
     "links_utiles": {
-      "title": "Links útiles",
       "chips": [
-        { "label": "WhatsApp", "send": "Pásame el WhatsApp" },
-        { "label": "Telegram", "send": "Pásame el Telegram" },
-        { "label": "Correo", "send": "Pásame el correo de contacto" },
-        { "label": "Soporte", "send": "¿Dónde pido soporte?" },
-        { "label": "Planes", "send": "¿Dónde veo los planes?" }
-      ]
-    }
-  },
-
-  "routing": {
-    "rules": [
-      {
-        "context": "gekos",
-        "match_any": ["gekos", "cita", "consulado", "auto agenda", "guardian", "retro", "full", "classic"]
-      },
-      {
-        "context": "cotizacion",
-        "match_any": ["cotizar", "cotización", "precio", "presupuesto", "costo", "cuánto cuesta", "propuesta", "factura"]
-      },
-      {
-        "context": "soporte",
-        "match_any": ["soporte", "error", "no funciona", "ayuda", "problema", "urgente", "cuenta", "acceso", "pago"]
-      },
-      {
-        "context": "servicios",
-        "match_any": ["servicios", "software", "sistema", "web", "landing", "app", "automatización", "integración", "api", "vpn", "servidor", "seguridad"]
-      }
-    ]
-  },
-
-  "clarify": {
-    "short_message_threshold": 2,
-    "suggest_on_confusion": {
-      "title": "No entendí bien. ¿Qué quieres hacer?",
-      "chips": [
-        { "label": "Servicios", "send": "__ctx__:servicios" },
-        { "label": "GEKOS", "send": "__ctx__:gekos" },
-        { "label": "Soporte", "send": "__ctx__:soporte" },
-        { "label": "Hablar con humano", "send": "Quiero hablar con una persona" }
+        { "label": "WhatsApp", "set_context": "links_utiles", "send": "Pásame el WhatsApp" },
+        { "label": "Telegram", "set_context": "links_utiles", "send": "Pásame el Telegram" },
+        { "label": "Correo", "set_context": "links_utiles", "send": "¿Cuál es el correo?" },
+        { "label": "Ubicación", "set_context": "links_utiles", "send": "¿Dónde están ubicados?" },
+        { "label": "Volver a temas", "send": "__topics__" }
       ]
     }
   }
