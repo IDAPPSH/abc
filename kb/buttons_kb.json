@@ -1,6 +1,7 @@
 {
   "contexts": {
     "inicio": {
+      "title": "¿Por dónde empezamos?",
       "chips": [
         { "label": "Ver temas", "send": "__topics__" },
         { "label": "Pregunta directa", "send": "__direct__" }
@@ -8,16 +9,18 @@
     },
 
     "topics": {
+      "title": "Elige un tema:",
       "chips": [
-        { "label": "Servicios", "set_context": "servicios", "send": "__show_ctx_menu__" },
-        { "label": "GEKOS", "set_context": "gekos", "send": "__show_ctx_menu__" },
-        { "label": "Soporte", "set_context": "soporte", "send": "__show_ctx_menu__" },
-        { "label": "Cotización", "set_context": "cotizacion", "send": "__show_ctx_menu__" },
-        { "label": "Links / Contacto", "set_context": "links_utiles", "send": "__show_ctx_menu__" }
+        { "label": "Servicios", "set_context": "servicios" },
+        { "label": "GEKOS", "set_context": "gekos" },
+        { "label": "Soporte", "set_context": "soporte" },
+        { "label": "Cotización", "set_context": "cotizacion" },
+        { "label": "Links / contacto", "set_context": "links_utiles" }
       ]
     },
 
     "servicios": {
+      "title": "Servicios — elige una opción:",
       "chips": [
         { "label": "Sitio web", "set_context": "servicios", "send": "Quiero un sitio web" },
         { "label": "App móvil", "set_context": "servicios", "send": "Quiero una app móvil" },
@@ -31,37 +34,42 @@
     },
 
     "gekos": {
+      "title": "GEKOS — preguntas frecuentes:",
       "chips": [
         { "label": "¿Qué es GEKOS?", "set_context": "gekos", "send": "¿Qué es GEKOS?" },
         { "label": "¿Cómo funciona?", "set_context": "gekos", "send": "¿Cómo funciona GEKOS?" },
-        { "label": "Precios", "set_context": "gekos", "send": "¿Cuánto cuesta GEKOS?" },
+        { "label": "Costos / precios", "set_context": "gekos", "send": "¿Cuánto cuesta GEKOS y qué incluye?" },
         { "label": "Costos 2026", "set_context": "gekos", "send": "¿Cuánto costará GEKOS en 2026?" },
-        { "label": "Garantía de cita", "set_context": "gekos", "send": "Explícame la garantía de cita" },
-        { "label": "Términos", "set_context": "gekos", "send": "Muéstrame términos y condiciones de GEKOS" },
-        { "label": "Hablar con humano", "set_context": "soporte", "send": "Quiero hablar con una persona" },
+        { "label": "Garantía de cita", "set_context": "gekos", "send": "Explícame la garantía de cita de GEKOS" },
+        { "label": "Términos", "set_context": "gekos", "send": "Muéstrame los términos y condiciones de GEKOS" },
+        { "label": "Cómo contratar", "set_context": "gekos", "send": "¿Cómo contrato GEKOS?" },
+        { "label": "Hablar con humano", "send": "__human__" },
         { "label": "Volver a temas", "send": "__topics__" }
       ]
     },
 
     "soporte": {
+      "title": "Soporte — elige una opción:",
       "chips": [
         { "label": "Tengo un error", "set_context": "soporte", "send": "Tengo un error, necesito ayuda" },
-        { "label": "No funciona", "set_context": "soporte", "send": "No me funciona, ¿me apoyas?" },
-        { "label": "Hablar con humano", "set_context": "soporte", "send": "__human__" },
+        { "label": "No funciona", "set_context": "soporte", "send": "No funciona, ¿me apoyas?" },
+        { "label": "Hablar con humano", "send": "__human__" },
         { "label": "Volver a temas", "send": "__topics__" }
       ]
     },
 
     "cotizacion": {
+      "title": "Cotización — elige una opción:",
       "chips": [
-        { "label": "Qué necesitan para cotizar", "set_context": "cotizacion", "send": "¿Qué información necesitan para cotizar?" },
+        { "label": "Qué necesitan", "set_context": "cotizacion", "send": "¿Qué información necesitan para cotizar?" },
         { "label": "Agendar llamada", "set_context": "cotizacion", "send": "Quiero agendar una llamada" },
-        { "label": "Cotizar ahora", "set_context": "cotizacion", "send": "__human__" },
+        { "label": "Hablar con humano", "send": "__human__" },
         { "label": "Volver a temas", "send": "__topics__" }
       ]
     },
 
     "links_utiles": {
+      "title": "Links / contacto — elige una opción:",
       "chips": [
         { "label": "WhatsApp", "set_context": "links_utiles", "send": "Pásame el WhatsApp" },
         { "label": "Telegram", "set_context": "links_utiles", "send": "Pásame el Telegram" },
@@ -72,3 +80,5 @@
     }
   }
 }
+
+
