@@ -21,6 +21,7 @@
   const randomGreeting = () => GREETINGS[Math.floor(Math.random() * GREETINGS.length)];
 
   const SESSION_KEY = "IDAPPSH_CHAT_SESSION_ID";
+  const CONTEXT_KEY = "IDAPPSH_CHAT_CONTEXT";
   const makeId = () => (crypto?.randomUUID?.() || (Date.now() + "-" + Math.random().toString(16).slice(2)));
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -48,19 +49,19 @@
     // ===== state =====
     let booted = false;
     let history = [];
-    let currentContext = "inicio";
+    let currentContext = localStorage.getItem(CONTEXT_KEY) || "inicio";
     let session_id = localStorage.getItem(SESSION_KEY) || makeId();
     localStorage.setItem(SESSION_KEY, session_id);
 
-    // navegación simple
-    const navStack = []; // guarda { context } para volver
+    // stack de menús (para Volver real)
+    // cada entry: { context, options }
+    const navStack = [];
 
     // ===== OPEN/CLOSE =====
     function openPanel() {
       panel.classList.add("open");
       panel.setAttribute("aria-hidden", "false");
 
-      // ✅ Inicializa SOLO al abrir por primera vez
       if (!booted) {
         booted = true;
         resetChat();
@@ -93,7 +94,6 @@
       if (!clickedInside) closePanel();
     });
 
-    // Evita submit/reload
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       sendMessage();
@@ -116,7 +116,7 @@
     function resetChat() {
       msgList.innerHTML = "";
       history = [];
-      currentContext = "inicio";
+      currentContext = localStorage.getItem(CONTEXT_KEY) || "inicio";
       navStack.length = 0;
     }
 
@@ -132,6 +132,12 @@
     function linkify(text) {
       let t = escapeHtml(text);
 
+      // [texto](url) markdown básico
+      t = t.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+|mailto:[^\s)]+)\)/g, (m, label, url) => {
+        const safeLabel = escapeHtml(label);
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer">${safeLabel}</a>`;
+      });
+
       // http/https
       t = t.replace(/(https?:\/\/[^\s<]+)/g, (m) =>
         `<a href="${m}" target="_blank" rel="noopener noreferrer">${m}</a>`
@@ -143,13 +149,6 @@
         return `<a href="${m}">${label}</a>`;
       });
 
-      // [texto](url) (markdown básico)
-      t = t.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+|mailto:[^\s)]+)\)/g, (m, label, url) => {
-        const safeLabel = escapeHtml(label);
-        return `<a href="${url}" target="_blank" rel="noopener noreferrer">${safeLabel}</a>`;
-      });
-
-      // saltos de línea
       t = t.replace(/\n/g, "<br/>");
       return t;
     }
@@ -158,18 +157,39 @@
       const div = document.createElement("div");
       div.className = "msg " + role;
 
-      if (role === "assistant") {
-        div.innerHTML = linkify(text);
-      } else {
-        div.textContent = text;
-      }
+      if (role === "assistant") div.innerHTML = linkify(text);
+      else div.textContent = text;
 
       msgList.appendChild(div);
       msgList.scrollTop = msgList.scrollHeight;
       return div;
     }
 
-    function appendButtonsRow(buttons) {
+    function pushMenuState(options) {
+      if (!Array.isArray(options) || !options.length) return;
+      navStack.push({ context: currentContext, options });
+      if (navStack.length > 30) navStack.shift();
+    }
+
+    function goBackMenu() {
+      if (navStack.length <= 1) {
+        // si no hay “previo”, vuelve al inicio
+        resetChat();
+        showStart();
+        return;
+      }
+      // quita el actual
+      navStack.pop();
+      const prev = navStack[navStack.length - 1];
+      if (prev?.context) {
+        currentContext = prev.context;
+        localStorage.setItem(CONTEXT_KEY, currentContext);
+      }
+      // re-render de botones previos
+      appendButtonsRow(prev.options, { push: false });
+    }
+
+    function appendButtonsRow(buttons, { push = true } = {}) {
       if (!Array.isArray(buttons) || !buttons.length) return null;
 
       const wrap = document.createElement("div");
@@ -190,7 +210,7 @@
           return;
         }
 
-        // send (manda texto al worker)
+        // send
         const label = String(b.label ?? "Opción").trim();
         const send = String(b.send ?? "").trim();
         if (!send) return;
@@ -211,30 +231,32 @@
       if (!wrap.childNodes.length) return null;
       msgList.appendChild(wrap);
       msgList.scrollTop = msgList.scrollHeight;
+
+      if (push) pushMenuState(buttons);
       return wrap;
     }
 
     // ===== Start / Topics =====
     function showStart() {
       appendBubble("assistant", randomGreeting());
-      appendButtonsRow([
+      const opts = [
         { label: "Ver temas", send: "__topics__" },
         { label: "Pregunta directa", send: "__direct__" }
-      ]);
+      ];
+      appendButtonsRow(opts);
     }
 
     function showTopics() {
-      navStack.push({ context: currentContext });
-
       appendBubble("assistant", "Elige un tema:");
-      appendButtonsRow([
+      const opts = [
         { label: "Servicios", send: "__ctx__:servicios" },
         { label: "GEKOS", send: "__ctx__:gekos" },
         { label: "Soporte", send: "__ctx__:soporte" },
         { label: "Cotización", send: "__ctx__:cotizacion" },
         { label: "Links / contacto", send: "__ctx__:links_utiles" },
         { label: "Volver", send: "__back__" }
-      ]);
+      ];
+      appendButtonsRow(opts);
     }
 
     function showDirect() {
@@ -259,8 +281,7 @@
         .map(a => ({ label: a.label || "Abrir", url: a.url }));
     }
 
-    // ✅ CLAVE: ahora soporta options con url y/o send
-
+    // ✅ CLAVE: acepta send Y url
     function pickOptions(data) {
       const opts = data?.options;
       if (!Array.isArray(opts)) return [];
@@ -269,38 +290,26 @@
         .map(x => ({
           label: String(x.label ?? "Opción").trim().slice(0, 60),
           send: x.send ? String(x.send).trim().slice(0, 250) : "",
-          url: x.url ? String(x.url).trim().slice(0, 800) : ""
+          url:  x.url  ? String(x.url).trim().slice(0, 800) : ""
         }))
         .filter(x => x.send || x.url);
     }
-
 
     // ===== Actions =====
     function handleAction(send) {
       const s = (send || "").trim();
       if (!s) return;
 
-      if (s === "__topics__") return showTopics();
+      if (s === "__topics__") return internalSend("__topics__", { showUser: false });
       if (s === "__direct__") return showDirect();
-
-      if (s === "__back__") {
-        const prev = navStack.pop();
-        if (!prev) {
-          resetChat();
-          showStart();
-          return;
-        }
-        currentContext = prev.context || "inicio";
-        resetChat();
-        showStart();
-        return;
-      }
+      if (s === "__back__") return goBackMenu();
 
       if (/^__ctx__:/i.test(s)) {
         const ctx = s.split(":")[1]?.trim() || "inicio";
         currentContext = ctx;
-        internalSend(`Cambiar tema a ${ctx}`, { showUser: false });
-        return;
+        localStorage.setItem(CONTEXT_KEY, currentContext);
+        // pedimos al worker un menú / respuesta del contexto
+        return internalSend("__topics__", { showUser: false });
       }
 
       internalSend(s, { showUser: true });
@@ -332,51 +341,55 @@
         const { data, raw } = await parseResponse(r);
         typing.remove();
 
+        if (!r.ok) {
+          appendBubble("assistant", "Error del servidor.");
+          appendBubble("assistant", raw.slice(0, 600));
+          appendButtonsRow([
+            { label: "WhatsApp", url: "https://wa.me/526633905025" },
+            { label: "Telegram", url: "https://t.me/r_alameda" },
+            { label: "Ver temas", send: "__topics__" }
+          ]);
+          return;
+        }
+
         if (typeof data?.context === "string" && data.context.trim()) {
           currentContext = data.context.trim();
+          localStorage.setItem(CONTEXT_KEY, currentContext);
         }
 
         const reply = String(data?.reply ?? "").trim();
-        if (!reply) {
-          appendBubble("assistant", "El servidor no mandó reply. Respuesta cruda:");
-          appendBubble("assistant", raw.slice(0, 800));
-          return;
+        if (reply) {
+          appendBubble("assistant", reply);
+          history.push({ role: "assistant", content: reply });
         }
 
-        appendBubble("assistant", reply);
-        history.push({ role: "assistant", content: reply });
+        // quick actions (si quieres mostrarlas en algunos casos)
+        // const qa = pickQuickActions(data);
 
-        // needs_human → quick actions
-        if (data?.needs_human === true) {
-          const qa = pickQuickActions(data);
-          appendBubble("assistant", "Elige un canal:");
-          appendButtonsRow(qa.length ? qa : [
-            { label: "WhatsApp", url: "https://wa.me/526633905025" },        // :contentReference[oaicite:3]{index=3}
-            { label: "Telegram", url: "https://t.me/Lourdes_tec" }             // :contentReference[oaicite:4]{index=4}
-          ]);
-          return;
-        }
-
-        // ✅ opciones generadas por el worker (send/url)
+        // options del worker
         const options = pickOptions(data);
 
         if (options.length) {
-          appendBubble("assistant", "Elige una opción o pregunta directo:");
-          appendButtonsRow([
-            ...options.slice(0, 10),
-            { label: "Ver temas", send: "__topics__" }
-          ]);
-        } else {
-          appendButtonsRow([{ label: "Ver temas", send: "__topics__" }]);
+          // si el worker NO mandó volver, lo ponemos si hay historial de menús
+          const hasBack = options.some(o => o?.send === "__back__");
+          const withNav = [
+            ...options,
+            ...(hasBack ? [] : (navStack.length ? [{ label: "Volver", send: "__back__" }] : []))
+          ];
+          appendButtonsRow(withNav);
+          return;
         }
+
+        // fallback mínimo
+        appendButtonsRow([{ label: "Ver temas", send: "__topics__" }]);
 
       } catch (e) {
         typing.remove();
         appendBubble("assistant", "Error de conexión (fetch falló).");
-        appendBubble("assistant", "Elige un canal:");
         appendButtonsRow([
-          { label: "WhatsApp", url: "https://wa.me/526633905025" },          // :contentReference[oaicite:5]{index=5}
-          { label: "Telegram", url: "https://t.me/Lourdes_tec" }               // :contentReference[oaicite:6]{index=6}
+          { label: "WhatsApp", url: "https://wa.me/526633905025" },
+          { label: "Telegram", url: "https://t.me/r_alameda" },
+          { label: "Ver temas", send: "__topics__" }
         ]);
       }
     }
@@ -387,8 +400,5 @@
       input.value = "";
       internalSend(text, { showUser: true });
     }
-
-    // ✅ OJO: ya NO llamamos showStart() aquí.
-    // Se hace hasta que abras el panel.
   });
 })();
