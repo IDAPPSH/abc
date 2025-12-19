@@ -1,3 +1,5 @@
+
+
 (() => {
   if (window.__IDAPPSH_CHATBOT_INIT__) return;
   window.__IDAPPSH_CHATBOT_INIT__ = true;
@@ -19,6 +21,7 @@
   const randomGreeting = () => GREETINGS[Math.floor(Math.random() * GREETINGS.length)];
 
   const SESSION_KEY = "IDAPPSH_CHAT_SESSION_ID";
+  const CONTEXT_KEY = "IDAPPSH_CHAT_CONTEXT";
   const makeId = () => (crypto?.randomUUID?.() || (Date.now() + "-" + Math.random().toString(16).slice(2)));
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -38,24 +41,37 @@
     if (!input) missing.push("idappsh-chat-input");
     if (!sendBtn) missing.push("idappsh-chat-send");
     if (!form) missing.push("idappsh-chat-form");
-
     if (missing.length) {
       console.warn("Faltan elementos del chatbot:", missing.join(", "));
       return;
     }
 
-    // ===== state =====
+    // ===== State =====
     let history = [];
-    let currentContext = "inicio";
     let session_id = localStorage.getItem(SESSION_KEY) || makeId();
     localStorage.setItem(SESSION_KEY, session_id);
+
+    let currentContext = localStorage.getItem(CONTEXT_KEY) || "inicio";
+
+    // stack para "Volver" (menús anteriores)
+    // cada entrada: { context, options }
+    let navStack = [];
+
+    // evita re-render del inicio
+    let booted = false;
 
     // ===== OPEN/CLOSE =====
     function openPanel() {
       panel.classList.add("open");
       panel.setAttribute("aria-hidden", "false");
       setTimeout(() => input.focus(), 50);
+
+      if (!booted) {
+        booted = true;
+        showStartOnce();
+      }
     }
+
     function closePanel() {
       panel.classList.remove("open");
       panel.setAttribute("aria-hidden", "true");
@@ -204,50 +220,13 @@
       return wrap;
     }
 
-    function showStart() {
-      appendBubble("assistant", randomGreeting());
-      appendButtonsRow([
-        { label: "Ver temas", send: "__topics__" },
-        { label: "Pregunta directa", send: "__direct__" }
-      ]);
-    }
-
-    function showTopics() {
-      appendBubble("assistant", "Elige un tema:");
-      appendButtonsRow([
-        { label: "Servicios", send: "__ctx__:servicios" },
-        { label: "GEKOS", send: "__ctx__:gekos" },
-        { label: "Soporte", send: "__ctx__:soporte" },
-        { label: "Cotización", send: "__ctx__:cotizacion" },
-        { label: "Links / contacto", send: "__ctx__:links_utiles" },
-        { label: "Volver", send: "__back__" }
-      ]);
-    }
-
-    function showDirect() {
-      appendBubble("assistant", "Va. Escribe tu pregunta 🙂");
-      input.focus();
-    }
-
-    // ===== Robust parse =====
+    // ===== Parsing =====
     async function parseResponse(r) {
       const raw = await r.text();
       let data = {};
       try { data = JSON.parse(raw); }
       catch { data = { reply: raw }; }
       return { raw, data };
-    }
-
-    function pickSuggestedButtons(data) {
-      const sb = data?.suggested_buttons;
-      if (!Array.isArray(sb)) return [];
-      return sb
-        .filter(x => x && typeof x === "object")
-        .map(x => ({
-          label: (x.label ?? "Opción").toString().trim(),
-          send: (x.send ?? x.value ?? "").toString().trim()
-        }))
-        .filter(x => x.send);
     }
 
     function pickQuickActions(data) {
@@ -258,24 +237,81 @@
         .map(a => ({ label: a.label || "Abrir", url: a.url }));
     }
 
+    function pickOptions(data) {
+      // worker nuevo usa "options": [{label, send}]
+      const opts = data?.options;
+      if (!Array.isArray(opts)) return [];
+      return opts
+        .filter(o => o && typeof o === "object")
+        .map(o => ({
+          label: (o.label ?? "Opción").toString().trim().slice(0, 40),
+          send: (o.send ?? "").toString().trim().slice(0, 250)
+        }))
+        .filter(o => o.send);
+    }
+
+    // ===== Start UI =====
+    function showStartOnce() {
+      appendBubble("assistant", randomGreeting());
+
+      // SOLO dos botones, nada más
+      appendButtonsRow([
+        { label: "Ver temas", send: "__topics__" },
+        { label: "Pregunta directa", send: "__direct__" }
+      ]);
+    }
+
+    // ===== Navigation stack =====
+    function pushMenuState({ context, options }) {
+      if (!Array.isArray(options) || !options.length) return;
+      navStack.push({ context, options });
+      // limita stack
+      if (navStack.length > 25) navStack.shift();
+    }
+
+    function goBackMenu() {
+      // si hay al menos 2 pantallas, volvemos a la anterior
+      if (navStack.length >= 2) {
+        navStack.pop();
+        const prev = navStack[navStack.length - 1];
+        if (prev?.context) {
+          currentContext = prev.context;
+          localStorage.setItem(CONTEXT_KEY, currentContext);
+        }
+        appendButtonsRow(prev.options);
+        return true;
+      }
+
+      // si no hay stack, volvemos a inicio (2 botones)
+      appendButtonsRow([
+        { label: "Ver temas", send: "__topics__" },
+        { label: "Pregunta directa", send: "__direct__" }
+      ]);
+      return true;
+    }
+
     // ===== Actions =====
     function handleAction(send) {
       const s = (send || "").trim();
       if (!s) return;
 
-      if (s === "__topics__") return showTopics();
-      if (s === "__direct__") return showDirect();
-      if (s === "__back__") return showStart();
-
-      // change context by telling worker, BUT don't show "__ctx__" as user message
-      if (/^__ctx__:/i.test(s)) {
-        const ctx = s.split(":")[1]?.trim() || "inicio";
-        currentContext = ctx;
-        internalSend(s, { showUser: false });
+      if (s === "__direct__") {
+        input.focus();
         return;
       }
 
-      // normal question: show as user text
+      if (s === "__back__") {
+        goBackMenu();
+        return;
+      }
+
+      // topics SIEMPRE con worker (no menú local)
+      if (s === "__topics__") {
+        internalSend("__topics__", { showUser: false });
+        return;
+      }
+
+      // normal: se manda como si el usuario lo escribió
       internalSend(s, { showUser: true });
     }
 
@@ -305,25 +341,33 @@
         const { data, raw } = await parseResponse(r);
         typing.remove();
 
-        // si el worker trae contexto, lo tomamos
-        if (typeof data?.context === "string" && data.context.trim()) {
-          currentContext = data.context.trim();
-        }
-
-        const reply = (data?.reply ?? "").toString().trim();
-        if (!reply) {
-          appendBubble("assistant", "El servidor no mandó reply. Respuesta cruda:");
-          appendBubble("assistant", raw.slice(0, 800));
+        // status no OK
+        if (!r.ok) {
+          appendBubble("assistant", "Error del servidor.");
+          appendBubble("assistant", raw.slice(0, 600));
+          const qaFail = pickQuickActions(data);
+          appendButtonsRow(qaFail.length ? qaFail : [
+            { label: "WhatsApp", url: "https://wa.me/526633905025" },
+            { label: "Telegram", url: "https://t.me/r_alameda" }
+          ]);
           return;
         }
 
-        appendBubble("assistant", reply);
-        history.push({ role: "assistant", content: reply });
+        // contexto del worker
+        if (typeof data?.context === "string" && data.context.trim()) {
+          currentContext = data.context.trim();
+          localStorage.setItem(CONTEXT_KEY, currentContext);
+        }
 
-        // Si pidió humano, muestra links de contacto
+        const reply = (data?.reply ?? "").toString().trim();
+        if (reply) {
+          appendBubble("assistant", reply);
+          history.push({ role: "assistant", content: reply });
+        }
+
+        // humano
         if (data?.needs_human === true) {
           const qa = pickQuickActions(data);
-          appendBubble("assistant", "Elige un canal:");
           appendButtonsRow(qa.length ? qa : [
             { label: "WhatsApp", url: "https://wa.me/526633905025" },
             { label: "Telegram", url: "https://t.me/r_alameda" }
@@ -331,28 +375,27 @@
           return;
         }
 
-        // Botones sugeridos (del worker)
-        const suggested = pickSuggestedButtons(data);
+        // opciones del worker
+        const options = pickOptions(data);
 
-        // Siempre damos “Volver a temas”
-        const withBack = [
-          ...suggested.slice(0, 7),
-          { label: "Volver", send: "__topics__" }
-        ];
+        if (options.length) {
+          // guardamos menú para "Volver"
+          pushMenuState({ context: currentContext, options });
 
-        // Si no hay sugeridos, al menos volver
-        if (!suggested.length) {
-          appendButtonsRow([{ label: "Ver temas", send: "__topics__" }]);
+          // mostramos botones SIN meter “Elige…” como texto extra
+          appendButtonsRow(options);
           return;
         }
 
-        appendBubble("assistant", "Elige una opción o pregunta directo:");
-        appendButtonsRow(withBack);
+        // fallback si no hay options
+        appendButtonsRow([
+          { label: "Ver temas", send: "__topics__" },
+          { label: "Pregunta directa", send: "__direct__" }
+        ]);
 
       } catch (e) {
         typing.remove();
         appendBubble("assistant", "Error de conexión real (fetch falló).");
-        appendBubble("assistant", "Elige un canal:");
         appendButtonsRow([
           { label: "WhatsApp", url: "https://wa.me/526633905025" },
           { label: "Telegram", url: "https://t.me/r_alameda" }
@@ -368,6 +411,10 @@
     }
 
     // ===== Boot =====
-    showStart();
+    // IMPORTANTE: NO pintamos nada hasta que abras el panel, para evitar duplicados por recarga/caché.
+    // (openPanel() llama showStartOnce() la primera vez)
+    // ===== Boot =====
+    // showStart();
   });
 })();
+
