@@ -1,5 +1,3 @@
-
-
 (() => {
   if (window.__IDAPPSH_CHATBOT_INIT__) return;
   window.__IDAPPSH_CHATBOT_INIT__ = true;
@@ -8,20 +6,22 @@
 
   const GREETINGS = [
     "Hola 👋 ¿En qué te puedo apoyar hoy?",
-    "¡Hey! 👋 Dime, ¿qué necesitas hacer?",
+    "¡Hey! ✋ ¿Qué necesitas hacer?",
     "Hola 😊 Estoy aquí para ayudarte, ¿qué buscas?",
-    "¡Bienvenido! 👋 ¿Cómo te puedo echar la mano?",
+    "¡Bienvenido! 🎉 ¿Cómo te puedo ayudar?",
     "Hola 🤖 Cuéntame, ¿en qué te ayudo?",
-    "¡Qué gusto verte! 👋 ¿Qué necesitas hoy?",
-    "Hola 😄 Soy tu asistente virtual, ¿qué se te ofrece?",
-    "¡Hey! 👋 Pregunta con confianza, ¿qué necesitas?",
-    "Hola 👋 Listo para ayudarte, ¿por dónde empezamos?",
-    "¡Buenas! 😎 ¿En qué te puedo servir?"
+    "¡Qué gusto verte! 😄 ¿Qué necesitas hoy?",
+    "Hola 🗣️ ¿Qué se te ofrece?",
+    "¡Hey! ❓ Pregunta con confianza",
+    "Hola 🧭 ¿Por dónde empezamos?",
+    "¡Buenas! 🙌 ¿En qué te puedo servir?",
+    "Hola 💬 ¿En qué te apoyo hoy?",
+    "¡Hey! ⚡ ¿Qué necesitas?",
+
   ];
   const randomGreeting = () => GREETINGS[Math.floor(Math.random() * GREETINGS.length)];
 
   const SESSION_KEY = "IDAPPSH_CHAT_SESSION_ID";
-  const CONTEXT_KEY = "IDAPPSH_CHAT_CONTEXT";
   const makeId = () => (crypto?.randomUUID?.() || (Date.now() + "-" + Math.random().toString(16).slice(2)));
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -46,30 +46,29 @@
       return;
     }
 
-    // ===== State =====
+    // ===== state =====
+    let booted = false;
     let history = [];
+    let currentContext = "inicio";
     let session_id = localStorage.getItem(SESSION_KEY) || makeId();
     localStorage.setItem(SESSION_KEY, session_id);
 
-    let currentContext = localStorage.getItem(CONTEXT_KEY) || "inicio";
-
-    // stack para "Volver" (menús anteriores)
-    // cada entrada: { context, options }
-    let navStack = [];
-
-    // evita re-render del inicio
-    let booted = false;
+    // navegación simple
+    const navStack = []; // guarda { context } para volver
 
     // ===== OPEN/CLOSE =====
     function openPanel() {
       panel.classList.add("open");
       panel.setAttribute("aria-hidden", "false");
-      setTimeout(() => input.focus(), 50);
 
+      // ✅ Inicializa SOLO al abrir por primera vez
       if (!booted) {
         booted = true;
-        showStartOnce();
+        resetChat();
+        showStart();
       }
+
+      setTimeout(() => input.focus(), 50);
     }
 
     function closePanel() {
@@ -101,6 +100,12 @@
       sendMessage();
     });
 
+    sendBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      sendMessage();
+    });
+
     input.addEventListener("keydown", (e) => {
       if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
@@ -108,74 +113,57 @@
       }
     });
 
-    sendBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      sendMessage();
-    });
-
-    // ===== “PRESENCIA” (movimiento + nudge) =====
-    (function setupPresence() {
-      let raf = null;
-      const minTop = 140;
-      const maxTop = () => Math.max(180, window.innerHeight - 170);
-
-      function setTop(px) {
-        document.documentElement.style.setProperty("--cb-launcher-top", px + "px");
-      }
-
-      function syncTop() {
-        const doc = document.documentElement;
-        const maxScroll = Math.max(1, doc.scrollHeight - window.innerHeight);
-        const p = Math.min(1, Math.max(0, window.scrollY / maxScroll));
-        const top = minTop + (maxTop() - minTop) * p;
-        setTop(top);
-      }
-
-      function onScroll() {
-        if (raf) return;
-        raf = requestAnimationFrame(() => {
-          raf = null;
-          syncTop();
-        });
-      }
-
-      window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", onScroll, { passive: true });
-      syncTop();
-
-      let lock = false;
-      function nudge() {
-        if (lock) return;
-        if (panel.classList.contains("open")) return;
-
-        lock = true;
-        launcher.classList.remove("is-nudging");
-        launcher.offsetHeight; // reflow
-        launcher.classList.add("is-nudging");
-
-        setTimeout(() => launcher.classList.remove("is-nudging"), 560);
-        setTimeout(() => (lock = false), 900);
-      }
-
-      document.addEventListener("click", nudge, true);
-      document.addEventListener("keydown", nudge, true);
-
-      setInterval(() => {
-        if (document.visibilityState !== "visible") return;
-        nudge();
-      }, 3000);
-    })();
-
     // ===== UI helpers =====
+    function resetChat() {
+      msgList.innerHTML = "";
+      history = [];
+      currentContext = "inicio";
+      navStack.length = 0;
+    }
+
+    function escapeHtml(s) {
+      return (s ?? "").toString()
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function linkify(text) {
+      let t = escapeHtml(text);
+
+      // http/https
+      t = t.replace(/(https?:\/\/[^\s<]+)/g, (m) =>
+        `<a href="${m}" target="_blank" rel="noopener noreferrer">${m}</a>`
+      );
+
+      // mailto:
+      t = t.replace(/(mailto:[^\s<]+)/g, (m) => {
+        const label = m.replace("mailto:", "");
+        return `<a href="${m}">${label}</a>`;
+      });
+
+      // saltos de línea
+      t = t.replace(/\n/g, "<br/>");
+      return t;
+    }
+
     function appendBubble(role, text) {
       const div = document.createElement("div");
       div.className = "msg " + role;
-      div.textContent = text;
+
+      if (role === "assistant") {
+        div.innerHTML = linkify(text);   // 👈 links clicables
+      } else {
+        div.textContent = text;          // usuario en texto plano
+      }
+
       msgList.appendChild(div);
       msgList.scrollTop = msgList.scrollHeight;
       return div;
     }
+
 
     function appendButtonsRow(buttons) {
       if (!Array.isArray(buttons) || !buttons.length) return null;
@@ -186,7 +174,7 @@
       buttons.forEach((b) => {
         if (!b) return;
 
-        // link button
+        // link
         if (b.url) {
           const a = document.createElement("a");
           a.className = "action-btn";
@@ -198,19 +186,21 @@
           return;
         }
 
-        // send button
-        const label = (b.label ?? "Opción").toString().trim();
-        const send = (b.send ?? b.value ?? "").toString().trim();
+        // send
+        const label = String(b.label ?? "Opción").trim();
+        const send = String(b.send ?? "").trim();
         if (!send) return;
 
         const btn = document.createElement("button");
         btn.className = "action-btn";
         btn.type = "button";
         btn.textContent = label;
+
         btn.onclick = () => {
           wrap.remove();
           handleAction(send);
         };
+
         wrap.appendChild(btn);
       });
 
@@ -220,7 +210,37 @@
       return wrap;
     }
 
-    // ===== Parsing =====
+    // ===== Start / Topics =====
+    function showStart() {
+      appendBubble("assistant", randomGreeting());
+      // ✅ SOLO botones, NO texto extra
+      appendButtonsRow([
+        { label: "Ver temas", send: "__topics__" },
+        { label: "Pregunta directa", send: "__direct__" }
+      ]);
+    }
+
+    function showTopics() {
+      // empuja a stack para volver
+      navStack.push({ context: currentContext });
+
+      appendBubble("assistant", "Elige un tema:");
+      appendButtonsRow([
+        { label: "Servicios", send: "__ctx__:servicios" },
+        { label: "GEKOS", send: "__ctx__:gekos" },
+        { label: "Soporte", send: "__ctx__:soporte" },
+        { label: "Cotización", send: "__ctx__:cotizacion" },
+        { label: "Links / contacto", send: "__ctx__:links_utiles" },
+        { label: "Volver", send: "__back__" }
+      ]);
+    }
+
+    function showDirect() {
+      appendBubble("assistant", "Va. Escribe tu pregunta 🙂");
+      input.focus();
+    }
+
+    // ===== Robust parse =====
     async function parseResponse(r) {
       const raw = await r.text();
       let data = {};
@@ -238,56 +258,15 @@
     }
 
     function pickOptions(data) {
-      // worker nuevo usa "options": [{label, send}]
       const opts = data?.options;
       if (!Array.isArray(opts)) return [];
       return opts
-        .filter(o => o && typeof o === "object")
-        .map(o => ({
-          label: (o.label ?? "Opción").toString().trim().slice(0, 40),
-          send: (o.send ?? "").toString().trim().slice(0, 250)
+        .filter(x => x && typeof x === "object")
+        .map(x => ({
+          label: String(x.label ?? "Opción").trim().slice(0, 40),
+          send: String(x.send ?? "").trim().slice(0, 200)
         }))
-        .filter(o => o.send);
-    }
-
-    // ===== Start UI =====
-    function showStartOnce() {
-      appendBubble("assistant", randomGreeting());
-
-      // SOLO dos botones, nada más
-      appendButtonsRow([
-        { label: "Ver temas", send: "__topics__" },
-        { label: "Pregunta directa", send: "__direct__" }
-      ]);
-    }
-
-    // ===== Navigation stack =====
-    function pushMenuState({ context, options }) {
-      if (!Array.isArray(options) || !options.length) return;
-      navStack.push({ context, options });
-      // limita stack
-      if (navStack.length > 25) navStack.shift();
-    }
-
-    function goBackMenu() {
-      // si hay al menos 2 pantallas, volvemos a la anterior
-      if (navStack.length >= 2) {
-        navStack.pop();
-        const prev = navStack[navStack.length - 1];
-        if (prev?.context) {
-          currentContext = prev.context;
-          localStorage.setItem(CONTEXT_KEY, currentContext);
-        }
-        appendButtonsRow(prev.options);
-        return true;
-      }
-
-      // si no hay stack, volvemos a inicio (2 botones)
-      appendButtonsRow([
-        { label: "Ver temas", send: "__topics__" },
-        { label: "Pregunta directa", send: "__direct__" }
-      ]);
-      return true;
+        .filter(x => x.send);
     }
 
     // ===== Actions =====
@@ -295,23 +274,34 @@
       const s = (send || "").trim();
       if (!s) return;
 
-      if (s === "__direct__") {
-        input.focus();
-        return;
-      }
+      if (s === "__topics__") return showTopics();
+      if (s === "__direct__") return showDirect();
 
       if (s === "__back__") {
-        goBackMenu();
+        const prev = navStack.pop();
+        // vuelve a start si no hay prev
+        if (!prev) {
+          resetChat();
+          showStart();
+          return;
+        }
+        currentContext = prev.context || "inicio";
+        // solo re-muestra el menú de temas (o start)
+        resetChat();
+        showStart();
         return;
       }
 
-      // topics SIEMPRE con worker (no menú local)
-      if (s === "__topics__") {
-        internalSend("__topics__", { showUser: false });
+      // cambiar contexto SIN mostrar "__ctx__" como mensaje del usuario
+      if (/^__ctx__:/i.test(s)) {
+        const ctx = s.split(":")[1]?.trim() || "inicio";
+        currentContext = ctx;
+        // pedimos al worker que nos dé reply + options del contexto (sin “user bubble”)
+        internalSend(`Cambiar tema a ${ctx}`, { showUser: false });
         return;
       }
 
-      // normal: se manda como si el usuario lo escribió
+      // pregunta normal
       internalSend(s, { showUser: true });
     }
 
@@ -341,64 +331,52 @@
         const { data, raw } = await parseResponse(r);
         typing.remove();
 
-        // status no OK
-        if (!r.ok) {
-          appendBubble("assistant", "Error del servidor.");
-          appendBubble("assistant", raw.slice(0, 600));
-          const qaFail = pickQuickActions(data);
-          appendButtonsRow(qaFail.length ? qaFail : [
-            { label: "WhatsApp", url: "https://wa.me/526633905025" },
-            { label: "Telegram", url: "https://t.me/r_alameda" }
-          ]);
-          return;
-        }
-
-        // contexto del worker
         if (typeof data?.context === "string" && data.context.trim()) {
           currentContext = data.context.trim();
-          localStorage.setItem(CONTEXT_KEY, currentContext);
         }
 
-        const reply = (data?.reply ?? "").toString().trim();
-        if (reply) {
-          appendBubble("assistant", reply);
-          history.push({ role: "assistant", content: reply });
+        const reply = String(data?.reply ?? "").trim();
+        if (!reply) {
+          appendBubble("assistant", "El servidor no mandó reply. Respuesta cruda:");
+          appendBubble("assistant", raw.slice(0, 800));
+          return;
         }
 
-        // humano
+        appendBubble("assistant", reply);
+        history.push({ role: "assistant", content: reply });
+
+        // needs_human → quick actions
         if (data?.needs_human === true) {
           const qa = pickQuickActions(data);
+          appendBubble("assistant", "Elige un canal:");
           appendButtonsRow(qa.length ? qa : [
             { label: "WhatsApp", url: "https://wa.me/526633905025" },
-            { label: "Telegram", url: "https://t.me/r_alameda" }
+            { label: "Telegram", url: "https://t.me/Lourdes_tec" }
           ]);
           return;
         }
 
-        // opciones del worker
+        // ✅ opciones generadas por el worker
         const options = pickOptions(data);
 
         if (options.length) {
-          // guardamos menú para "Volver"
-          pushMenuState({ context: currentContext, options });
-
-          // mostramos botones SIN meter “Elige…” como texto extra
-          appendButtonsRow(options);
-          return;
+          appendBubble("assistant", "Elige una opción o pregunta directo:");
+          appendButtonsRow([
+            ...options.slice(0, 7),
+            { label: "Ver temas", send: "__topics__" }
+          ]);
+        } else {
+          // fallback mínimo
+          appendButtonsRow([{ label: "Ver temas", send: "__topics__" }]);
         }
-
-        // fallback si no hay options
-        appendButtonsRow([
-          { label: "Ver temas", send: "__topics__" },
-          { label: "Pregunta directa", send: "__direct__" }
-        ]);
 
       } catch (e) {
         typing.remove();
-        appendBubble("assistant", "Error de conexión real (fetch falló).");
+        appendBubble("assistant", "Error de conexión (fetch falló).");
+        appendBubble("assistant", "Elige un canal:");
         appendButtonsRow([
           { label: "WhatsApp", url: "https://wa.me/526633905025" },
-          { label: "Telegram", url: "https://t.me/r_alameda" }
+          { label: "Telegram", url: "https://t.me/Lourdes_tec" }
         ]);
       }
     }
@@ -410,11 +388,7 @@
       internalSend(text, { showUser: true });
     }
 
-    // ===== Boot =====
-    // IMPORTANTE: NO pintamos nada hasta que abras el panel, para evitar duplicados por recarga/caché.
-    // (openPanel() llama showStartOnce() la primera vez)
-    // ===== Boot =====
-    // showStart();
+    // ✅ OJO: ya NO llamamos showStart() aquí.
+    // Se hace hasta que abras el panel.
   });
 })();
-
