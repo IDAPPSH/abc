@@ -16,8 +16,7 @@
     "Hola 🧭 ¿Por dónde empezamos?",
     "¡Buenas! 🙌 ¿En qué te puedo servir?",
     "Hola 💬 ¿En qué te apoyo hoy?",
-    "¡Hey! ⚡ ¿Qué necesitas?",
-
+    "¡Hey! ⚡ ¿Qué necesitas?"
   ];
   const randomGreeting = () => GREETINGS[Math.floor(Math.random() * GREETINGS.length)];
 
@@ -144,6 +143,12 @@
         return `<a href="${m}">${label}</a>`;
       });
 
+      // [texto](url) (markdown básico)
+      t = t.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+|mailto:[^\s)]+)\)/g, (m, label, url) => {
+        const safeLabel = escapeHtml(label);
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer">${safeLabel}</a>`;
+      });
+
       // saltos de línea
       t = t.replace(/\n/g, "<br/>");
       return t;
@@ -154,16 +159,15 @@
       div.className = "msg " + role;
 
       if (role === "assistant") {
-        div.innerHTML = linkify(text);   // 👈 links clicables
+        div.innerHTML = linkify(text);
       } else {
-        div.textContent = text;          // usuario en texto plano
+        div.textContent = text;
       }
 
       msgList.appendChild(div);
       msgList.scrollTop = msgList.scrollHeight;
       return div;
     }
-
 
     function appendButtonsRow(buttons) {
       if (!Array.isArray(buttons) || !buttons.length) return null;
@@ -174,7 +178,7 @@
       buttons.forEach((b) => {
         if (!b) return;
 
-        // link
+        // link (redirige)
         if (b.url) {
           const a = document.createElement("a");
           a.className = "action-btn";
@@ -186,7 +190,7 @@
           return;
         }
 
-        // send
+        // send (manda texto al worker)
         const label = String(b.label ?? "Opción").trim();
         const send = String(b.send ?? "").trim();
         if (!send) return;
@@ -213,7 +217,6 @@
     // ===== Start / Topics =====
     function showStart() {
       appendBubble("assistant", randomGreeting());
-      // ✅ SOLO botones, NO texto extra
       appendButtonsRow([
         { label: "Ver temas", send: "__topics__" },
         { label: "Pregunta directa", send: "__direct__" }
@@ -221,7 +224,6 @@
     }
 
     function showTopics() {
-      // empuja a stack para volver
       navStack.push({ context: currentContext });
 
       appendBubble("assistant", "Elige un tema:");
@@ -257,17 +259,21 @@
         .map(a => ({ label: a.label || "Abrir", url: a.url }));
     }
 
+    // ✅ CLAVE: ahora soporta options con url y/o send
+
     function pickOptions(data) {
       const opts = data?.options;
       if (!Array.isArray(opts)) return [];
       return opts
         .filter(x => x && typeof x === "object")
         .map(x => ({
-          label: String(x.label ?? "Opción").trim().slice(0, 40),
-          send: String(x.send ?? "").trim().slice(0, 200)
+          label: String(x.label ?? "Opción").trim().slice(0, 60),
+          send: x.send ? String(x.send).trim().slice(0, 250) : "",
+          url: x.url ? String(x.url).trim().slice(0, 800) : ""
         }))
-        .filter(x => x.send);
+        .filter(x => x.send || x.url);
     }
+
 
     // ===== Actions =====
     function handleAction(send) {
@@ -279,29 +285,24 @@
 
       if (s === "__back__") {
         const prev = navStack.pop();
-        // vuelve a start si no hay prev
         if (!prev) {
           resetChat();
           showStart();
           return;
         }
         currentContext = prev.context || "inicio";
-        // solo re-muestra el menú de temas (o start)
         resetChat();
         showStart();
         return;
       }
 
-      // cambiar contexto SIN mostrar "__ctx__" como mensaje del usuario
       if (/^__ctx__:/i.test(s)) {
         const ctx = s.split(":")[1]?.trim() || "inicio";
         currentContext = ctx;
-        // pedimos al worker que nos dé reply + options del contexto (sin “user bubble”)
         internalSend(`Cambiar tema a ${ctx}`, { showUser: false });
         return;
       }
 
-      // pregunta normal
       internalSend(s, { showUser: true });
     }
 
@@ -350,23 +351,22 @@
           const qa = pickQuickActions(data);
           appendBubble("assistant", "Elige un canal:");
           appendButtonsRow(qa.length ? qa : [
-            { label: "WhatsApp", url: "https://wa.me/526633905025" },
-            { label: "Telegram", url: "https://t.me/Lourdes_tec" }
+            { label: "WhatsApp", url: "https://wa.me/526633905025" },        // :contentReference[oaicite:3]{index=3}
+            { label: "Telegram", url: "https://t.me/Lourdes_tec" }             // :contentReference[oaicite:4]{index=4}
           ]);
           return;
         }
 
-        // ✅ opciones generadas por el worker
+        // ✅ opciones generadas por el worker (send/url)
         const options = pickOptions(data);
 
         if (options.length) {
           appendBubble("assistant", "Elige una opción o pregunta directo:");
           appendButtonsRow([
-            ...options.slice(0, 7),
+            ...options.slice(0, 10),
             { label: "Ver temas", send: "__topics__" }
           ]);
         } else {
-          // fallback mínimo
           appendButtonsRow([{ label: "Ver temas", send: "__topics__" }]);
         }
 
@@ -375,8 +375,8 @@
         appendBubble("assistant", "Error de conexión (fetch falló).");
         appendBubble("assistant", "Elige un canal:");
         appendButtonsRow([
-          { label: "WhatsApp", url: "https://wa.me/526633905025" },
-          { label: "Telegram", url: "https://t.me/Lourdes_tec" }
+          { label: "WhatsApp", url: "https://wa.me/526633905025" },          // :contentReference[oaicite:5]{index=5}
+          { label: "Telegram", url: "https://t.me/Lourdes_tec" }               // :contentReference[oaicite:6]{index=6}
         ]);
       }
     }
