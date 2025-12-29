@@ -1,3 +1,8 @@
+// FILE: assets/script/chatbot.js
+// Rol: lógica del chatbot (abrir/cerrar, enviar mensajes, quick actions, persistencia local si aplica).
+// Regla: no tocar navegación global aquí.
+// Actualizado: 2025-12-23
+
 (() => {
   if (window.__IDAPPSH_CHATBOT_INIT__) return;
   window.__IDAPPSH_CHATBOT_INIT__ = true;
@@ -14,7 +19,12 @@
 
   const SESSION_KEY = "IDAPPSH_CHAT_SESSION_ID";
   const CONTEXT_KEY = "IDAPPSH_CHAT_CONTEXT";
-  const makeId = () => (crypto?.randomUUID?.() || (Date.now() + "-" + Math.random().toString(16).slice(2)));
+
+  const makeId = () => (
+    (globalThis.crypto && typeof globalThis.crypto.randomUUID === "function")
+      ? globalThis.crypto.randomUUID()
+      : (Date.now() + "-" + Math.random().toString(16).slice(2))
+  );
 
   document.addEventListener("DOMContentLoaded", () => {
     const launcher = document.getElementById("idappsh-chat-launcher");
@@ -44,7 +54,6 @@
     let session_id = localStorage.getItem(SESSION_KEY) || makeId();
     localStorage.setItem(SESSION_KEY, session_id);
 
-    // Stack real para Volver: guarda { context, options }
     const navStack = [];
 
     function resetChat() {
@@ -70,9 +79,8 @@
       wrap.className = "action-row";
 
       buttons.forEach((b) => {
-        if (!b) return;
+        if (!b || typeof b !== "object") return;
 
-        // LINK
         if (b.url) {
           const href = String(b.url || "").trim();
           if (!href) return;
@@ -86,7 +94,6 @@
           return;
         }
 
-        // SEND
         const label = String(b.label ?? "Opción").trim();
         const send = String(b.send ?? "").trim();
         if (!send) return;
@@ -108,8 +115,7 @@
       msgList.scrollTop = msgList.scrollHeight;
 
       if (pushMenu) {
-        // Guardamos SOLO options con send (para volver)
-        const onlySend = buttons.filter(x => x && x.send);
+        const onlySend = buttons.filter(x => x && typeof x === "object" && x.send);
         if (onlySend.length) {
           navStack.push({ context: currentContext, options: onlySend });
           if (navStack.length > 40) navStack.shift();
@@ -142,8 +148,37 @@
       appendButtonsRow(prev.options, { pushMenu: false });
     }
 
+    // =========================
+    // POSICIONAR PANEL SEGÚN EL LAUNCHER (INLINE STYLE, GANA AL CSS)
+    // =========================
+    function clamp(n, min, max) {
+      return Math.max(min, Math.min(max, n));
+    }
+
+    function syncPanelToLauncher() {
+      // Si el panel está display:none, offsetHeight será 0; usamos fallback.
+      const panelH = panel.offsetHeight || 540;
+
+      const l = launcher.getBoundingClientRect();
+
+      // Queremos el panel "arriba" del launcher (con separación)
+      const gap = 14;
+      const desiredTop = l.top - panelH - gap;
+
+      const minTop = 12;
+      const maxTop = window.innerHeight - panelH - 12;
+      const top = clamp(desiredTop, minTop, maxTop);
+
+      // Clave: anulamos bottom del CSS y fijamos top
+      panel.style.bottom = "auto";
+      panel.style.top = `${top}px`;
+    }
+
+    // =========================
     // OPEN/CLOSE
+    // =========================
     function openPanel() {
+      // Ojo: primero mostramos para poder medir height real
       panel.classList.add("open");
       panel.setAttribute("aria-hidden", "false");
 
@@ -153,7 +188,11 @@
         showStart();
       }
 
-      setTimeout(() => input.focus(), 50);
+      // Espera 1 frame para que el display:flex ya aplique y el height sea real
+      requestAnimationFrame(() => {
+        syncPanelToLauncher();
+        input.focus();
+      });
     }
 
     function closePanel() {
@@ -179,6 +218,70 @@
       if (!clickedInside) closePanel();
     });
 
+    // =========================
+    // PRESENCIA: mover launcher por scroll + nudge + (si panel abierto) mover panel
+    // =========================
+    (function setupPresence() {
+      let raf = null;
+
+      const minTop = 140;
+      const maxTop = () => Math.max(180, window.innerHeight - 170);
+
+      function setTop(px) {
+        document.documentElement.style.setProperty("--cb-launcher-top", px + "px");
+      }
+
+      function syncTop() {
+        const doc = document.documentElement;
+        const maxScroll = Math.max(1, doc.scrollHeight - window.innerHeight);
+        const p = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+        const top = minTop + (maxTop() - minTop) * p;
+
+        setTop(top);
+
+        // Si está abierto, el panel sigue al launcher en scroll/resize
+        if (panel.classList.contains("open")) syncPanelToLauncher();
+      }
+
+      function onScroll() {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          raf = null;
+          syncTop();
+        });
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll, { passive: true });
+
+      syncTop();
+
+      let lock = false;
+      function nudge() {
+        if (lock) return;
+        if (panel.classList.contains("open")) return;
+
+        lock = true;
+        launcher.classList.remove("is-nudging");
+        launcher.offsetHeight; // reflow
+        launcher.classList.add("is-nudging");
+
+        setTimeout(() => launcher.classList.remove("is-nudging"), 560);
+        setTimeout(() => (lock = false), 900);
+      }
+
+      document.addEventListener("click", nudge, true);
+      document.addEventListener("keydown", nudge, true);
+
+      setInterval(() => {
+        if (document.visibilityState !== "visible") return;
+        nudge();
+      }, 3000);
+    })();
+
+    // =========================
+    // ENVIAR MENSAJES
+    // =========================
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       sendMessage();
@@ -197,7 +300,6 @@
       }
     });
 
-    // Parsing
     async function parseResponse(r) {
       const raw = await r.text();
       let data = {};
@@ -230,7 +332,6 @@
         .filter(x => x.send);
     }
 
-    // Actions
     function handleAction(send) {
       const s = String(send || "").trim();
       if (!s) return;
@@ -254,7 +355,6 @@
       internalSend(s, { showUser: true });
     }
 
-    // Worker call
     async function internalSend(text, { showUser = true } = {}) {
       const msg = String(text || "").trim();
       if (!msg) return;
@@ -282,7 +382,7 @@
 
         if (!r.ok) {
           appendBubble("assistant", "Error del servidor.");
-          appendBubble("assistant", raw.slice(0, 600));
+          appendBubble("assistant", String(raw || "").slice(0, 600));
           appendButtonsRow([{ label: "Ver temas", send: "__topics__" }], { pushMenu: true });
           return;
         }
@@ -295,11 +395,9 @@
         const reply = String(data?.reply ?? "").trim();
         if (reply) appendBubble("assistant", reply);
 
-        // ✅ CLAVE: SIEMPRE pintamos quick_actions (links) como botones <a>
         const qa = pickQuickActions(data);
         if (qa.length) appendButtonsRow(qa, { pushMenu: false });
 
-        // options (menús) → al stack
         const options = pickOptions(data);
         if (options.length) {
           appendButtonsRow(options, { pushMenu: true });
