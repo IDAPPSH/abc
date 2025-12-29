@@ -106,6 +106,25 @@
     "worksFor": { "@id": "https://idappsh.site/#organization" }
   }
   </script>
+
+  <!-- JSON-LD: WebPage (página ancla indexable) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://idappsh.site/#webpage",
+    "url": "https://idappsh.site/",
+    "name": "IDAPPSH - Innovation & Development of Hybrid Systems",
+    "description": "Soluciones tecnológicas completas: software a la medida, web, apps, automatización, infraestructura y seguridad.",
+    "inLanguage": "es-MX",
+    "isPartOf": { "@id": "https://idappsh.site/#website" },
+    "about": { "@id": "https://idappsh.site/#organization" },
+    "primaryImageOfPage": {
+      "@type": "ImageObject",
+      "url": "https://idappsh.site/img/favicon_io/banner-idappsh.png"
+    }
+  }
+  </script>
 </head>
 
 <body>
@@ -114,7 +133,7 @@
   <!-- ========== HEADER / NAV ========== -->
   <header>
     <div class="nav">
-      <a href="#inicio" class="nav-brand" aria-label="Ir al inicio">
+      <a href="#inicio" class="nav-brand">
         <div class="nav-logo-mark">H</div>
         <div>
           <div class="nav-logo-text-main">IDAPPSH</div>
@@ -124,28 +143,27 @@
 
       <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú" type="button">☰</button>
 
-      <nav class="nav-menu" id="navMenu" aria-label="Menú principal">
-        <a class="nav-link active" href="#inicio" aria-current="page">Inicio</a>
-        <a class="nav-link" href="#soluciones">Soluciones</a>
-        <a class="nav-link" href="#productos">Proyectos</a>
-        <a class="nav-link" href="#novedades">Novedades</a>
-        <a class="nav-link" href="#planes">Planes</a>
-        <a class="nav-link" href="#clientes">Clientes</a>
-        <a class="nav-link" href="#nosotros">Nosotros</a>
-        <a class="nav-link" href="#soporte">Soporte</a>
-        <a class="nav-link" href="#contacto">Contacto</a>
+      <!-- NAV: href reales + data-target -->
+      <nav class="nav-menu" id="navMenu">
+        <a class="nav-link active" href="#inicio" data-target="inicio" aria-current="page">Inicio</a>
+        <a class="nav-link" href="#soluciones" data-target="soluciones">Soluciones</a>
+        <a class="nav-link" href="#proyectos" data-target="proyectos">Proyectos</a>
+        <a class="nav-link" href="#novedades" data-target="novedades">Novedades</a>
+        <a class="nav-link" href="#planes" data-target="planes">Planes</a>
+        <a class="nav-link" href="#clientes" data-target="clientes">Clientes</a>
+        <a class="nav-link" href="#nosotros" data-target="nosotros">Nosotros</a>
+        <a class="nav-link" href="#soporte" data-target="soporte">Soporte</a>
+        <a class="nav-link" href="#contacto" data-target="contacto">Contacto</a>
       </nav>
 
       <div class="nav-cta" id="navCta">
-        <a class="btn btn-outline" href="#soluciones">Ver servicios</a>
-        <a class="btn btn-primary" href="#contacto">Agenda una llamada</a>
+        <a class="btn btn-outline" href="#soluciones" data-target="soluciones">Ver servicios</a>
+        <a class="btn btn-primary" href="#contacto" data-target="contacto">Agenda una llamada</a>
       </div>
     </div>
   </header>
 
-  <!-- ========== CONTENIDO PRINCIPAL ========== -->
   <main>
-
     <!-- HERO -->
     <section id="inicio">
       <div class="wrapper">
@@ -153,6 +171,7 @@
           <div>
             <div class="hero-eyebrow">Innovation & Development of Hybrid Systems</div>
 
+            <!-- H1 con marca -->
             <h1 class="hero-title">
               <span class="hero-highlight">IDAPPSH</span>: Soluciones tecnológicas completas para tu negocio.
             </h1>
@@ -163,8 +182,8 @@
             </p>
 
             <div class="hero-actions">
-              <a class="btn btn-primary" href="#soluciones">Ver soluciones</a>
-              <a class="btn btn-outline" href="#contacto">Hablar sobre un proyecto</a>
+              <a class="btn btn-primary" href="#soluciones" data-target="soluciones">Ver soluciones</a>
+              <a class="btn btn-outline" href="#contacto" data-target="contacto">Hablar sobre un proyecto</a>
             </div>
 
             <div class="hero-meta">
@@ -225,19 +244,23 @@
           <div class="section-kicker">Novedades & redes</div>
           <h2 class="section-title">Automatización, seguridad, web, apps y más en acción.</h2>
           <p class="section-subtitle">
-            Muestras visuales de las áreas que trabajamos. Reemplaza las imágenes por tus propios diseños y capturas.
+            Muestras visuales de las áreas que trabajamos y conexión directa con la actividad en Facebook.
+            Puedes reemplazar las imágenes por tus propios diseños y capturas.
           </p>
         </header>
 
         <div class="novedades-layout">
-          <div class="img-carousel-shell" aria-label="Carrusel de imágenes">
+          <!-- CARRUSEL -->
+          <div class="img-carousel-shell" data-carousel>
             <div class="img-carousel-header">
               <span>Servicios en imágenes</span>
-              <span style="font-size:0.75rem;color:var(--text-muted);">Usa las flechas o desliza</span>
+              <span style="font-size:0.75rem;color:var(--text-muted);">
+                Desliza o espera el cambio automático
+              </span>
             </div>
 
-            <button class="img-carousel-btn left" id="imgCarouselPrev" type="button" aria-label="Anterior">‹</button>
-            <button class="img-carousel-btn right" id="imgCarouselNext" type="button" aria-label="Siguiente">›</button>
+            <button class="img-carousel-btn left" type="button" data-carousel-prev aria-label="Anterior">‹</button>
+            <button class="img-carousel-btn right" type="button" data-carousel-next aria-label="Siguiente">›</button>
 
             <div class="img-carousel-track" id="imgCarouselTrack">
               <div class="img-carousel-slide">
@@ -275,12 +298,57 @@
                   <img src="img/main_carousel/soporte-it.jpg" alt="Soporte técnico e infraestructura">
                 </div>
                 <div class="img-carousel-info">
-                  <h3>Soporte e infraestructura</h3>
+                  <h3>Soporte técnico e infraestructura</h3>
                   <p>Equipos, servidores y redes listos para trabajar.</p>
                   <ul>
                     <li>Redes y VPN</li>
                     <li>Servidores</li>
                     <li>Mantenimiento preventivo</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="img-carousel-slide">
+                <div class="img-carousel-media">
+                  <img src="img/main_carousel/chatbots-rpa.jpg" alt="Chatbots y RPA">
+                </div>
+                <div class="img-carousel-info">
+                  <h3>Chatbots y RPA</h3>
+                  <p>Automatización inteligente para procesos internos.</p>
+                  <ul>
+                    <li>Bots empresariales</li>
+                    <li>Integración con Telegram</li>
+                    <li>RPA para tareas complejas</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="img-carousel-slide">
+                <div class="img-carousel-media">
+                  <img src="img/main_carousel/excel-vba.png" alt="Reportes y Excel / VBA">
+                </div>
+                <div class="img-carousel-info">
+                  <h3>Reportes y análisis de datos</h3>
+                  <p>Dashboards y reportes automatizados profesionales.</p>
+                  <ul>
+                    <li>Excel avanzado</li>
+                    <li>VBA automatizado</li>
+                    <li>Dashboards dinámicos</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="img-carousel-slide">
+                <div class="img-carousel-media">
+                  <img src="img/main_carousel/api-integration.jpg" alt="Integración de APIs">
+                </div>
+                <div class="img-carousel-info">
+                  <h3>Integración de APIs</h3>
+                  <p>Conexión entre sistemas internos y servicios externos.</p>
+                  <ul>
+                    <li>Pasarelas de pago</li>
+                    <li>Webhooks</li>
+                    <li>Servicios externos</li>
                   </ul>
                 </div>
               </div>
@@ -299,12 +367,28 @@
                   </ul>
                 </div>
               </div>
+
+              <div class="img-carousel-slide">
+                <div class="img-carousel-media">
+                  <img src="img/main_carousel/desarrollo-apps-moviles.jpg" alt="Desarrollo de aplicaciones móviles">
+                </div>
+                <div class="img-carousel-info">
+                  <h3>Aplicaciones móviles</h3>
+                  <p>Apps conectadas a sistemas web y APIs.</p>
+                  <ul>
+                    <li>Android y iOS</li>
+                    <li>GPS, QR, notificaciones</li>
+                    <li>Apps internas y comerciales</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <p class="small-note">
-          Nota: el carrusel usa imágenes locales. Si alguna imagen no existe, no truena nada, solo no se verá.
+          Nota: el carrusel usa imágenes locales; sólo sustituye los archivos por tus diseños.
+          El widget de Facebook muestra la actividad en tiempo real de tu página.
         </p>
       </div>
     </section>
@@ -317,7 +401,7 @@
           <h2 class="section-title">Desarrollo de software, web, apps, infraestructura y automatización.</h2>
           <p class="section-subtitle">
             Servicios diseñados para adaptarse a tu forma de trabajo: sistemas personalizados, plataformas web,
-            apps móviles, automatización, integraciones, análisis de datos y soporte continuo.
+            aplicaciones móviles, automatización, integraciones, análisis de datos, seguridad y soporte continuo.
           </p>
         </header>
 
@@ -325,10 +409,12 @@
           <article class="card">
             <div class="card-icon">🧩</div>
             <h3 class="card-title">Desarrollo de software a la medida</h3>
-            <p class="card-text">Sistemas creados para tus procesos, sin plantillas genéricas.</p>
+            <p class="card-text">
+              Sistemas creados específicamente para tus procesos, sin plantillas genéricas ni limitaciones innecesarias.
+            </p>
             <ul class="card-list">
-              <li>Control de clientes, citas e inventarios</li>
-              <li>Paneles administrativos internos</li>
+              <li>Sistemas de control de clientes, citas e inventarios</li>
+              <li>Sistemas administrativos y paneles internos</li>
               <li>Herramientas híbridas (web + escritorio)</li>
             </ul>
             <div class="card-footer">
@@ -340,26 +426,30 @@
           <article class="card">
             <div class="card-icon">🌐</div>
             <h3 class="card-title">Desarrollo web profesional</h3>
-            <p class="card-text">Sitios modernos y optimizados para mostrar, vender o administrar.</p>
+            <p class="card-text">
+              Sitios y plataformas web modernas, rápidas y optimizadas para mostrar, vender y administrar servicios.
+            </p>
             <ul class="card-list">
               <li>Sitios corporativos y landing pages</li>
-              <li>Formularios avanzados</li>
-              <li>Integración con APIs</li>
+              <li>Formularios avanzados y paneles administrativos</li>
+              <li>Integración con bases de datos y APIs</li>
             </ul>
             <div class="card-footer">
               <span>Web lista para producción</span>
-              <a href="#productos" class="card-link">Ver ejemplos →</a>
+              <a href="#proyectos" class="card-link">Ver ejemplos →</a>
             </div>
           </article>
 
           <article class="card">
             <div class="card-icon">📱</div>
             <h3 class="card-title">Aplicaciones móviles</h3>
-            <p class="card-text">Apps para Android/iOS conectadas a tu sistema y servicios.</p>
+            <p class="card-text">
+              Apps profesionales para Android y iOS, conectadas con sistemas web, bases de datos y servicios externos.
+            </p>
             <ul class="card-list">
-              <li>Apps empresariales o comerciales</li>
-              <li>GPS, QR, notificaciones</li>
-              <li>Integración con backend</li>
+              <li>Apps empresariales internas y comerciales</li>
+              <li>Integración con GPS, notificaciones, QR, APIs</li>
+              <li>Publicación en Play Store y App Store</li>
             </ul>
             <div class="card-footer">
               <span>Apps diseñadas para crecer</span>
@@ -368,17 +458,87 @@
           </article>
 
           <article class="card">
-            <div class="card-icon">🤖</div>
-            <h3 class="card-title">Automatización y bots</h3>
-            <p class="card-text">Automatiza tareas repetitivas y procesos internos.</p>
+            <div class="card-icon">🖥️</div>
+            <h3 class="card-title">Ingeniería de sistemas / informática</h3>
+            <p class="card-text">
+              Diseño, optimización y mantenimiento de la infraestructura que soporta tus sistemas.
+            </p>
             <ul class="card-list">
-              <li>Bots y RPA</li>
-              <li>Alertas por Telegram / correo</li>
-              <li>Reportes automáticos</li>
+              <li>Servidores dedicados, VPS y entornos híbridos</li>
+              <li>Redes, VPN y seguridad básica</li>
+              <li>Optimización de equipos y servicios</li>
+            </ul>
+            <div class="card-footer">
+              <span>Infraestructura estable</span>
+              <a href="#contacto" class="card-link">Revisar tu entorno →</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🤖</div>
+            <h3 class="card-title">Automatización y bots empresariales</h3>
+            <p class="card-text">
+              Automatización de tareas repetitivas y procesos internos mediante herramientas y bots inteligentes.
+            </p>
+            <ul class="card-list">
+              <li>Automatización en web y sistemas internos</li>
+              <li>Bots para gestión de datos y reportes</li>
+              <li>Alertas por Telegram, correo o panel</li>
             </ul>
             <div class="card-footer">
               <span>Menos tareas manuales</span>
-              <a href="#contacto" class="card-link">Quiero automatizar →</a>
+              <a href="#proyectos" class="card-link">Ejemplos prácticos →</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">📊</div>
+            <h3 class="card-title">Análisis de datos y reportes</h3>
+            <p class="card-text">
+              Reportes automatizados, dashboards interactivos y soluciones basadas en Excel y otras fuentes.
+            </p>
+            <ul class="card-list">
+              <li>Reportes automáticos y dashboards dinámicos</li>
+              <li>Optimización de procesos basados en hojas de cálculo</li>
+              <li>Integración de datos desde Excel, CSV y APIs</li>
+            </ul>
+            <div class="card-footer">
+              <span>Datos que se convierten en decisiones</span>
+              <a href="#contacto" class="card-link">Optimizar tus reportes →</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🔌</div>
+            <h3 class="card-title">Integración de sistemas y APIs</h3>
+            <p class="card-text">
+              Conectamos sistemas entre sí para que la información fluya sin reprocesos ni duplicados.
+            </p>
+            <ul class="card-list">
+              <li>Integración con pasarelas de pago y servicios externos</li>
+              <li>Notificaciones automáticas y webhooks</li>
+              <li>Puentes entre sistemas internos y plataformas externas</li>
+            </ul>
+            <div class="card-footer">
+              <span>Todo trabajando en conjunto</span>
+              <a href="#contacto" class="card-link">Revisar integraciones →</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🔒</div>
+            <h3 class="card-title">Seguridad, mantenimiento y soporte</h3>
+            <p class="card-text">
+              Protección de datos, mantenimiento preventivo y soporte técnico continuo para tus sistemas.
+            </p>
+            <ul class="card-list">
+              <li>Respaldo, control de acceso y buenas prácticas</li>
+              <li>Mantenimiento preventivo y correctivo</li>
+              <li>Actualización de sistemas y sitios web</li>
+            </ul>
+            <div class="card-footer">
+              <span>Sistemas cuidados a largo plazo</span>
+              <a href="#contacto" class="card-link">Pedir soporte →</a>
             </div>
           </article>
         </div>
@@ -386,38 +546,44 @@
     </section>
 
     <!-- PROYECTOS -->
-    <section id="productos">
+    <section id="proyectos">
       <div class="wrapper">
         <header class="section-header">
           <div class="section-kicker">Servicios & Proyectos</div>
           <h2 class="section-title">Ejemplos de soluciones que se pueden construir e integrar.</h2>
           <p class="section-subtitle">
-            Desde paneles de operación hasta automatización e integraciones.
+            Desde sistemas internos y paneles para operación hasta automatización, integraciones y apps móviles
+            conectadas a tu infraestructura actual.
           </p>
         </header>
 
         <div class="products-grid">
           <article class="card">
-            <h3 class="card-title">Sistema de monitoreo y alertas</h3>
-            <p class="card-text">Vigila fuentes clave y alerta por Telegram/correo/panel.</p>
+            <h3 class="card-title">Sistema de monitoreo y alertas personalizadas</h3>
+            <p class="card-text">
+              Sistema que vigila información específica y envía alertas por Telegram, correo o panel
+              cuando se detectan cambios importantes o ventanas de oportunidad.
+            </p>
             <ul class="card-list">
-              <li>Monitoreo 24/7</li>
-              <li>Historial de cambios</li>
-              <li>Configuración por cliente</li>
+              <li>Monitoreo 24/7 de fuentes clave</li>
+              <li>Historial de eventos y registros</li>
+              <li>Configuración flexible por cliente o servicio</li>
             </ul>
             <div class="card-footer">
-              <span>Especial para ventanas de oportunidad</span>
+              <span>Especial para operaciones sensibles al tiempo</span>
               <a href="#contacto" class="card-link">Quiero algo similar →</a>
             </div>
           </article>
 
           <article class="card">
-            <h3 class="card-title">Dashboard de operación</h3>
-            <p class="card-text">Vista central de estados, tareas y métricas.</p>
+            <h3 class="card-title">Dashboard de operación y métricas</h3>
+            <p class="card-text">
+              Panel centralizado para visualizar estados de sistemas, tareas, colas, alertas y resultados en tiempo real.
+            </p>
             <ul class="card-list">
-              <li>Control en tiempo real</li>
-              <li>Filtros por cliente/fecha</li>
-              <li>Base de reportes</li>
+              <li>Vista unificada de procesos y estados</li>
+              <li>Filtros por cliente, servicio o fecha</li>
+              <li>Base para reportes y toma de decisiones</li>
             </ul>
             <div class="card-footer">
               <span>Control operativo en una sola pantalla</span>
@@ -434,44 +600,53 @@
         <header class="section-header">
           <div class="section-kicker">Planes</div>
           <h2 class="section-title">Modelos de colaboración claros y escalables.</h2>
-          <p class="section-subtitle">Proyecto puntual o colaboración continua con soporte y mejoras.</p>
+          <p class="section-subtitle">
+            Podemos trabajar por proyecto específico o bajo esquemas continuos con mantenimiento, mejoras y soporte.
+          </p>
         </header>
 
         <div class="plans-grid">
           <article class="plan-card">
             <h3 class="plan-name">Proyecto puntual</h3>
             <p class="plan-price">A definir <span>/ por alcance</span></p>
-            <p class="plan-desc">Ideal para construir una solución con inicio y fin definidos.</p>
+            <p class="plan-desc">
+              Ideal para construir un sistema, sitio o app específica con inicio y fin definidos.
+            </p>
             <ul class="plan-features">
-              <li>Requerimientos</li>
-              <li>Desarrollo + entrega</li>
+              <li>Relevamiento de requerimientos</li>
+              <li>Desarrollo, pruebas y entrega</li>
               <li>Capacitación básica</li>
             </ul>
-            <a class="btn btn-outline" href="#contacto">Cotizar</a>
+            <a class="btn btn-outline" href="#contacto" data-target="contacto">Cotizar proyecto</a>
           </article>
 
           <article class="plan-card highlight">
             <h3 class="plan-name">Sistemas + Automatización</h3>
             <p class="plan-price">Mensual <span>/ según módulos</span></p>
-            <p class="plan-desc">Desarrollo continuo + mantenimiento + mejoras.</p>
+            <p class="plan-desc">
+              Para combinar sistemas personalizados, automatización de procesos y mantenimiento continuo.
+            </p>
             <ul class="plan-features">
-              <li>Módulos a medida</li>
-              <li>Actualizaciones</li>
+              <li>Desarrollo de módulos a la medida</li>
+              <li>Mejoras y actualizaciones constantes</li>
+              <li>Monitoreo básico de infraestructura</li>
               <li>Atención prioritaria</li>
             </ul>
-            <a class="btn btn-primary" href="#contacto">Hablar</a>
+            <a class="btn btn-primary" href="#contacto" data-target="contacto">Hablar sobre este plan</a>
           </article>
 
           <article class="plan-card">
             <h3 class="plan-name">Acompañamiento tecnológico</h3>
             <p class="plan-price">Mensual <span>/ consultoría</span></p>
-            <p class="plan-desc">Decidir qué construir, cuándo y cómo integrarlo.</p>
+            <p class="plan-desc">
+              Acompañamiento para decidir qué construir, cuándo y cómo integrarlo con tu operación actual.
+            </p>
             <ul class="plan-features">
-              <li>Sesiones periódicas</li>
-              <li>Roadmap</li>
-              <li>Recomendaciones aplicadas</li>
+              <li>Sesiones de revisión periódicas</li>
+              <li>Recomendaciones técnicas aplicadas</li>
+              <li>Roadmap de sistemas, automatización y apps</li>
             </ul>
-            <a class="btn btn-outline" href="#contacto">Agendar</a>
+            <a class="btn btn-outline" href="#contacto" data-target="contacto">Agendar llamada</a>
           </article>
         </div>
       </div>
@@ -483,26 +658,35 @@
         <header class="section-header">
           <div class="section-kicker">Casos de uso</div>
           <h2 class="section-title">Sistemas que ya están trabajando para otros.</h2>
-          <p class="section-subtitle">Reducir carga manual, minimizar errores y tener control.</p>
+          <p class="section-subtitle">
+            El objetivo es el mismo en todos los casos: reducir carga manual, minimizar errores y dar más control sobre la información clave.
+          </p>
         </header>
 
         <div class="clients-grid">
           <article class="client-card">
             <div class="client-name">Agencia de servicios</div>
             <div class="client-tag">Monitoreo y panel web</div>
-            <p>Panel + alertas, reduciendo revisiones manuales constantes.</p>
+            <p>
+              Implementación de sistemas de monitoreo y panel web con alertas y estados centralizados,
+              reduciendo revisiones manuales constantes.
+            </p>
           </article>
 
           <article class="client-card">
             <div class="client-name">Profesionales independientes</div>
             <div class="client-tag">Automatización y reportes</div>
-            <p>Reportes automáticos y avisos para enfocarse en lo importante.</p>
+            <p>
+              Automatización de procesos repetitivos, generación de reportes y avisos que permiten enfocarse en tareas de mayor valor.
+            </p>
           </article>
 
           <article class="client-card">
             <div class="client-name">PyMEs</div>
             <div class="client-tag">Sistemas y apps a medida</div>
-            <p>Paneles web y apps conectadas a su flujo de trabajo real.</p>
+            <p>
+              Sistemas internos, paneles web y aplicaciones móviles conectadas a su flujo de trabajo y herramientas ya existentes.
+            </p>
           </article>
         </div>
       </div>
@@ -514,19 +698,24 @@
         <header class="section-header">
           <div class="section-kicker">Nosotros</div>
           <h2 class="section-title">IDAPPSH: enfoque técnico, soluciones reales.</h2>
-          <p class="section-subtitle">Construimos sistemas útiles, mantenibles y listos para crecer.</p>
+          <p class="section-subtitle">
+            Más que “herramientas sueltas”, la idea es construir sistemas que realmente se usen y se integren con el día a día de tu operación.
+          </p>
         </header>
 
         <div class="about-layout">
           <div>
             <p style="font-size:0.86rem;color:var(--text-muted);margin-bottom:0.8rem;">
-              IDAPPSH nace de automatizar procesos manuales: monitoreo, tareas repetitivas, consolidación de datos e integraciones.
+              IDAPPSH nace de la necesidad de automatizar procesos que normalmente se gestionan a mano:
+              monitoreo continuo, tareas repetitivas, consolidación de información y conexión entre sistemas que antes trabajaban aislados.
             </p>
             <p style="font-size:0.86rem;color:var(--text-muted);margin-bottom:0.8rem;">
-              Enfoque práctico: lo que se construye se usa, se mantiene y escala con tu operación.
+              Trabajamos con un enfoque práctico: soluciones útiles, mantenibles y con espacio para crecer.
+              Desde un sistema pequeño hasta una infraestructura híbrida, la idea es que cada pieza tenga sentido.
             </p>
             <p style="font-size:0.86rem;color:var(--text-muted);">
-              Tres filtros: útil hoy, mantenible, escalable. Si pasa los 3, se construye.
+              Cada proyecto pasa por tres filtros: ¿es útil hoy?, ¿es mantenible sin volverse un problema?, ¿puede crecer con tu operación?
+              Si la respuesta es sí a los tres, se construye.
             </p>
           </div>
 
@@ -534,62 +723,73 @@
             <div class="timeline-item">
               <div class="timeline-year">Inicio</div>
               <div class="timeline-title">Automatización para uso propio</div>
-              <div>Scripts y sistemas internos para resolver problemas concretos.</div>
+              <div>
+                Primeros sistemas y scripts enfocados en resolver problemas internos concretos y procesos manuales.
+              </div>
             </div>
 
             <div class="timeline-item">
-              <div class="timeline-year">Siguiente</div>
+              <div class="timeline-year">Etapa siguiente</div>
               <div class="timeline-title">Soluciones para terceros</div>
-              <div>Herramientas estables para clientes con soporte y documentación.</div>
+              <div>
+                Adaptación de herramientas para que funcionen de forma estable para clientes, con soporte, documentación y ajustes continuos.
+              </div>
             </div>
 
             <div class="timeline-item">
               <div class="timeline-year">Actualidad</div>
-              <div class="timeline-title">Laboratorio híbrido</div>
-              <div>Software + web + apps + automatización + infraestructura + seguridad.</div>
+              <div class="timeline-title">Laboratorio de sistemas híbridos</div>
+              <div>
+                IDAPPSH combina desarrollo de software, web, apps móviles, automatización, infraestructura y seguridad para ofrecer soluciones completas a medida.
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SOPORTE -->
+    <!-- SOPORTE / FAQ -->
     <section id="soporte">
       <div class="wrapper">
         <header class="section-header">
           <div class="section-kicker">Soporte & ayuda</div>
-          <h2 class="section-title">Acompañamiento antes, durante y después.</h2>
-          <p class="section-subtitle">Se entrega y se acompaña: ajustes, mejoras y evolución.</p>
+          <h2 class="section-title">Acompañamiento técnico antes, durante y después del desarrollo.</h2>
+          <p class="section-subtitle">
+            No se trata de entregar un sistema y desaparecer. La idea es acompañar el uso, los ajustes y la evolución del proyecto.
+          </p>
         </header>
 
-        <div class="faq-list">
+        <div class="faq-list" data-faq>
           <article class="faq-item">
             <button class="faq-question" type="button" aria-expanded="false">
-              <span>¿Qué necesito para empezar?</span>
-              <span class="faq-toggle">+</span>
+              <span>¿Qué necesito para empezar un proyecto con IDAPPSH?</span>
+              <span class="faq-toggle" aria-hidden="true">+</span>
             </button>
             <div class="faq-answer" hidden>
-              Un resumen de tu proceso actual, qué te duele y qué quieres mejorar. Con eso se aterriza una propuesta.
+              Un resumen sencillo de tu proceso actual, qué te duele y qué te gustaría mejorar.
+              Con eso se puede agendar una llamada corta y aterrizar requerimientos y prioridades.
             </div>
           </article>
 
           <article class="faq-item">
             <button class="faq-question" type="button" aria-expanded="false">
               <span>¿Dan soporte remoto y actualizaciones?</span>
-              <span class="faq-toggle">+</span>
+              <span class="faq-toggle" aria-hidden="true">+</span>
             </button>
             <div class="faq-answer" hidden>
-              Sí. Dependiendo del proyecto se incluye soporte remoto, ajustes y actualizaciones.
+              Sí. Dependiendo del tipo de solución, se incluye soporte remoto, ajustes y actualizaciones.
+              En esquemas continuos se programan revisiones periódicas.
             </div>
           </article>
 
           <article class="faq-item">
             <button class="faq-question" type="button" aria-expanded="false">
-              <span>¿Pueden trabajar sobre sistemas existentes?</span>
-              <span class="faq-toggle">+</span>
+              <span>¿Pueden trabajar sobre sistemas que ya tengo?</span>
+              <span class="faq-toggle" aria-hidden="true">+</span>
             </button>
             <div class="faq-answer" hidden>
-              Sí. Se revisa, se integran partes o se reemplaza lo que convenga.
+              En muchos casos sí. Se revisa el sistema actual, se identifican puntos de integración
+              y se decide si conviene mejorar, conectar o reemplazar partes específicas.
             </div>
           </article>
         </div>
@@ -602,18 +802,20 @@
         <header class="section-header">
           <div class="section-kicker">Contacto</div>
           <h2 class="section-title">Cuéntanos qué proceso quieres mejorar o automatizar.</h2>
-          <p class="section-subtitle">Deja tus datos y un resumen. Te respondemos con el mejor camino.</p>
+          <p class="section-subtitle">
+            Deja tus datos y un resumen de lo que necesitas. A partir de eso se arma una propuesta inicial y se define el mejor camino para avanzar.
+          </p>
         </header>
 
         <div class="contact-layout">
-          <form class="contact-form" id="contactForm" novalidate>
+          <form class="contact-form" id="contactForm">
             <div class="field-group">
               <label class="field-label" for="nombre">Nombre</label>
-              <input class="field-input" id="nombre" name="nombre" placeholder="Nombre o negocio" required />
+              <input class="field-input" id="nombre" name="nombre" placeholder="Nombre o nombre de tu negocio" required />
             </div>
 
             <div class="field-group">
-              <label class="field-label" for="email">Correo</label>
+              <label class="field-label" for="email">Correo electrónico</label>
               <input class="field-input" id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com" required />
             </div>
 
@@ -623,27 +825,33 @@
             </div>
 
             <div class="field-group">
-              <label class="field-label" for="tipo">Tipo</label>
+              <label class="field-label" for="tipo">Tipo de proyecto</label>
               <select class="field-select" id="tipo" name="tipo">
-                <option value="">Selecciona</option>
+                <option value="">Selecciona una opción</option>
                 <option value="sistema">Sistema a medida</option>
                 <option value="web">Desarrollo web</option>
-                <option value="apps">Apps móviles</option>
+                <option value="apps">Aplicaciones móviles</option>
                 <option value="automatizacion">Automatización</option>
-                <option value="infraestructura">Infraestructura</option>
+                <option value="infraestructura">Servidores / Infraestructura</option>
                 <option value="consultoria">Consultoría</option>
                 <option value="otro">Otro</option>
               </select>
             </div>
 
             <div class="field-group">
-              <label class="field-label" for="mensaje">Mensaje</label>
+              <label class="field-label" for="mensaje">Describe brevemente lo que necesitas</label>
               <textarea class="field-textarea" id="mensaje" name="mensaje"
-                placeholder="Ejemplo: necesito automatizar X, sistema para Y..." required></textarea>
+                placeholder="Ejemplo: sistema para X, panel para Y, automatizar Z..." required></textarea>
             </div>
 
-            <button class="btn btn-primary" type="submit">Enviar</button>
-            <div id="statusMessage" class="status-msg" role="status" aria-live="polite"></div>
+            <button class="btn btn-primary" type="submit">Enviar mensaje</button>
+
+            <div class="small-note">
+              Este formulario es una demostración en frontend. Cuando tengas tu backend listo se puede conectar
+              a correo, API propia o notificación por Telegram/WhatsApp.
+            </div>
+
+            <div id="statusMessage" class="status-msg" aria-live="polite"></div>
           </form>
 
           <div class="contact-meta">
@@ -654,25 +862,26 @@
             </div>
 
             <div class="contact-meta-item">
-              <strong>Canales</strong>
+              <strong>Canales de contacto</strong>
               <div>WhatsApp: 663 390 5025</div>
-              <div>Telegram: @Lourdes_tec</div>
+              <div>Telegram: @r_alameda</div>
+              <div>Correo electrónico y llamadas programadas.</div>
             </div>
 
             <div class="contact-meta-item">
-              <strong>Ubicación</strong>
-              <div>Cuernavaca, Morelos, México. Atención remota.</div>
+              <strong>Ubicación de referencia</strong>
+              <div>Cuernavaca, Morelos, México. Atención remota a cualquier parte.</div>
+              <div>Horario flexible según proyecto.</div>
             </div>
 
             <div class="map-shell">
-              <iframe src="https://www.google.com/maps?q=Cuernavaca,+Morelos,+Mexico&output=embed"
-                loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa Cuernavaca"></iframe>
+              <iframe src="https://www.google.com/maps?q=Cuernavaca,+Morelos,+Mexico&output=embed" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
         </div>
       </div>
     </section>
-
   </main>
 
   <!-- FOOTER -->
@@ -680,21 +889,25 @@
     <div class="wrapper">
       <div class="footer-layout">
         <div class="footer-brand">
-          <div class="footer-brand-title">IDAPPSH – Innovation & Development of Hybrid Systems</div>
+          <div class="footer-brand-title">
+            IDAPPSH – Innovation & Development of Hybrid Systems
+          </div>
           <div class="footer-brand-sub">
-            Software a la medida, web, apps, automatización, integraciones, infraestructura y seguridad informática.
+            Ofrecemos soluciones tecnológicas completas: desarrollo de software a la medida,
+            aplicaciones móviles, sitios web profesionales, automatización, integraciones,
+            infraestructura y seguridad informática.
           </div>
         </div>
 
         <div>
           <div class="footer-column-title">Navegación</div>
           <div class="footer-links">
-            <a class="footer-link" href="#inicio">Inicio</a>
-            <a class="footer-link" href="#soluciones">Soluciones</a>
-            <a class="footer-link" href="#productos">Proyectos</a>
-            <a class="footer-link" href="#novedades">Novedades</a>
-            <a class="footer-link" href="#planes">Planes</a>
-            <a class="footer-link" href="#contacto">Contacto</a>
+            <a class="footer-link" href="#inicio" data-target="inicio">Inicio</a>
+            <a class="footer-link" href="#soluciones" data-target="soluciones">Soluciones</a>
+            <a class="footer-link" href="#proyectos" data-target="proyectos">Proyectos</a>
+            <a class="footer-link" href="#novedades" data-target="novedades">Novedades</a>
+            <a class="footer-link" href="#planes" data-target="planes">Planes</a>
+            <a class="footer-link" href="#contacto" data-target="contacto">Contacto</a>
           </div>
         </div>
 
@@ -731,11 +944,11 @@
           </div>
         </div>
 
-        <!-- LEGAL: NO PONGO LINKS A PÁGINAS QUE NO EXISTEN -->
         <div>
           <div class="footer-column-title">Legal</div>
           <div class="footer-legal">
-            <span class="footer-link" style="opacity:.75;">(Pendiente: aviso-privacidad.html / terminos.html)</span>
+            <a href="/aviso-privacidad.html" class="footer-link">Aviso de privacidad</a>
+            <a href="/terminos-condiciones.html" class="footer-link">Términos y condiciones</a>
           </div>
         </div>
       </div>
@@ -748,7 +961,7 @@
 
   <!-- BOTÓN WHATSAPP FLOTANTE -->
   <a href="https://wa.me/526633905025" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
   </a>
 
   <!-- ================= IA CHATBOT (UI) ================= -->
@@ -779,4 +992,5 @@
   <script src="/assets/script/main.js" defer></script>
   <script src="/assets/script/chatbot.js?v=99" defer></script>
 </body>
+
 </html>
