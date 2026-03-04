@@ -1076,3 +1076,29 @@
     <button id="idappsh-chat-launcher" aria-label="Abrir chat" type="button">
         <i class="fa-solid fa-comments"></i>
     </button>
+
+    <div id="idappsh-chat-panel" aria-hidden="true">
+    <div class="chat-head">
+        <div class="chat-title">
+            <div class="chat-name">IDAPPSH Assistant</div>
+            <div class="chat-sub">Respuestas sobre servicios y soporte</div>
+        </div>
+        <button id="idappsh-chat-close" class="chat-close" aria-label="Cerrar" type="button">×</button>
+    </div>
+
+    <div id="idappsh-chat-messages" class="chat-body"></div>
+
+    <form id="idappsh-chat-form" class="chat-foot">
+        <input id="idappsh-chat-input" type="text" placeholder="Escribe tu pregunta…" autocomplete="off" />
+        <button id="idappsh-chat-send" type="submit" class="chat-send" aria-label="Enviar">
+            <i class="fa-solid fa-paper-plane"></i>
+        </button>
+    </form>
+</div>
+
+<!-- JS (AL FINAL SIEMPRE) -->
+<script src="/assets/script/main.js" defer></script>
+<script src="/assets/script/chatbot.js?v=99" defer></script>
+</body>
+
+</html>
